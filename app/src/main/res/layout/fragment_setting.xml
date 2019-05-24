@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+
+    <include
+        android:id="@+id/layout_title"
+        layout="@layout/fragment_layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/layout_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_title"
+        android:orientation="horizontal"
+        android:paddingRight="@dimen/dp_17">
+
+        <TextView
+            android:id="@+id/tv_notify_head"
+            style="@style/set_style_notify"
+            android:layout_weight="1"
+            android:text="@string/set_account_head" />
+
+        <ImageView
+            android:id="@+id/iv_head"
+            android:layout_width="20dp"
+            android:layout_height="@dimen/dp_20"
+            android:layout_gravity="center_vertical"
+            android:background="@color/color_EAEAEA" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="@dimen/dp_20"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:background="@color/color_EAEAEA" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line_a"
+        style="@style/set_style_line"
+        android:layout_below="@+id/layout_head" />
+
+    <TextView
+        android:id="@+id/tv_notify_id"
+        style="@style/set_style_notify"
+        android:layout_below="@+id/line_a"
+        android:text="@string/set_account_id" />
+
+    <TextView
+        android:id="@+id/tv_id"
+        style="@style/set_style_value"
+        android:layout_alignBottom="@+id/tv_notify_id"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/tv_notify_id"
+        android:gravity="right"
+        android:text="fasdfasd" />
+
+    <View
+        android:id="@+id/line_b"
+        style="@style/set_style_line"
+        android:layout_below="@+id/tv_notify_id" />
+
+
+    <LinearLayout
+        android:id="@+id/layout_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line_b"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_notify_name"
+            style="@style/set_style_notify"
+            android:layout_weight="1"
+            android:text="@string/set_account_name" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/set_style_value"
+            android:layout_alignBottom="@+id/tv_notify_name"
+            android:layout_alignParentRight="true"
+            android:gravity="right"
+            android:text="fasdfasd" />
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/line_c"
+        style="@style/set_style_line"
+        android:layout_below="@+id/layout_name" />
+
+
+
+    <LinearLayout
+        android:id="@+id/layout_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line_c"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_notify_phone"
+            style="@style/set_style_notify"
+            android:layout_below="@+id/line_c"
+            android:text="@string/set_account_phone"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/tv_phone"
+            style="@style/set_style_value"
+            android:layout_alignBottom="@+id/tv_notify_phone"
+            android:layout_alignParentRight="true"
+            android:gravity="right"
+            android:text="1234567878" />
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/line_d"
+        style="@style/set_style_line"
+        android:layout_below="@+id/layout_phone" />
+
+
+    <TextView
+        android:id="@+id/tv_notify_version"
+        style="@style/set_style_notify"
+        android:layout_below="@+id/line_d"
+        android:text="@string/set_account_version" />
+
+    <TextView
+        android:id="@+id/tv_version"
+        style="@style/set_style_value"
+        android:layout_alignBottom="@+id/tv_notify_version"
+        android:layout_alignParentRight="true"
+        android:gravity="right"
+        android:text="1.2.3" />
+
+    <View
+        android:id="@+id/line_e"
+        style="@style/set_style_line"
+        android:layout_below="@+id/tv_notify_version" />
+
+    <TextView
+        android:id="@+id/tv_notify_sty"
+        style="@style/set_style_notify"
+        android:layout_below="@+id/line_e"
+        android:text="@string/set_account_sty" />
+
+    <View
+        android:id="@+id/line_f"
+        style="@style/set_style_line"
+        android:layout_below="@+id/tv_notify_sty" />
+
+</RelativeLayout>

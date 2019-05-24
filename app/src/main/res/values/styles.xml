@@ -1,0 +1,43 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="TranslucentTheme" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+
+    <style name="set_style_notify">
+        <item name="android:paddingLeft">@dimen/dp_17</item>
+        <item name="android:paddingTop">@dimen/dp_20</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">@dimen/dp_20</item>
+        <item name="android:textColor">@color/color_252525</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <style name="set_style_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dp_1</item>
+        <item name="android:background">@color/color_EAEAEA</item>
+        <item name="android:layout_marginLeft">@dimen/dp_17</item>
+        <item name="android:layout_marginRight">@dimen/dp_17</item>
+    </style>
+
+    <style name="set_style_value">
+        <item name="android:paddingRight">@dimen/dp_17</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/color_757575</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+
+</resources>

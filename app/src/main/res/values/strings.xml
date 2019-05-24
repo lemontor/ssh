@@ -1,0 +1,113 @@
+<resources>
+    <string name="app_name">ssh</string>
+    <string name="login_edt_account">请输入用户名/手机号</string>
+    <string name="login_check_phone">手机号</string>
+    <string name="login_check_code">输入验证码</string>
+    <string name="login_edt_pwt">请输入密码</string>
+    <string name="login_tv_fast_login">短信快捷登录</string>
+    <string name="login_tv_forget_pw">忘记密码？</string>
+    <string name="login_tv_login">立即登录</string>
+    <string name="login_tv_reg">注册</string>
+    <string name="login_secret">登录即代表您已经同意《顺时行隐私政策》</string>
+    <string name="login_send_code">发送验证码</string>
+    <string name="login_set_pw">登录密码</string>
+    <string name="login_notify_pw">6-20位字符，区分大小写</string>
+    <string name="login_reg_phone">请输入11位手机号</string>
+
+    <string name="phone_login_notify_title">短信快捷登录</string>
+    <string name="phone_login_notify_num">请输入手机号</string>
+    <string name="phone_login_notify_next">下一步</string>
+    <string name="phone_login_notify_custom">遇到问题？请联系客服</string>
+    <string name="phone_login_notify_find">找回密码</string>
+    <string name="phone_login_notify_code">获取验证码</string>
+    <string name="phone_login_notify_code_check">输入短信验证码</string>
+    <string name="phone_login_notify_code_time">接收短信大约需要 </string>
+    <string name="phone_login_notify_code_phone_part_one">我们已向</string>
+    <string name="phone_login_notify_code_phone_part_two">发送短信验证码</string>
+    <string name="phone_login_notify_update">更改密码</string>
+    <string name="phone_login_notify_send">提交</string>
+    <string name="phone_login_notify_new_pw">设置新密码</string>
+
+
+    <string name="main_left_notify_title">顺时行</string>
+    <string name="main_left_notify_sell">出售闲置</string>
+    <string name="main_left_notify_price">鉴定估价</string>
+
+    <string name="main_left_notify_story">寻找销售店铺</string>
+    <string name="main_left_notify_conn">联系方式</string>
+    <string name="main_left_notify_notify">法律声明</string>
+
+    <string name="main_right_notify_title">我的账户</string>
+    <!--<string name="main_right_notify_sell">我的鉴定估价售卖</string>-->
+
+    <string name="main_right_notify_check">我的鉴定</string>
+    <string name="main_right_notify_sell">我的售卖</string>
+    <string name="main_right_notify_price">我的估价</string>
+
+    <string name="main_right_notify_sub">我的预约</string>
+    <string name="main_right_notify_cus">客服</string>
+    <string name="main_right_notify_pack">我的钱包</string>
+    <string name="main_right_notify_news">系统消息</string>
+
+    <string name="main_right_notify_goods">推荐有礼</string>
+    <string name="main_right_notify_question">常见问题</string>
+    <string name="main_right_notify_set">设置</string>
+
+    <string name="set_account_head">头像</string>
+    <string name="set_account_id">ID</string>
+    <string name="set_account_name">昵称</string>
+    <string name="set_account_phone">手机号</string>
+    <string name="set_account_version">版本</string>
+    <string name="set_account_sty">隐私政策</string>
+    <string name="set_account_nickname">请输入您的新昵称</string>
+    <string name="set_account_check">确认修改</string>
+    <string name="set_account_notify">若有疑问，可进入顺时行客服中心 寻求帮助。</string>
+
+    <string name="set_account_rename">更改昵称</string>
+    <string name="set_account_code">获取验证码</string>
+    <string name="set_account_new_code">请输入验证码</string>
+    <string name="set_account_new_phone">请输入更改手机号</string>
+    <string name="set_account_new_nickname">请输入您的新昵称</string>
+    <string name="set_account_modify_phone">修改手机号</string>
+
+
+
+    <string name="check_title">我的鉴定</string>
+    <string name="sell_title">我的售卖</string>
+
+    <string name="check_consult">在线咨询</string>
+    <string name="check_check">继续鉴定</string>
+    <string name="sell_sell">继续售卖</string>
+    <string name="cancel_sub">取消预约</string>
+    <string name="consulter">咨询鉴定师</string>
+    <string name="question">常见问题</string>
+    <string name="question_label_a">如何把宝贝卖给顺时行？</string>
+    <string name="question_label_b">请问顺时行的联系方式和地址？</string>
+    <string name="question_details_a">1.填写宝贝信息并上传宝贝相关细节图</string>
+    <string name="question_details_b">2.提交成功后，2小时内我们的鉴定师会对宝贝进行一些初步鉴定和报价；</string>
+    <string name="question_details_c">3.如果您对我们提出的价格满意，即可选择回收方式（上门回收，服务网点回收，快递邮寄），对实物进行更全面的鉴定；</string>
+    <string name="question_details_d">4.双方满意之后，我们会最快速度的给您转账，甚至会当面转账；如您对我们的报价不满意，我们会把报备邮寄回去给您；</string>
+    <string name="question_details_e">1.联系电话 400-833-1577</string>
+    <string name="question_details_f">2.地址深圳市南山区粤海街道科华路讯美科技广场1号楼409顺时行回收</string>
+    <string name="question_conn_cus">联系客户</string>
+
+    <string name="system_news_title">系统消息</string>
+    <string name="system_news_state_eva">估价通知</string>
+    <string name="system_news_state_recycle">回收通知</string>
+    <string name="system_news_state_active">活动通知</string>
+
+    <string name="chose_type_title">选择分类</string>
+    <string name="chose_goods_type">选择品牌</string>
+    <string name="chose_goods_func">功能状态</string>
+    <string name="chose_goods_material">手表材质</string>
+    <string name="chose_goods_style">款式</string>
+    <string name="chose_goods_file">附件</string>
+    <string name="chose_goods_new">新旧程度</string>
+    <string name="chose_goods_func_notify">手表机械系统运行评估设计，请检测是否手表正常运行，\n 如果有故障，请选择功能故障按钮。</string>
+    <string name="chose_goods_func_basic">功能正常</string>
+    <string name="chose_goods_func_lost">功能故障</string>
+
+
+
+
+</resources>

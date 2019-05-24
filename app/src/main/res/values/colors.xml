@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="color_ffffff">#ffffff</color>
+    <color name="color_000000">#000000</color>
+    <color name="color_CACACA">#CACACA</color>
+    <color name="color_2B2B2B">#2B2B2B</color>
+    <color name="color_EAEAEA">#EAEAEA</color>
+    <color name="color_568ECF">#568ECF</color>
+    <color name="color_C8C8C8">#C8C8C8</color>
+    <color name="color_757575">#757575</color>
+    <color name="color_252525">#252525</color>
+    <color name="color_f1f1f1">#f1f1f1</color>
+    <color name="color_EB1616">#EB1616</color>
+    <color name="color_fcfcfc">#fcfcfc</color>
+    <color name="color_767676">#767676</color>
+    <color name="color_FF4343">#FF4343</color>
+    <color name="color_F2F2F2">#F2F2F2</color>
+    <color name="color_2ED0FF">#2ED0FF</color>
+    <color name="color_ff2020">#ff2020</color>
+    <color name="color_888888">#888888</color>
+    <color name="color_F7B254">#F7B254</color>
+    <color name="color_FC5B54">#FC5B54</color>
+    <color name="color_4AB4FF">#4AB4FF</color>
+
+</resources>

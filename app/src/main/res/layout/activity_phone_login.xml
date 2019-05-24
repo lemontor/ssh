@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+    <include
+        layout="@layout/layout_title"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/phone_login_notify_title"
+        android:textSize="@dimen/sp_16"
+        android:textColor="@color/color_000000"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="@dimen/dp_81"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="@dimen/dp_43"
+        android:layout_marginRight="@dimen/dp_43">
+
+        <TextView
+            android:id="@+id/tv_new_pw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_14"
+            android:textColor="@color/color_000000"
+            android:text="@string/phone_login_notify_new_pw"
+            android:layout_marginRight="@dimen/dp_51"/>
+
+        <EditText
+            android:id="@+id/edt_phone_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:textColorHint="@color/color_CACACA"
+            android:hint="@string/phone_login_notify_num"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_14"
+            android:drawableLeft="@mipmap/icon_phone"
+            android:drawablePadding="@dimen/dp_14"
+            android:textCursorDrawable="@drawable/bg_edt_cursor"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/color_EAEAEA"
+        android:layout_marginLeft="@dimen/dp_43"
+        android:layout_marginRight="@dimen/dp_43"
+        android:layout_marginTop="@dimen/dp_18"
+        android:layout_marginBottom="@dimen/dp_41"/>
+
+    <Button
+        android:id="@+id/tv_next"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginLeft="@dimen/dp_43"
+        android:layout_marginRight="@dimen/dp_43"
+        android:background="@drawable/bg_click_state"
+        android:text="@string/phone_login_notify_next"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:textSize="@dimen/sp_14"
+        />
+
+    <TextView
+        android:id="@+id/tv_notify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/phone_login_notify_custom"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp_19"
+        android:textSize="@dimen/sp_12"
+        android:textColor="@color/color_C8C8C8"
+        android:visibility="invisible"/>
+
+
+
+
+
+
+
+
+</LinearLayout>

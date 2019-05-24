@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_50"
+    android:layout_marginLeft="@dimen/dp_47"
+    android:layout_marginRight="@dimen/dp_47"
+    android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/edt_code_one"
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_code_border_check"
+        android:gravity="center"
+        android:text=""
+        android:maxLength="1"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_16"
+        android:inputType="number"
+        android:textCursorDrawable="@drawable/bg_edt_cursor"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/transparent" />
+
+    <EditText
+        android:id="@+id/edt_code_two"
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_code_border_uncheck"
+        android:gravity="center"
+        android:text=""
+        android:textCursorDrawable="@drawable/bg_edt_cursor"
+        android:maxLength="1"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_16"
+        android:inputType="number"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <EditText
+        android:id="@+id/edt_code_three"
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_code_border_uncheck"
+        android:gravity="center"
+        android:text=""
+        android:maxLength="1"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_16"
+        android:inputType="number"
+        android:textCursorDrawable="@drawable/bg_edt_cursor"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <EditText
+        android:id="@+id/edt_code_four"
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_code_border_uncheck"
+        android:gravity="center"
+        android:text=""
+        android:maxLength="1"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_16"
+        android:inputType="number"
+        android:textCursorDrawable="@drawable/bg_edt_cursor"/>
+
+</LinearLayout>

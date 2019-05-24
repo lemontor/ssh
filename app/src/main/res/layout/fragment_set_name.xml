@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/layout_title"
+        layout="@layout/fragment_layout_title" />
+
+    <LinearLayout
+        android:id="@+id/layout_part"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/layout_title">
+
+        <FrameLayout
+            android:id="@+id/layout_edt_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_37"
+            android:layout_marginLeft="@dimen/dp_45"
+            android:layout_marginTop="@dimen/dp_45"
+            android:layout_marginRight="@dimen/dp_45"
+            android:background="@drawable/bg_set_name_border"
+            android:paddingLeft="@dimen/dp_18"
+            >
+
+            <EditText
+                android:id="@+id/edt_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/set_account_new_phone"
+                android:textColor="@color/color_000000"
+                android:textColorHint="@color/color_CACACA"
+                android:maxLines="1"
+                android:textSize="@dimen/sp_12" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_phone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_37"
+            android:layout_marginLeft="@dimen/dp_45"
+            android:layout_marginRight="@dimen/dp_45"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@drawable/bg_set_name_border"
+            android:paddingLeft="@dimen/dp_18"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
+
+            <EditText
+                android:id="@+id/edt_phone"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/set_account_new_code"
+                android:textColor="@color/color_000000"
+                android:textColorHint="@color/color_CACACA"
+                android:maxLines="1"
+                android:textSize="@dimen/sp_12"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/tv_get_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_EB1616"
+                android:text="@string/set_account_code"
+                android:textSize="@dimen/sp_10"
+                android:paddingRight="@dimen/dp_11"/>
+
+        </LinearLayout>
+
+
+
+
+
+        <TextView
+            android:id="@+id/tv_check"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_37"
+            android:layout_marginLeft="@dimen/dp_45"
+            android:layout_marginTop="@dimen/dp_17"
+            android:layout_marginRight="@dimen/dp_45"
+            android:background="@drawable/bg_check_name_border"
+            android:gravity="center"
+            android:text="@string/set_account_check"
+            android:textColor="@android:color/white"
+            android:textColorHint="@color/color_CACACA"
+            android:layout_below="@+id/layout_edt_name"
+            android:textSize="@dimen/sp_14" />
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+    <TextView
+        android:id="@+id/tv_notify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/set_account_notify"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="@dimen/dp_19"
+        android:textSize="@dimen/sp_10"
+        android:textColor="@color/color_000000"
+        />
+
+
+
+</RelativeLayout>

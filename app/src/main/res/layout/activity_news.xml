@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_F2F2F2"
+    android:orientation="vertical"
+    >
+
+    <include
+        android:id="@+id/layout_title"
+        layout="@layout/layout_main_title"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_20"
+        android:text="@string/main_right_notify_sub"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_17"
+        android:gravity="center_horizontal"
+        android:background="@android:color/white"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_10"
+        android:background="@color/color_F2F2F2"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_sub"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+    </android.support.v7.widget.RecyclerView>
+
+
+
+
+</LinearLayout>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+        <include layout="@layout/layout_main_title" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_title"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_20"
+            android:text="@string/check_title"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_17" />
+
+       <LinearLayout
+           android:id="@+id/layout_brand"
+           android:layout_width="match_parent"
+           android:layout_height="@dimen/dp_45"
+           android:orientation="horizontal"
+           android:paddingLeft="@dimen/dp_19"
+           android:paddingRight="@dimen/dp_19">
+           <TextView
+               android:layout_width="0dp"
+               android:layout_height="match_parent"
+               android:layout_weight="1"
+               android:textSize="@dimen/sp_14"
+               android:textColor="@color/color_000000"
+               android:text="@string/chose_goods_type"
+               android:gravity="center_vertical"/>
+           <TextView
+               android:id="@+id/tv_type_value"
+               android:layout_width="wrap_content"
+               android:layout_height="match_parent"
+               android:textSize="@dimen/sp_14"
+               android:textColor="@color/color_000000"
+               android:text="@string/chose_type_title"
+               android:gravity="center_vertical"
+               android:drawableRight="@mipmap/icon_back"
+               android:drawablePadding="@dimen/dp_10"/>
+
+       </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_func"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_45"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dp_19"
+            android:paddingRight="@dimen/dp_19">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/color_000000"
+                android:text="@string/chose_goods_func"
+                android:gravity="center_vertical"/>
+            <TextView
+                android:id="@+id/tv_func_value"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/color_000000"
+                android:text="@string/chose_type_title"
+                android:gravity="center_vertical"
+                android:drawableRight="@mipmap/icon_back"
+                android:drawablePadding="@dimen/dp_10"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_45"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dp_19"
+            android:paddingRight="@dimen/dp_19">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/color_000000"
+                android:text="@string/chose_goods_material"
+                android:gravity="center_vertical"/>
+            <TextView
+                android:id="@+id/tv_material_value"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/color_000000"
+                android:text="@string/chose_type_title"
+                android:gravity="center_vertical"
+                android:drawableRight="@mipmap/icon_back"
+                android:drawablePadding="@dimen/dp_10"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_45"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dp_19"
+            android:paddingRight="@dimen/dp_19">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/color_000000"
+                android:text="@string/chose_goods_style"
+                android:gravity="center_vertical"/>
+            <TextView
+                android:id="@+id/tv_style_value"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/color_000000"
+                android:text="@string/chose_type_title"
+                android:gravity="center_vertical"
+                android:drawableRight="@mipmap/icon_back"
+                android:drawablePadding="@dimen/dp_10"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_45"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dp_19"
+            android:paddingRight="@dimen/dp_19">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/color_000000"
+                android:text="@string/chose_goods_file"
+                android:gravity="center_vertical"/>
+            <TextView
+                android:id="@+id/tv_file_value"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/color_000000"
+                android:text="@string/chose_type_title"
+                android:gravity="center_vertical"
+                android:drawableRight="@mipmap/icon_back"
+                android:drawablePadding="@dimen/dp_10"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_14"
+            android:textColor="@color/color_000000"
+            android:text="@string/chose_goods_new"
+            android:paddingLeft="@dimen/dp_19"
+            android:paddingTop="@dimen/dp_10"/>
+
+
+    </LinearLayout>
+</ScrollView>
