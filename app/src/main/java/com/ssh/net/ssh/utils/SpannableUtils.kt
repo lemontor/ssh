@@ -20,15 +20,12 @@ class SpannableUtils {
 
         fun setMargin(context: Context,textView: TextView) {
             var spannableString = SpannableString(textView.text.toString())
-            var what = LeadingMarginSpan.Standard(0,dp2px(context,15))
+            var what = LeadingMarginSpan.Standard(0,ScreenUtils.dp2px(context,15))
             spannableString.setSpan(what, 0, spannableString.length, SpannableString.SPAN_INCLUSIVE_INCLUSIVE)
             textView.text = spannableString
         }
 
-        fun dp2px(context: Context, dpValue: Int):Int{
-            var scale = context.resources.displayMetrics.density
-            return (dpValue * scale+0.5f).toInt();
-        }
+
 
 
     }

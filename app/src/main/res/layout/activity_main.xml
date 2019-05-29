@@ -12,28 +12,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/iv_more"
-            android:layout_width="@dimen/dp_20"
-            android:layout_height="@dimen/dp_20"
-            android:layout_marginLeft="@dimen/dp_20"
-            android:layout_marginTop="@dimen/dp_50"
-            android:background="@android:color/white" />
-
-        <ImageView
-            android:id="@+id/iv_person"
-            android:layout_width="@dimen/dp_20"
-            android:layout_height="@dimen/dp_20"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="@dimen/dp_50"
-            android:layout_marginRight="@dimen/dp_20"
-            android:background="@android:color/white" />
-
         <com.ssh.net.mainview.view.ChanelView
             android:id="@+id/rv_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </com.ssh.net.mainview.view.ChanelView>
+
+
+        <ImageView
+            android:id="@+id/iv_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_50"
+            android:src="@mipmap/icon_more"/>
+
+        <ImageView
+            android:id="@+id/iv_person"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/dp_50"
+            android:layout_marginRight="@dimen/dp_20"
+            android:src="@mipmap/icon_person"/>
+
+
 
     </RelativeLayout>
 

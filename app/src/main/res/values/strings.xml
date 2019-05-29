@@ -71,7 +71,6 @@
     <string name="set_account_modify_phone">修改手机号</string>
 
 
-
     <string name="check_title">我的鉴定</string>
     <string name="sell_title">我的售卖</string>
 
@@ -96,9 +95,14 @@
     <string name="system_news_state_recycle">回收通知</string>
     <string name="system_news_state_active">活动通知</string>
 
+    <string name="chose_goods_watch_title">出售手表</string>
+    <string name="chose_goods_bag_title">出售包包</string>
+    <string name="chose_goods_jewelry_title">出售首饰</string>
+
     <string name="chose_type_title">选择分类</string>
     <string name="chose_goods_type">选择品牌</string>
     <string name="chose_goods_func">功能状态</string>
+    <string name="chose_bag_size">宝贝尺寸</string>
     <string name="chose_goods_material">手表材质</string>
     <string name="chose_goods_style">款式</string>
     <string name="chose_goods_file">附件</string>
@@ -106,7 +110,57 @@
     <string name="chose_goods_func_notify">手表机械系统运行评估设计，请检测是否手表正常运行，\n 如果有故障，请选择功能故障按钮。</string>
     <string name="chose_goods_func_basic">功能正常</string>
     <string name="chose_goods_func_lost">功能故障</string>
+    <string name="chose_goods_material_notify">请选择，您购买手表的材质</string>
+    <string name="chose_goods_material_golden">金</string>
+    <string name="chose_goods_material_steel">钢</string>
 
+    <string name="chose_goods_style_notify">请选择，您购买手表的款式</string>
+    <string name="chose_goods_style_man">男款</string>
+    <string name="chose_goods_style_women">女款</string>
+
+    <string name="chose_goods_files_one">包装盒</string>
+    <string name="chose_goods_files_two">说明书</string>
+    <string name="chose_goods_files_three">保修卡</string>
+    <string name="chose_goods_files_four">收据或发票</string>
+    <string name="chose_goods_files_five">其他</string>
+    <string name="chose_goods_notify_five">添加鉴定物照片，以便鉴定师进行鉴定</string>
+    <string name="chose_goods_notify_six">证书</string>
+    <string name="chose_goods_notify_seven">其它配件</string>
+
+    <string name="chose_goods_notify_a">防尘袋</string>
+    <string name="chose_goods_notify_b">肩带</string>
+    <string name="chose_goods_notify_c">保修卡</string>
+    <string name="chose_goods_notify_d">收据或发票</string>
+    <string name="chose_goods_notify_e">五金配件</string>
+    <string name="chose_goods_notify_f">无附件</string>
+
+
+
+
+
+    <string name="chose_goods_add_remark">添加备注</string>
+    <string name="chose_goods_photo">拍照</string>
+    <string name="chose_goods_photo_chose">从手机相册选择</string>
+    <string name="chose_goods_photo_cancel">取消</string>
+
+    <string name="bag_size_mini">mini</string>
+    <string name="bag_size_big">大</string>
+    <string name="bag_size_medium">中</string>
+    <string name="bag_size_small">小</string>
+    <string name="bag_size_notify">请选择，您购买包包的尺寸大小</string>
+
+    <string name="jewelry_title">镶钻</string>
+    <string name="jewelry_notify">首饰的钻石是否原装配备，如果另找镶嵌师傅\n加工上去的钻石，请选择后镶钻。</string>
+    <string name="jewelry_org_diamond">原镶钻</string>
+    <string name="jewelry_last_diamond">后镶钻</string>
+
+    <string name="jewelry_material">材质</string>
+    <string name="jewelry_material_notify">请选择，您购买饰品的材质</string>
+    <string name="jewelry_material_pt950">PT950</string>
+    <string name="jewelry_material_au750">AU750</string>
+    <string name="jewelry_material_925">925银</string>
+    <string name="news_cancel">删除</string>
+    <string name="wallet_title">我的钱包</string>
 
 
 

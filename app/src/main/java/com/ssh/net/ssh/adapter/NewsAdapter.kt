@@ -4,11 +4,11 @@ import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import com.ssh.net.ssh.R
+import com.ssh.net.ssh.`interface`.OnClickItemListener
 import com.ssh.net.ssh.viewHolder.NewsViewHolder
 
-class  NewsAdapter(context: Context):RecyclerView.Adapter<NewsViewHolder>(){
+class  NewsAdapter(var context: Context,var onClickItemListener: OnClickItemListener):RecyclerView.Adapter<NewsViewHolder>(){
 
     var layoutInflater :LayoutInflater
 
@@ -17,7 +17,7 @@ class  NewsAdapter(context: Context):RecyclerView.Adapter<NewsViewHolder>(){
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): NewsViewHolder {
-        return NewsViewHolder(layoutInflater.inflate(R.layout.item_news,null))
+        return NewsViewHolder(context,layoutInflater.inflate(R.layout.item_news,null))
     }
 
     override fun getItemCount(): Int {
@@ -25,7 +25,9 @@ class  NewsAdapter(context: Context):RecyclerView.Adapter<NewsViewHolder>(){
     }
 
     override fun onBindViewHolder(p0: NewsViewHolder, p1: Int) {
-
+        p0.cartView.setOnClickListener {
+            onClickItemListener.clickItem(p1)
+        }
     }
 
 }

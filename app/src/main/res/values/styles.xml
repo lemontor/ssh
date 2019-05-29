@@ -39,5 +39,13 @@
         <item name="android:textSize">@dimen/sp_14</item>
     </style>
 
+    <!-- popupwindow -->
+    <style name="BottomDialogWindowAnim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/dialog_exit_anim</item>
+    </style>
+
+
+
 
 </resources>

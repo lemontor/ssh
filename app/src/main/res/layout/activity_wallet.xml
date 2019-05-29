@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/layout_main_title"/>
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_20"
+        android:text="@string/wallet_title"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_17"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/layout_title"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/white"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_126"
+        android:orientation="horizontal"
+        android:background="@color/color_282828">
+        
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥200\n已成单红包"
+                android:layout_centerInParent="true"
+                android:textSize="@dimen/sp_14"
+                android:textColor="#F9AA00"
+                />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="@dimen/dp_1"
+            android:layout_height="@dimen/dp_50"
+            android:background="#F9AA00"
+            android:layout_gravity="center_vertical"/>
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_money_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥200\n已成单红包"
+                android:layout_centerInParent="true"
+                android:textSize="@dimen/sp_14"
+                android:textColor="#F9AA00"
+                />
+
+        </RelativeLayout>
+        
+    </LinearLayout>
+    
+
+
+</LinearLayout>

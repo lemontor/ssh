@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <SeekBar
+        android:id="@+id/seek_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="99"
+        android:maxHeight="@dimen/dp_2"
+        android:paddingStart="@dimen/dp_15"
+        android:paddingEnd="@dimen/dp_15"
+        android:progress="0"
+        android:progressDrawable="@drawable/seek_progress"
+        android:thumb="@drawable/seek_thumb" />
+
+    <TextView
+        android:id="@+id/seek_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center|center_vertical"
+        android:paddingBottom="@dimen/dp_3"
+        android:paddingLeft="@dimen/dp_12"
+        android:text="0"
+        android:textSize="@dimen/sp_10"
+        android:textColor="@android:color/white"
+        android:layout_alignParentLeft="true"/>
+
+</RelativeLayout>

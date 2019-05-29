@@ -1,8 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="@dimen/dp_62">
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_cancel"
+        android:layout_width="@dimen/dp_62"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/card_view"
+        android:layout_alignBottom="@+id/card_view"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/dp_17"
+        android:layout_marginRight="@dimen/dp_17"
+        android:background="@android:color/white"
+        app:cardCornerRadius="@dimen/dp_4">
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_B90000"
+            android:gravity="center"
+            android:text="@string/news_cancel"
+            android:textColor="@android:color/white" />
+
+    </android.support.v7.widget.CardView>
+
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
@@ -11,54 +36,55 @@
         android:layout_marginLeft="@dimen/dp_17"
         android:layout_marginRight="@dimen/dp_17"
         android:background="@android:color/white"
+        android:tag="slide_flag"
         app:cardCornerRadius="@dimen/dp_4">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/dp_9"
             android:paddingLeft="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_9"
             android:paddingRight="@dimen/dp_10">
 
             <TextView
                 android:id="@+id/tv_state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_10"
+                android:background="@drawable/bg_news_state_eva"
                 android:text="估价"
                 android:textColor="@android:color/white"
-                android:background="@drawable/bg_news_state_eva"
-                />
+                android:textSize="@dimen/sp_10" />
+
             <TextView
                 android:id="@+id/tv_news_state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_10"
-                android:text="@string/system_news_state_eva"
-                android:textColor="@color/color_252525"
                 android:layout_toRightOf="@+id/tv_state"
                 android:paddingLeft="@dimen/dp_8"
-                />
+                android:text="@string/system_news_state_eva"
+                android:textColor="@color/color_252525"
+                android:textSize="@dimen/sp_10" />
+
             <TextView
                 android:id="@+id/tv_news_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_10"
-                android:text="2019/04/26 11:36"
-                android:textColor="@color/color_252525"
                 android:layout_alignParentRight="true"
                 android:paddingLeft="@dimen/dp_8"
-                />
+                android:text="2019/04/26 11:36"
+                android:textColor="@color/color_252525"
+                android:textSize="@dimen/sp_10" />
+
             <TextView
                 android:id="@+id/tv_news_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_10"
-                android:text="您有一个估价订单还有"
-                android:textColor="@color/color_252525"
                 android:layout_below="@id/tv_state"
                 android:paddingTop="@dimen/dp_19"
                 android:paddingBottom="@dimen/dp_15"
-                />
+                android:text="您有一个估价订单还有"
+                android:textColor="@color/color_252525"
+                android:textSize="@dimen/sp_10" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
-</FrameLayout>
+</RelativeLayout>

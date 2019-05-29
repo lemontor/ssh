@@ -1,5 +1,6 @@
 package com.ssh.net.ssh.adapter
 
+import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ssh.net.ssh.R
+import com.ssh.net.ssh.utils.ScreenUtils
 import com.ssh.net.ssh.utils.SpannableUtils
 import com.ssh.net.ssh.viewHolder.BrandViewHolder
 
@@ -52,7 +54,8 @@ class BrandAdapter(var context: Context) : RecyclerView.Adapter<BrandViewHolder>
     }
 
     fun heightExpand(view: View) {
-        val valueAnimator = ValueAnimator.ofInt(view.layoutParams.height, SpannableUtils.dp2px(context, 122))
+        colorForBlack(view)
+        val valueAnimator = ValueAnimator.ofInt(view.layoutParams.height, ScreenUtils.dp2px(context, 122))
         valueAnimator.duration = 500
         valueAnimator.addUpdateListener {
             val value = it.animatedValue as Int
@@ -63,7 +66,8 @@ class BrandAdapter(var context: Context) : RecyclerView.Adapter<BrandViewHolder>
     }
 
     fun heightReduce(view: View) {
-        val valueAnimator = ValueAnimator.ofInt(view.layoutParams.height, SpannableUtils.dp2px(context, 60))
+        colorForWhite(view)
+        val valueAnimator = ValueAnimator.ofInt(view.layoutParams.height, ScreenUtils.dp2px(context, 60))
         valueAnimator.duration = 500
         valueAnimator.addUpdateListener {
             val value = it.animatedValue as Int
@@ -71,6 +75,22 @@ class BrandAdapter(var context: Context) : RecyclerView.Adapter<BrandViewHolder>
             view.requestLayout()
         }
         valueAnimator.start()
+    }
+
+    fun colorForBlack(view: View){
+        val animator = ValueAnimator.ofInt(context.resources.getColor(R.color.color_000000), context.resources.getColor(R.color.color_00000f),context.resources.getColor(R.color.color_ffffff))
+        animator.setEvaluator(ArgbEvaluator())
+        animator.duration = 500
+        animator.start()
+        animator.addUpdateListener { animation -> view.setBackgroundColor(animation.animatedValue as Int) }
+    }
+
+    fun colorForWhite(view: View){
+        val animator = ValueAnimator.ofInt(context.resources.getColor(R.color.color_ffffff), context.resources.getColor(R.color.color_fffff0),context.resources.getColor(R.color.color_000000))
+        animator.setEvaluator(ArgbEvaluator())
+        animator.duration = 500
+        animator.start()
+        animator.addUpdateListener { animation -> view.setBackgroundColor(animation.animatedValue as Int) }
     }
 
 

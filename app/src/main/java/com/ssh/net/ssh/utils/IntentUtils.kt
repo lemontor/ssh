@@ -18,73 +18,79 @@ class IntentUtils {
         fun toPhoneLogin(context: Context, from: Int) {
             var intent = Intent()
             intent.setClass(context, PhoneLoginActivity::class.java)
-            intent.putExtra("from",from)
+            intent.putExtra("from", from)
             context.startActivity(intent)
             val ac = context as Activity
             SSHApplication.addActivity(ac)
         }
 
 
-        fun toCheckCode(context: Context,phone:String){
+        fun toCheckCode(context: Context, phone: String) {
             var intent = Intent()
-            intent.setClass(context,CheckCodeActivity::class.java)
-            intent.putExtra("phone",phone)
+            intent.setClass(context, CheckCodeActivity::class.java)
+            intent.putExtra("phone", phone)
             context.startActivity(intent)
             SSHApplication.addActivity(context as Activity)
         }
 
-        fun toMain(context: Context){
+        fun toMain(context: Context) {
             var intent = Intent()
-            intent.setClass(context,MainActivity::class.java)
+            intent.setClass(context, MainActivity::class.java)
             context.startActivity(intent)
         }
 
-        fun toCheck(context: Context,from: Int){
+        fun toCheck(context: Context, from: Int) {
             var intent = Intent()
-            intent.setClass(context,CheckActivity::class.java)
-            intent.putExtra("from",from)
+            intent.setClass(context, CheckActivity::class.java)
+            intent.putExtra("from", from)
             context.startActivity(intent)
         }
 
-        fun toSub(context: Context){
+        fun toSub(context: Context) {
             var intent = Intent()
-            intent.setClass(context,SubscribeActivity::class.java)
+            intent.setClass(context, SubscribeActivity::class.java)
             context.startActivity(intent)
         }
 
-        fun toEva(context: Context){
+        fun toEva(context: Context) {
             var intent = Intent()
-            intent.setClass(context,EvaluateActivity::class.java)
+            intent.setClass(context, EvaluateActivity::class.java)
             context.startActivity(intent)
         }
 
-        fun toQuestion(context: Context){
+        fun toQuestion(context: Context) {
             var intent = Intent()
-            intent.setClass(context,QuestionActivity::class.java)
+            intent.setClass(context, QuestionActivity::class.java)
             context.startActivity(intent)
         }
 
-        fun toNews(context: Context){
+        fun toNews(context: Context) {
             var intent = Intent()
-            intent.setClass(context,SystemNewsActivity::class.java)
+            intent.setClass(context, SystemNewsActivity::class.java)
             context.startActivity(intent)
         }
 
-        fun toType(context: Context){
+        fun toType(context: Context) {
             var intent = Intent()
-            intent.setClass(context,ChoseTypeActivity::class.java)
+            intent.setClass(context, ChoseTypeActivity::class.java)
             context.startActivity(intent)
         }
 
-        fun toThing(context: Context){
+        fun toGoodsDetails(context: Context, from: Int) {
             var intent = Intent()
-            intent.setClass(context,ThingActivity::class.java)
+            if (from == 0) {
+                intent.setClass(context, SellWatchActivity::class.java)
+            }else if(from == 1){
+                intent.setClass(context, SellBagActivity::class.java)
+            }else{
+                intent.setClass(context, SellJewelryActivity::class.java)
+            }
             context.startActivity(intent)
         }
 
-        fun toBrand(context: Context){
+        fun toBrand(context: Context) {
             var intent = Intent()
-            intent.setClass(context,BrandActivity::class.java)
+            intent.setClass(context, BrandActivity::class.java)
             context.startActivity(intent)
         }
 

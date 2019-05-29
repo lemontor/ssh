@@ -29,7 +29,14 @@ class TypeAdapter(val context: Context):RecyclerView.Adapter<TypeViewHolder>() {
     override fun onBindViewHolder(p0: TypeViewHolder, p1: Int) {
         p0.mIvPic.setImageResource(R.mipmap.test)
         p0.mIvPic.setOnClickListener {
-            IntentUtils.toThing(context)
+            if(p1 == 0){
+                IntentUtils.toGoodsDetails(context,0)
+            }else if(p1 == 1){
+                IntentUtils.toGoodsDetails(context,1)
+            }else if(p1 == 2){
+                IntentUtils.toGoodsDetails(context,2)
+            }
+
         }
     }
 }

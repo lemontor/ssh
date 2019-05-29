@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@android:color/white"
+    android:paddingBottom="@dimen/dp_30">
+
+    <ImageView
+        android:id="@+id/iv_dismiss"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/dp_17"
+        android:paddingTop="@dimen/dp_20"
+        android:src="@mipmap/icon_cancel" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/iv_dismiss"
+        android:layout_centerHorizontal="true"
+        android:text="@string/chose_bag_size"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_14" />
+
+    <TextView
+        android:id="@+id/tv_notify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_13"
+        android:text="@string/bag_size_notify"
+        android:textColor="@color/color_888888"
+        android:textSize="@dimen/sp_12" />
+
+    <View
+        android:id="@+id/view_line_a"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_below="@id/tv_notify"
+        android:background="@color/color_F2F2F2" />
+
+    <LinearLayout
+        android:id="@+id/layout_size_mini"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_below="@+id/view_line_a"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_19"
+        android:paddingRight="@dimen/dp_19">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/bag_size_mini"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_14" />
+
+        <CheckBox
+            android:id="@+id/cb_mini"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_line_b"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_below="@id/layout_size_mini"
+        android:background="@color/color_F2F2F2"
+        android:layout_marginLeft="@dimen/dp_17"
+        />
+
+    <LinearLayout
+        android:id="@+id/layout_size_big"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_below="@+id/view_line_b"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_19"
+        android:paddingRight="@dimen/dp_19">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/bag_size_big"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_14" />
+
+        <CheckBox
+            android:id="@+id/cb_big"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_line_d"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_below="@id/layout_size_big"
+        android:background="@color/color_F2F2F2"
+        android:layout_marginLeft="@dimen/dp_17"
+        />
+
+    <LinearLayout
+        android:id="@+id/layout_size_medium"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_below="@+id/view_line_d"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_19"
+        android:paddingRight="@dimen/dp_19">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/bag_size_medium"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_14" />
+
+        <CheckBox
+            android:id="@+id/cb_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_line_c"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_below="@id/layout_size_medium"
+        android:layout_marginLeft="@dimen/dp_17"
+        android:background="@color/color_F2F2F2" />
+
+    <LinearLayout
+        android:id="@+id/layout_size_small"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_below="@+id/view_line_c"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_19"
+        android:paddingRight="@dimen/dp_19">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/bag_size_small"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_14" />
+
+        <CheckBox
+            android:id="@+id/cb_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</RelativeLayout>

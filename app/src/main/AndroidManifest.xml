@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -50,11 +49,23 @@
             android:name=".ui.activity.ChoseTypeActivity"
             android:theme="@style/TranslucentTheme" />
         <activity
-            android:name=".ui.activity.ThingActivity"
-            android:theme="@style/TranslucentTheme" />
+            android:name=".ui.activity.SellWatchActivity"
+            android:theme="@style/TranslucentTheme"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity.SellBagActivity"
+            android:theme="@style/TranslucentTheme"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".ui.activity.SellJewelryActivity"
+            android:theme="@style/TranslucentTheme"
+            android:windowSoftInputMode="adjustPan" />
+
         <activity
             android:name=".ui.activity.BrandActivity"
             android:theme="@style/TranslucentTheme" />
+
 
     </application>
 

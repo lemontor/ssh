@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
+import android.widget.ImageView
 import com.ssh.net.mainview.bean.ColorBean
 import com.ssh.net.mainview.view.ChanelView
 import com.ssh.net.ssh.R
@@ -36,6 +37,8 @@ class MainActivity : BaseMvpActivity<MainPresenter>(), MyAdapterDemo.OnItemClick
 
     lateinit var mainRecyclerView: ChanelView
     lateinit var mDrawerLayout: DrawerLayout
+    lateinit var mIvMore: ImageView
+    lateinit var mIvPreson: ImageView
     lateinit var mFrameLayoutForLeft: FrameLayout
     lateinit var mFrameLayoutForRight: FrameLayout
     var list: MutableList<ColorBean> = ArrayList<ColorBean>()
@@ -81,6 +84,12 @@ class MainActivity : BaseMvpActivity<MainPresenter>(), MyAdapterDemo.OnItemClick
     private fun initListener() {
         showLeftFragment(mFragmentMore)
         showRightFragment(mFragmentPerson)
+        mIvMore.setOnClickListener {
+            mDrawerLayout.openDrawer(mFrameLayoutForLeft)
+        }
+        mIvPreson.setOnClickListener {
+            mDrawerLayout.openDrawer(mFrameLayoutForRight)
+        }
         mDrawerLayout.addDrawerListener(object : DrawerLayout.DrawerListener {
             override fun onDrawerStateChanged(p0: Int) {
             }
@@ -109,6 +118,8 @@ class MainActivity : BaseMvpActivity<MainPresenter>(), MyAdapterDemo.OnItemClick
         mDrawerLayout = findViewById(R.id.drawer_layout)
         mFrameLayoutForLeft = findViewById(R.id.layout_left)
         mFrameLayoutForRight = findViewById(R.id.layout_right)
+        mIvMore = findViewById(R.id.iv_more)
+        mIvPreson = findViewById(R.id.iv_person)
         var linearLayoutManager = LinearLayoutManager(this)
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         mainRecyclerView.layoutManager = linearLayoutManager
@@ -159,7 +170,6 @@ class MainActivity : BaseMvpActivity<MainPresenter>(), MyAdapterDemo.OnItemClick
             event.openId == AppConfig.FRAGMENT_RIGHT_OPEN_NICK_PHONE -> showRightFragment(getNameFragment(1)!!)
             event.openId == AppConfig.FRAGMENT_RIGHT_OPEN_CLOSE -> mDrawerLayout.closeDrawer(mFrameLayoutForRight)
             event.openId == AppConfig.FRAGMENT_LEFT_OPEN_CLOSE -> mDrawerLayout.closeDrawer(mFrameLayoutForLeft)
-
         }
     }
 

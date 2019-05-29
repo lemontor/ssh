@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_main_title" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_title"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_20"
+        android:text="@string/chose_goods_jewelry_title"
+        android:textColor="@color/color_000000"
+        android:background="@color/color_ffffff"
+        android:gravity="center"
+        android:textSize="@dimen/sp_17" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
+
+        <LinearLayout
+            android:id="@+id/layout_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/layout_brand"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_45"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_19"
+                android:paddingRight="@dimen/dp_19">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/chose_goods_type"
+                    android:textColor="@color/color_000000"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:id="@+id/tv_type_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawableRight="@mipmap/icon_next"
+                    android:drawablePadding="@dimen/dp_10"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/color_000000"
+                    android:textSize="@dimen/sp_14" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_material"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_45"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_19"
+                android:paddingRight="@dimen/dp_19">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/jewelry_material"
+                    android:textColor="@color/color_000000"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:id="@+id/tv_material_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawableRight="@mipmap/icon_next"
+                    android:drawablePadding="@dimen/dp_10"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/color_000000"
+                    android:textSize="@dimen/sp_14" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_style"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_45"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_19"
+                android:paddingRight="@dimen/dp_19">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/jewelry_title"
+                    android:textColor="@color/color_000000"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:id="@+id/tv_style_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawableRight="@mipmap/icon_next"
+                    android:drawablePadding="@dimen/dp_10"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/color_000000"
+                    android:textSize="@dimen/sp_14" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_file"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_45"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_19"
+                android:paddingRight="@dimen/dp_19">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/chose_goods_file"
+                    android:textColor="@color/color_000000"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:id="@+id/tv_file_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawableRight="@mipmap/icon_next"
+                    android:drawablePadding="@dimen/dp_10"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/color_000000"
+                    android:textSize="@dimen/sp_14" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_19"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingBottom="@dimen/dp_14"
+                android:text="@string/chose_goods_new"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_14" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:paddingLeft="@dimen/dp_19"
+                android:paddingRight="@dimen/dp_19">
+
+                <TextView
+                    android:id="@+id/tv_old"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="旧"
+                    android:textColor="@color/color_000000"
+                    android:textSize="@dimen/sp_12" />
+
+                <com.ssh.net.ssh.widget.TextSeekBar
+                    android:id="@+id/tsbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_old"></com.ssh.net.ssh.widget.TextSeekBar>
+
+                <TextView
+                    android:id="@+id/tv_new"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@+id/tsbar"
+                    android:layout_alignParentRight="true"
+                    android:paddingLeft="@dimen/dp_5"
+                    android:text="新"
+                    android:textColor="@color/color_000000"
+                    android:textSize="@dimen/sp_12" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_notify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/dp_19"
+                android:paddingRight="@dimen/dp_19"
+                android:textColor="@color/color_888888"
+                android:textSize="@dimen/sp_12" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/dp_19"
+                android:paddingRight="@dimen/dp_19"
+                android:text="@string/chose_goods_notify_five"
+                android:textColor="@color/color_888888"
+                android:textSize="@dimen/sp_14" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_pic"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_220"
+                android:layout_marginLeft="@dimen/dp_13"
+                android:layout_marginTop="@dimen/dp_9"
+                android:layout_marginRight="@dimen/dp_20"
+                android:nestedScrollingEnabled="false"
+                android:layout_marginBottom="@dimen/dp_9">
+            </android.support.v7.widget.RecyclerView>
+            <EditText
+                android:id="@+id/edt_remark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
+                android:hint="@string/chose_goods_add_remark"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_14"
+                android:background="@null"
+                android:maxLines="2"
+                android:textColorHint="@color/color_888888"
+                android:layout_marginBottom="@dimen/dp_40"
+                android:paddingBottom="@dimen/dp_10"
+                />
+
+            <Button
+                android:id="@+id/tv_login_last"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginLeft="@dimen/dp_22"
+                android:layout_marginRight="@dimen/dp_22"
+                android:background="@drawable/bg_click_state"
+                android:gravity="center"
+                android:text="@string/phone_login_notify_next"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/sp_14" />
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

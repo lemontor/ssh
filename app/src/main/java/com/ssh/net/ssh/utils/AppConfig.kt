@@ -24,6 +24,11 @@ class AppConfig {
         val FRAGMENT_LEFT_OPEN_CLOSE = 11
 
 
+        val REQUEST_ID_GET_PIC = 0
+
+
+
+
     }
 
 
