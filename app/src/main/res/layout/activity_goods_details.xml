@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_56"
+        android:drawableLeft="@mipmap/icon_back"
+        android:paddingLeft="@dimen/dp_26"
+        android:paddingRight="@dimen/dp_10" />
+
+
+    <ScrollView
+        android:id="@+id/layout_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tv_back"
+        android:layout_above="@+id/layout_goods_info"
+        android:scrollbars="none"
+      >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/color_000000">
+
+            <com.miiikr.taixian.widget.CustomViewPager
+                android:id="@+id/vp_goods"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </com.miiikr.taixian.widget.CustomViewPager>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/dp_33"
+                android:text="@string/goods_details_title"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/dp_20"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/dp_40"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_20"
+                android:paddingRight="@dimen/dp_20"
+                android:paddingBottom="@dimen/dp_45">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/dp_17"
+                    android:layout_weight="1"
+                    android:text="@string/goods_details_constituent"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_value_constituent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/dp_17"
+                    android:text="#95新"
+                    android:maxLines="1"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_20"
+                android:paddingRight="@dimen/dp_20"
+                android:paddingBottom="@dimen/dp_45">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/dp_17"
+                    android:layout_weight="1"
+                    android:text="@string/goods_details_meterial"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_value_material"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/dp_17"
+                    android:text="金子"
+                    android:maxLines="1"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_20"
+                android:paddingRight="@dimen/dp_20"
+                android:paddingBottom="@dimen/dp_100">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/dp_17"
+                    android:layout_weight="1"
+                    android:text="@string/goods_details_files"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_value_files"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/dp_17"
+                    android:text="肩带，保修卡，五金配件"
+                    android:maxLines="1"
+                    />
+            </LinearLayout>
+             
+            <ImageView
+                android:id="@+id/iv_head"
+                android:layout_width="@dimen/dp_56"
+                android:layout_height="@dimen/dp_56"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/dp_25"/>
+
+            <TextView
+                android:id="@+id/tv_check_result"
+                android:layout_width="@dimen/dp_250"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@android:color/white"
+                android:text="鉴定结果：根据图片鉴定，与正品工艺相符合。最终鉴定结果以实物鉴定为准。"
+                android:paddingBottom="@dimen/dp_100"
+                />
+
+            
+        </LinearLayout>
+    </ScrollView>
+
+
+
+    <LinearLayout
+        android:id="@+id/layout_goods_info"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        >
+
+        <TextView
+            android:id="@+id/tv_talk"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_21"
+            android:gravity="center"
+            android:text="@string/check_consult"
+            android:background="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/tv_sell"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/sp_21"
+            android:textColor="@android:color/white"
+            android:background="@color/color_000000"
+            android:text="@string/sell_my"
+            android:gravity="center"
+            />
+    </LinearLayout>
+</RelativeLayout>

@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
-import com.ssh.net.mainview.R;
+import com.miiikr.taixian.mainview.R;
 
 
 public class MyItemTextLayout extends ChanelItemTextLayout {

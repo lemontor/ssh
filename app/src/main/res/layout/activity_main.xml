@@ -12,11 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.ssh.net.mainview.view.ChanelView
-            android:id="@+id/rv_main"
+        <com.miiikr.taixian.widget.MainViewPager
+            android:id="@+id/vp_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        </com.ssh.net.mainview.view.ChanelView>
+        </com.miiikr.taixian.widget.MainViewPager>
 
 
         <ImageView

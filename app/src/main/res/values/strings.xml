@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ssh</string>
+    <string name="app_name">顺时行</string>
     <string name="login_edt_account">请输入用户名/手机号</string>
     <string name="login_check_phone">手机号</string>
     <string name="login_check_code">输入验证码</string>
@@ -77,6 +77,7 @@
     <string name="check_consult">在线咨询</string>
     <string name="check_check">继续鉴定</string>
     <string name="sell_sell">继续售卖</string>
+    <string name="sell_my">我要售卖</string>
     <string name="cancel_sub">取消预约</string>
     <string name="consulter">咨询鉴定师</string>
     <string name="question">常见问题</string>
@@ -161,7 +162,26 @@
     <string name="jewelry_material_925">925银</string>
     <string name="news_cancel">删除</string>
     <string name="wallet_title">我的钱包</string>
+    <string name="wallet_details">收支明细</string>
+    <string name="get_details">提现记录</string>
+    <string name="get_pw">我的余额</string>
+    <string name="get_no_pw">未设置</string>
+    <string name="active_card">活动卡券</string>
+    <string name="string_help_text">当前应用缺少必要权限.\n请点击"设置"-"权限"-打开所需权限.\n最后点击两次后退按钮,即可返回.</string>
 
+    <string name="busi_title">我的余额</string>
+    <string name="busi_get">提款</string>
+    <string name="map_search">搜索</string>
+    <string name="map_address">公司名称：深圳前海全明星科技有限公司 \n公司地址：深圳市南山区粤海街道科华路讯美科技广场1号楼409</string>
+
+
+    <string name="goods_details_title">商品参数</string>
+    <string name="goods_details_constituent">成分</string>
+    <string name="goods_details_meterial">材质</string>
+    <string name="goods_details_files">附件</string>
+    <string name="share_notify">每邀请一位好友成功售卖商品，\n你即获得￥50可提现收入。\n奖励无限叠加。</string>
+    <string name="share_notify2">好友通过你的邀请成功注册APP，其也可获赠50元红包，售卖商品后即可提现！</string>
+    <string name="share_rule_1">每成功推荐1位好友加入</string>
 
 
 </resources>

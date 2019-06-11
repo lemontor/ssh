@@ -31,17 +31,18 @@
 
         <ImageView
             android:id="@+id/iv_head"
-            android:layout_width="20dp"
-            android:layout_height="@dimen/dp_20"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
             android:layout_gravity="center_vertical"
-            android:background="@color/color_EAEAEA" />
+            />
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="@dimen/dp_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/dp_15"
-            android:background="@color/color_EAEAEA" />
+            android:src="@mipmap/icon_next"
+            />
     </LinearLayout>
 
     <View
@@ -159,5 +160,17 @@
         android:id="@+id/line_f"
         style="@style/set_style_line"
         android:layout_below="@+id/tv_notify_sty" />
+
+    <TextView
+        android:id="@+id/tv_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="退出登录"
+        android:textColor="@color/color_757575"
+        android:textSize="@dimen/sp_14"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="@dimen/dp_30"/>
+
 
 </RelativeLayout>

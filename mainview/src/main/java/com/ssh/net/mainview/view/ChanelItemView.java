@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.ssh.net.mainview.R;
+import com.miiikr.taixian.mainview.R;
 import com.ssh.net.mainview.utils.DisPlayUtils;
 
 

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_71">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_cancel"
+        android:layout_width="@dimen/dp_62"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/card_view"
+        android:layout_alignBottom="@+id/card_view"
+        android:layout_alignParentRight="true"
+        android:background="@android:color/white">
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_B90000"
+            android:gravity="center"
+            android:text="@string/news_cancel"
+            android:textColor="@android:color/white" />
+
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:tag="slide_flag">
+
+        <RelativeLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:tag="slide_flag">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_19"
+                android:paddingTop="@dimen/dp_20"
+                android:text="顺时行奖励红包"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_title"
+                android:paddingLeft="@dimen/dp_19"
+                android:paddingTop="@dimen/dp_7"
+                android:paddingBottom="@dimen/dp_19"
+                android:text="2019 02 23"
+                android:textColor="@color/color_EAEAEA"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:id="@+id/tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:paddingTop="@dimen/dp_19"
+                android:paddingRight="@dimen/dp_22"
+                android:text="￥50"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_20" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/color_F2F2F2"
+        android:layout_below="@+id/card_view"
+        android:layout_marginLeft="@dimen/dp_12"
+        android:layout_marginRight="@dimen/dp_12"
+        />
+
+
+</RelativeLayout>

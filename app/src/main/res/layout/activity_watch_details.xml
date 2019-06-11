@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dp_20">
 
     <include layout="@layout/layout_main_title" />
 
@@ -240,17 +241,17 @@
                 android:paddingRight="@dimen/dp_19"
                 android:text="@string/chose_goods_notify_five"
                 android:textColor="@color/color_888888"
-                android:textSize="@dimen/sp_14" />
+                android:textSize="@dimen/sp_14"
+                android:paddingBottom="@dimen/dp_9"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_pic"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_220"
-                android:layout_marginLeft="@dimen/dp_13"
-                android:layout_marginTop="@dimen/dp_9"
-                android:layout_marginRight="@dimen/dp_20"
+                android:layout_height="match_parent"
                 android:nestedScrollingEnabled="false"
-                android:layout_marginBottom="@dimen/dp_9">
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
+                >
             </android.support.v7.widget.RecyclerView>
             <EditText
                 android:id="@+id/edt_remark"
@@ -266,6 +267,7 @@
                 android:textColorHint="@color/color_888888"
                 android:layout_marginBottom="@dimen/dp_40"
                 android:paddingBottom="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_20"
                 />
 
             <Button

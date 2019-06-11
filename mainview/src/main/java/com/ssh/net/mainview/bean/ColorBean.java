@@ -1,6 +1,8 @@
 package com.ssh.net.mainview.bean;
 
-public class ColorBean {
+import java.io.Serializable;
+
+public class ColorBean implements Serializable {
     int res;
 
     int type;

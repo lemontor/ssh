@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <include
+        layout="@layout/layout_main_title"/>
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:text="上门回收"
+        android:textColor="@color/color_000000"
+        android:background="@android:color/white"
+        android:textSize="@dimen/sp_16"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/dp_10"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:clipChildren="false">
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_appoint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false">
+        </android.support.v4.view.ViewPager>
+
+        <Button
+            android:id="@+id/tv_next"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_24"
+            android:layout_marginRight="@dimen/dp_24"
+            android:background="@drawable/bg_click_state_login"
+            android:text="可预约"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:textSize="@dimen/sp_14"
+            android:layout_marginTop="@dimen/dp_31"
+            android:layout_below="@+id/edt_code"
+            />
+    </LinearLayout>
+
+
+
+</LinearLayout>

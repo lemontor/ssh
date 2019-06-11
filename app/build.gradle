@@ -3,14 +3,33 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+
+
+
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.ssh.net.ssh"
+        applicationId "com.miiikr.taixian"
         minSdkVersion 18
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        ndk {
+            //选择要添加的对应 cpu 类型的 .so 库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', "x86"
+            // 还可以添加 ', 'mips', 'mips64','x86', 'x86_64'
+        }
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "18d5d43958ef9d11eebcea40", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
     }
     buildTypes {
         release {
@@ -19,6 +38,13 @@ android {
         }
     }
 }
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -29,39 +55,60 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     /*
-            rxJava
-             */
+                rxJava
+                 */
     implementation 'io.reactivex.rxjava2:rxjava:2.1.5'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     /*
-            retrofit2
-             */
+                retrofit2
+                 */
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     /*
-            okHttp3
-             */
+                okHttp3
+                 */
     implementation 'com.squareup.okhttp3:okhttp:3.9.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
     /*
-            glide
-             */
+                glide
+                 */
     implementation 'com.github.bumptech.glide:glide:4.3.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.3.1'
     /*
-        design
-         */
+            design
+             */
     implementation 'com.android.support:cardview-v7:28.0.0'
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     implementation project(':mainview')
+    /*
+        EventBus
+         */
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    /*
+        luban
+         */
+    implementation 'top.zibin:Luban:1.1.3'
+    /*
+        wechat
+         */
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+    implementation files('libs/core-3.2.1.jar')
 
     /*
-    EventBus
+    jpush
      */
-    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'cn.jiguang.sdk:jpush:3.3.1'
+    implementation 'cn.jiguang.sdk:jcore:2.0.1'  
+
+
+    implementation 'com.android.support:multidex:1.0.3'
+
+//    implementation(name: 'openDefault-4.3.9', ext: 'aar')
+
+    implementation 'com.sina.weibo.sdk:core:4.3.9:openDefaultRelease@aar'
 
 
 }

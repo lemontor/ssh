@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/color_F2F2F2"
+    >
 
     <include
+        android:id="@+id/layout_title"
         layout="@layout/layout_main_title"/>
     <TextView
         android:id="@+id/tv_title"
@@ -19,13 +23,17 @@
         android:gravity="center_horizontal"
         android:layout_below="@+id/layout_title"
         android:layout_centerHorizontal="true"
-        android:background="@android:color/white"/>
+        android:background="@android:color/white"
+        />
 
     <LinearLayout
+        android:id="@+id/layout_money"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_126"
         android:orientation="horizontal"
-        android:background="@color/color_282828">
+        android:background="@color/color_282828"
+        android:layout_below="@+id/tv_title"
+        >
         
         <RelativeLayout
             android:layout_width="0dp"
@@ -36,9 +44,10 @@
                 android:id="@+id/tv_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="￥200\n已成单红包"
+                android:text="￥200\n已成单红包 >"
                 android:layout_centerInParent="true"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp_16"
+                android:gravity="center"
                 android:textColor="#F9AA00"
                 />
         </RelativeLayout>
@@ -53,22 +62,60 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            >
 
             <TextView
                 android:id="@+id/tv_money_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="￥200\n已成单红包"
+                android:text="￥50\n未成单红包 >"
                 android:layout_centerInParent="true"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp_16"
+                android:gravity="center"
                 android:textColor="#F9AA00"
                 />
 
         </RelativeLayout>
         
     </LinearLayout>
-    
 
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_yue"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_weight="1"
+            android:text="@string/get_pw"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_14"
+            android:gravity="center_vertical"
+            android:layout_below="@+id/layout_money"
+            android:paddingLeft="@dimen/dp_19"
+            android:drawableRight="@mipmap/icon_next"
+            android:background="@android:color/white"
+            android:paddingRight="@dimen/dp_22"/>
+
+
+    <TextView
+        android:id="@+id/tv_active"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:text="@string/active_card"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_14"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_19"
+        android:drawableRight="@mipmap/icon_next"
+        android:paddingRight="@dimen/dp_22"
+        android:layout_marginTop="@dimen/dp_8"
+        android:background="@android:color/white"
+        android:layout_below="@+id/tv_yue"/>
+
+    <FrameLayout
+        android:id="@+id/layout_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
+
+</RelativeLayout>
