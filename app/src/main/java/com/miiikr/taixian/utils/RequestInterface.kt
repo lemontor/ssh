@@ -20,6 +20,7 @@ object RequestInterface {
     val REQUEST_SELL_ID = 16
     val REQUEST_CHECK_ID = 17
     val REQUEST_EVA_ID = 18
+    val REQUEST_CANCEL_EVA_ID = 19
 
 
 

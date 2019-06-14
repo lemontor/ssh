@@ -3,10 +3,7 @@ package com.miiikr.taixian.BaseMvp.presenter
 import android.util.Log
 import com.miiikr.taixian.BaseMvp.IView.AccountView
 import com.miiikr.taixian.BaseMvp.IView.PersonView
-import com.miiikr.taixian.entity.CheckEntity
-import com.miiikr.taixian.entity.EvaEntity
-import com.miiikr.taixian.entity.SellEntity
-import com.miiikr.taixian.entity.SubEntity
+import com.miiikr.taixian.entity.*
 import com.miiikr.taixian.net.RetrofitApiInterface
 import com.miiikr.taixian.net.RetrofitManager
 import com.miiikr.taixian.net.RetrofitManager2
@@ -52,6 +49,11 @@ class PersonPresenter : BasePresenter<PersonView>() {
                 override fun onResponse(call: Call<SubEntity>, response: Response<SubEntity>) {
                     if (response?.body() != null) {
                            it.onNext(response.body()!!)
+                    }else{
+                        if (isViewAttached()) {
+                            mainView!!.onFailue(requestId,"接口出现错误")
+                            mainView!!.hideLoading()
+                        }
                     }
                 }
             })
@@ -81,6 +83,11 @@ class PersonPresenter : BasePresenter<PersonView>() {
                 override fun onResponse(call: Call<SellEntity>, response: Response<SellEntity>) {
                     if (response?.body() != null) {
                         it.onNext(response.body()!!)
+                    }else{
+                        if (isViewAttached()) {
+                            mainView!!.onFailue(requestId,"接口出现错误")
+                            mainView!!.hideLoading()
+                        }
                     }
                 }
             })
@@ -146,6 +153,11 @@ class PersonPresenter : BasePresenter<PersonView>() {
                 override fun onResponse(call: Call<EvaEntity>, response: Response<EvaEntity>) {
                     if (response?.body() != null) {
                         it.onNext(response.body()!!)
+                    }else{
+                        if (isViewAttached()) {
+                            mainView!!.onFailue(requestId,"接口出现错误")
+                            mainView!!.hideLoading()
+                        }
                     }
                 }
             })
@@ -159,6 +171,40 @@ class PersonPresenter : BasePresenter<PersonView>() {
                 }
     }
 
+
+    fun getCancelEvaData(requestId: Int, userId: String,productId:String,state:Int) {
+        if (isViewAttached()) {
+            mainView!!.showLoading()
+        }
+        Observable.create(ObservableOnSubscribe<CommonEntity> {
+            val api = RetrofitManager2.initRetrofit()!!.create(RetrofitApiInterface::class.java)
+            api.getEvaDataCancel(userId,productId,state).enqueue(object : Callback<CommonEntity> {
+                override fun onFailure(call: Call<CommonEntity>, t: Throwable) {
+                    if (isViewAttached()) {
+                        mainView!!.onFailue(requestId, t.message!!)
+                    }
+                }
+
+                override fun onResponse(call: Call<CommonEntity>, response: Response<CommonEntity>) {
+                    if (response?.body() != null) {
+                        it.onNext(response.body()!!)
+                    }else{
+                        if (isViewAttached()) {
+                            mainView!!.onFailue(requestId,"接口出现错误")
+                            mainView!!.hideLoading()
+                        }
+                    }
+                }
+            })
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    if(isViewAttached()){
+                        mainView!!.onSuccess(requestId,it)
+                        mainView!!.hideLoading()
+                    }
+                }
+    }
 
 
 

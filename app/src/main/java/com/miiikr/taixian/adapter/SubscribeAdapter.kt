@@ -6,13 +6,14 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import ccom.miiikr.taixian.`interface`.OnClickItemListener
 import com.miiikr.taixian.R
 import com.miiikr.taixian.entity.SubEntity
 import com.ssh.net.ssh.utils.GlideHelper
 import com.ssh.net.ssh.utils.SpannableUtils
 import com.ssh.net.ssh.viewHolder.SubscriberViewHolder
 
-class SubscribeAdapter(val context: Context, val datas: ArrayList<SubEntity.SubDataEntity>) : RecyclerView.Adapter<SubscriberViewHolder>() {
+class SubscribeAdapter(val context: Context, val datas: ArrayList<SubEntity.SubDataEntity>,val click:OnClickItemListener) : RecyclerView.Adapter<SubscriberViewHolder>() {
 
     var inflater: LayoutInflater = LayoutInflater.from(context)
 
@@ -89,6 +90,9 @@ class SubscribeAdapter(val context: Context, val datas: ArrayList<SubEntity.SubD
             p0.mTvDate.text = SpannableUtils.millisecond2Date(datas[p1].createTime)
         }
 
+        p0.mTvCancel.setOnClickListener {
+            click.clickItem(p1)
+        }
 
 //        GlideHelper.loadBitmpaByCircle(context as Activity, p0.mIvPic, url)
     }

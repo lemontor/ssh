@@ -109,7 +109,15 @@ public class SSHProgressHUD extends Dialog {
 			instance = null;
 		}
 	}
-    
+
+	@Override
+	public void dismiss() {
+//		if (((Activity) context).isFinishing()) {
+			super.dismiss();
+			instance = null;
+//		}
+	}
+
 	public void dismissWithSuccess() {
 		tvMessage.setText("Success");
 		showSuccessImage();

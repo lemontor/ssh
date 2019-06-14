@@ -4,18 +4,25 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.ImageView
+import ccom.miiikr.taixian.`interface`.OnClickItemListener
 import com.miiikr.taixian.BaseMvp.IView.PersonView
 import com.miiikr.taixian.BaseMvp.View.BaseMvpActivity
 import com.miiikr.taixian.BaseMvp.presenter.PersonPresenter
 import com.miiikr.taixian.R
 import com.miiikr.taixian.adapter.SubscribeAdapter
+import com.miiikr.taixian.entity.CommonEntity
 import com.miiikr.taixian.entity.SubEntity
 import com.miiikr.taixian.utils.RequestInterface
 import com.miiikr.taixian.utils.SharedPreferenceUtils
 import com.miiikr.taixian.utils.ToastUtils
 import com.miiikr.taixian.widget.SSHProgressHUD
 
-class SubscribeActivity : BaseMvpActivity<PersonPresenter>(), PersonView {
+class SubscribeActivity : BaseMvpActivity<PersonPresenter>(), PersonView,OnClickItemListener {
+
+    override fun clickItem(position: Int) {
+        cancelIndex = position
+        mPresenter.getCancelEvaData(RequestInterface.REQUEST_CANCEL_EVA_ID,"10086",mSubData[position].productId!!,mSubData[position].state)
+    }
 
     override fun <T : Any> onSuccess(responseId: Int, response: T) {
         if (responseId == RequestInterface.REQUEST_SUB_ID) {
@@ -30,6 +37,17 @@ class SubscribeActivity : BaseMvpActivity<PersonPresenter>(), PersonView {
                     ToastUtils.toastShow(this, result.message)
                 }
             }
+        }else if(responseId == RequestInterface.REQUEST_CANCEL_EVA_ID){
+            val result = response as? CommonEntity
+            if(result != null){
+                if(result.state == 1){
+                   mSubData.removeAt(cancelIndex)
+                    adapter.notifyDataSetChanged()
+                }else{
+                    ToastUtils.toastShow(this, result.message)
+                }
+            }
+
         }
     }
 
@@ -41,6 +59,7 @@ class SubscribeActivity : BaseMvpActivity<PersonPresenter>(), PersonView {
     lateinit var mIvBack: ImageView
     lateinit var mSubData: ArrayList<SubEntity.SubDataEntity>
     lateinit var adapter: SubscribeAdapter
+    var cancelIndex = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +73,7 @@ class SubscribeActivity : BaseMvpActivity<PersonPresenter>(), PersonView {
 
     private fun initData() {
         mSubData = ArrayList()
-        adapter = SubscribeAdapter(this, mSubData)
+        adapter = SubscribeAdapter(this, mSubData,this)
         mRvSub.adapter = adapter
 
 //        mPresenter.getSubData(RequestInterface.REQUEST_SUB_ID, SharedPreferenceUtils(this).getValue(SharedPreferenceUtils.PREFERENCE_U_I)!!)

@@ -153,7 +153,7 @@ class CheckActivity : BaseMvpActivity<PersonPresenter>(), OnClickItemListener, P
     }
 
     override fun hideLoading() {
-//        mSSHProgressHUD.dismiss()
+        mSSHProgressHUD.dismiss()
     }
 
 

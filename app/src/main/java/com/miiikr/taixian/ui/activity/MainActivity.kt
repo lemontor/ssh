@@ -201,7 +201,7 @@ class MainActivity : BaseMvpActivity<MainPresenter>(), MainView {
         mFrameLayoutForRight = findViewById(R.id.layout_right)
         mIvMore = findViewById(R.id.iv_more)
         mIvPreson = findViewById(R.id.iv_person)
-        mSSHProgressHUD = SSHProgressHUD.getInstance(this)
+        mSSHProgressHUD = SSHProgressHUD.getInstance(this@MainActivity)
         mSSHProgressHUD.setMessage("获取数据中")
         mSSHProgressHUD.setCancelable(true)
     }
@@ -291,12 +291,12 @@ class MainActivity : BaseMvpActivity<MainPresenter>(), MainView {
 
 
     override fun showLoading() {
-        super.showLoading()
+//        super.showLoading()
         mSSHProgressHUD.show()
     }
 
     override fun hideLoading() {
-        super.hideLoading()
+//        super.hideLoading()
         mSSHProgressHUD.dismiss()
     }
 

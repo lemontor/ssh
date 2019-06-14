@@ -65,6 +65,10 @@ interface RetrofitApiInterface {
     @POST("api/sshEvaluation/evaluationList")
     fun getEvaData(@Field("userId") useId: String):Call<EvaEntity>
 
+    @FormUrlEncoded
+    @POST("api/sshReservation/changeReservationState")
+    fun getEvaDataCancel(@Field("userId") useId: String,@Field("productId")productId:String,@Field("state")state:Int):Call<CommonEntity>
+
 
 
 }
