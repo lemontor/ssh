@@ -24,6 +24,12 @@ class IntentUtils {
             SSHApplication.addActivity(ac)
         }
 
+        fun toLogin(context: Context) {
+            var intent = Intent()
+            intent.setClass(context, LoginActivity::class.java)
+            context.startActivity(intent)
+        }
+
 
         fun toCheckCode(context: Context, phone: String) {
             var intent = Intent()
@@ -143,8 +149,10 @@ class IntentUtils {
             context.startActivity(intent)
         }
 
-        fun toPic(context: Context){
+        fun toPic(context: Context,sex:Int,headUrl:String){
             var intent = Intent()
+            intent.putExtra("sex",sex)
+            intent.putExtra("headUrl",headUrl)
             intent.setClass(context, PicActivity::class.java)
             context.startActivity(intent)
         }

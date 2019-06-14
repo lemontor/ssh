@@ -54,7 +54,7 @@
     <string name="main_right_notify_set">设置</string>
 
     <string name="set_account_head">头像</string>
-    <string name="set_account_id">ID</string>
+    <string name="set_account_id">性别</string>
     <string name="set_account_name">昵称</string>
     <string name="set_account_phone">手机号</string>
     <string name="set_account_version">版本</string>
@@ -181,7 +181,13 @@
     <string name="goods_details_files">附件</string>
     <string name="share_notify">每邀请一位好友成功售卖商品，\n你即获得￥50可提现收入。\n奖励无限叠加。</string>
     <string name="share_notify2">好友通过你的邀请成功注册APP，其也可获赠50元红包，售卖商品后即可提现！</string>
-    <string name="share_rule_1">每成功推荐1位好友加入</string>
+    <string name="share_rule_1">用户邀请好友注册成为顺时行新用户,好友注册成功后双方各得50元现金红包;</string>
+    <string name="share_rule_2">好友与顺时行达成首次交易,双方即可将红包提现;</string>
+    <string name="share_rule_3">好友须为首次注册顺时行APP的新用户;</string>
+    <string name="share_rule_4">用户通过完成第1、2条后取得的现金红包可提现至微信零钱,可在顺时行APP-推荐有奖-可提现金额中查看;</string>
+    <string name="share_rule_5">如发现用户存在任何违规套取现金红包的行为，顺时行将依法追究其法律责任等;</string>
+    <string name="share_rule_6">如有疑问请联系顺时行客服;</string>
+
 
 
 </resources>

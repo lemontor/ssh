@@ -9,23 +9,20 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.view.ViewPager
 import android.support.v4.widget.DrawerLayout
-import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.View
-import android.view.animation.AnimationUtils
 import android.widget.*
 import com.miiikr.taixian.BaseMvp.IView.MainView
 import java.util.ArrayList
 import com.miiikr.taixian.BaseMvp.View.BaseMvpActivity
 import com.miiikr.taixian.BaseMvp.presenter.MainPresenter
 import com.miiikr.taixian.R
-import com.miiikr.taixian.adapter.MyAdapterDemo
 import com.miiikr.taixian.adapter.NtAdapter2
 import com.miiikr.taixian.app.SSHApplication
 import com.miiikr.taixian.entity.Bean
 import com.miiikr.taixian.entity.CommonEntity
 import com.miiikr.taixian.entity.MainEntity
 import com.miiikr.taixian.entity.MessageEvent
-import com.miiikr.taixian.net.RetrofitApiInterface
 import com.miiikr.taixian.ui.fragment.MainFragmentLeft
 import com.miiikr.taixian.ui.fragment.MainFragmentRight
 import com.miiikr.taixian.ui.fragment.SetNameFragment
@@ -55,16 +52,18 @@ class MainActivity : BaseMvpActivity<MainPresenter>(), MainView {
                     }
                 }
             }
-            RequestInterface.REQUEST_MAIN_SEX ->{
+            RequestInterface.REQUEST_MAIN_SEX -> {
                 val result = response as? CommonEntity
-                if(result != null){
-                     if(result.state == 1){
-                         SharedPreferenceUtils(this@MainActivity).setChose(SharedPreferenceUtils.PREFERENCE_U_C,true)
-                     }
+                if (result != null) {
+                    if (result.state == 1) {
+                        Log.e("tag_chose", "chose")
+                        getSharedPreferences()!!.setChose(SharedPreferenceUtils.PREFERENCE_U_C, true)
+                    }
                 }
             }
         }
     }
+
     override fun onFailue(responseId: Int, msg: String) {
     }
 
@@ -88,6 +87,7 @@ class MainActivity : BaseMvpActivity<MainPresenter>(), MainView {
     var mFragmentSet: SettingFragment? = null
     var mFragmentNickName: SetNameFragment? = null
     lateinit var mSSHProgressHUD: SSHProgressHUD
+    var share: SharedPreferenceUtils? = null
 
 
     /*
@@ -186,6 +186,14 @@ class MainActivity : BaseMvpActivity<MainPresenter>(), MainView {
         }, IntentFilter(ConstantsAPI.ACTION_REFRESH_WXAPP))
     }
 
+    fun getSharedPreferences(): SharedPreferenceUtils? {
+        if (share == null) {
+            share = SharedPreferenceUtils(this)
+        }
+        return share
+    }
+
+
     private fun initUI() {
         mainRecyclerView = findViewById(R.id.vp_main)
         mDrawerLayout = findViewById(R.id.drawer_layout)
@@ -225,14 +233,20 @@ class MainActivity : BaseMvpActivity<MainPresenter>(), MainView {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(event: MessageEvent) {
-        when {
-            event.openId == AppConfig.FRAGMENT_RIGHT_OPEN_SET_ID -> showRightFragment(getSettingFragment()!!)
-            event.openId == AppConfig.FRAGMENT_RIGHT_OPEN_NICK_NAME -> showRightFragment(getNameFragment(0)!!)
-            event.openId == AppConfig.FRAGMENT_RIGHT_OPEN_NICK_PHONE -> showRightFragment(getNameFragment(1)!!)
-            event.openId == AppConfig.FRAGMENT_RIGHT_OPEN_CLOSE -> mDrawerLayout.closeDrawer(mFrameLayoutForRight)
-            event.openId == AppConfig.FRAGMENT_LEFT_OPEN_CLOSE -> mDrawerLayout.closeDrawer(mFrameLayoutForLeft)
-            event.openId == AppConfig.MAIN_CHANGE_SEX_WOMEN -> mPresenter.setSexInfo(RequestInterface.REQUEST_MAIN_SEX,SharedPreferenceUtils(this@MainActivity).getValue(SharedPreferenceUtils.PREFERENCE_U_I)!!,"2")
-            event.openId == AppConfig.MAIN_CHANGE_SEX_MAN -> mPresenter.setSexInfo(RequestInterface.REQUEST_MAIN_SEX,SharedPreferenceUtils(this@MainActivity).getValue(SharedPreferenceUtils.PREFERENCE_U_I)!!,"1")
+        if (event.openId == AppConfig.FRAGMENT_RIGHT_OPEN_SET_ID) {
+            showRightFragment(getSettingFragment()!!)
+        } else if (event.openId == AppConfig.FRAGMENT_RIGHT_OPEN_NICK_NAME) {
+            showRightFragment(getNameFragment(0)!!)
+        } else if (event.openId == AppConfig.FRAGMENT_RIGHT_OPEN_NICK_PHONE) {
+            showRightFragment(getNameFragment(1)!!)
+        } else if (event.openId == AppConfig.FRAGMENT_RIGHT_OPEN_CLOSE) {
+            mDrawerLayout.closeDrawer(mFrameLayoutForRight)
+        } else if (event.openId == AppConfig.FRAGMENT_LEFT_OPEN_CLOSE) {
+            mDrawerLayout.closeDrawer(mFrameLayoutForLeft)
+        } else if (event.openId == AppConfig.MAIN_CHANGE_SEX_WOMEN) {
+            mPresenter.setSexInfo(RequestInterface.REQUEST_MAIN_SEX, share!!.getValue(SharedPreferenceUtils.PREFERENCE_U_I)!!, "2")
+        } else if (event.openId == AppConfig.MAIN_CHANGE_SEX_MAN) {
+            mPresenter.setSexInfo(RequestInterface.REQUEST_MAIN_SEX, share!!.getValue(SharedPreferenceUtils.PREFERENCE_U_I)!!, "1")
         }
     }
 

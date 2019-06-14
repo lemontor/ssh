@@ -44,6 +44,20 @@ class GlideHelper {
             }
         }
 
+        fun loadBitmpaByCircleWithSize(activity: Activity?, imageView: ImageView?, url: String,width:Int,height: Int) {
+            if (activity != null && !activity.isFinishing && imageView != null) {
+                val requestOptions = RequestOptions.circleCropTransform().override(width,height).diskCacheStrategy(DiskCacheStrategy.ALL).dontAnimate()
+                Glide.with(activity).load(url).apply(requestOptions).into(object :SimpleTarget<Drawable>(){
+                    override fun onResourceReady(resource: Drawable?, transition: Transition<in Drawable>?) {
+//                        val width = resource!!.intrinsicWidth
+//                        val height = resource!!.intrinsicHeight
+                        imageView.setImageDrawable(resource)
+                    }
+                })
+            }
+        }
+
+
         fun loadBitmpaByCircleInRes(activity: Activity?, imageView: ImageView?, res: Int) {
             if (activity != null && !activity.isFinishing && imageView != null) {
                 val requestOptions = RequestOptions.circleCropTransform().diskCacheStrategy(DiskCacheStrategy.ALL).dontAnimate().centerCrop()
@@ -95,6 +109,19 @@ class GlideHelper {
                 })
             }
         }
+
+        fun loadBitmapByCornerWithPlaceholder(activity: Activity?, imageView: ImageView?, url: String?,placeholderId:Int) {
+            if (activity != null && !activity.isFinishing && imageView != null) {
+                val cornerOptions = RoundedCorners(10)
+                val requestOptions = RequestOptions.bitmapTransform(cornerOptions).placeholder(placeholderId).error(placeholderId).diskCacheStrategy(DiskCacheStrategy.ALL).dontAnimate()
+                Glide.with(activity).load(url).apply(requestOptions).into(object :SimpleTarget<Drawable>(){
+                    override fun onResourceReady(resource: Drawable?, transition: Transition<in Drawable>?) {
+                        imageView.setImageDrawable(resource)
+                    }
+                })
+            }
+        }
+
 
         /*
         加载图片

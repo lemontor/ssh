@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+   >
 
     <include
         android:id="@+id/layout_title"
@@ -21,25 +22,33 @@
         android:textColor="@color/color_000000"
         android:textSize="@dimen/sp_17" />
 
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/color_F2F2F2"
+        android:layout_below="@+id/tv_title"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_check"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tv_title"
+        android:layout_below="@+id/line"
         android:layout_above="@+id/tv_check">
-
     </android.support.v7.widget.RecyclerView>
 
-        <TextView
-            android:id="@+id/tv_check"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
-            android:layout_weight="1"
-            android:textColor="@color/color_000000"
-            android:textSize="@dimen/sp_17"
-            android:background="@color/color_fcfcfc"
-            android:text="@string/check_check"
-            android:gravity="center"
-            android:layout_alignParentBottom="true"
-            />
+    <ViewStub
+        android:id="@+id/contentPanel"
+        android:inflatedId="@+id/inflatedStart"
+        android:layout="@layout/layout_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        />
+
+
+
+
+
+
 </RelativeLayout>

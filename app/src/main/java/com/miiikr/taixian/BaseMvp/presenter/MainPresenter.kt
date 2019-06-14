@@ -28,7 +28,7 @@ class MainPresenter : BasePresenter<MainView>() {
                     mView.hideLoading()
                 }
                 override fun onResponse(call: Call<MainEntity>, response: Response<MainEntity>) {
-                    if (response != null && response.body() != null) {
+                    if (response?.body() != null) {
                         it.onNext(response.body()!!)
                     }else{
 
@@ -52,7 +52,7 @@ class MainPresenter : BasePresenter<MainView>() {
                 }
 
                 override fun onResponse(call: Call<CommonEntity>, response: Response<CommonEntity>) {
-                    if (response != null && response.body() != null) {
+                    if (response?.body() != null) {
                         it.onNext(response.body()!!)
                     }else{
 

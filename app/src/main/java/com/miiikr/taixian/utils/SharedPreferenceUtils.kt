@@ -15,6 +15,7 @@ class SharedPreferenceUtils(context: Context) {
         val PREFERENCE_U_N = "N"
         val PREFERENCE_U_P = "P"
         val PREFERENCE_U_H = "H"
+        val PREFERENCE_U_S = "S"
         val PREFERENCE_U_C = "isChose"
 
 
@@ -39,6 +40,17 @@ class SharedPreferenceUtils(context: Context) {
         editor!!.apply()
         return this
     }
+
+    fun putValueForInt(key: String, value: Int):SharedPreferenceUtils {
+        editor!!.putInt(key, value)
+        editor!!.apply()
+        return this
+    }
+
+    fun getValueForInt(key: String):Int{
+        return sharedPreferences!!.getInt(key,0)
+    }
+
 
     fun getValue(key: String): String? {
         return sharedPreferences!!.getString(key, "")

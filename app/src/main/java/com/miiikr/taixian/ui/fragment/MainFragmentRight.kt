@@ -15,15 +15,15 @@ import com.miiikr.taixian.R
 import com.miiikr.taixian.adapter.PersonItemAdapter
 import com.miiikr.taixian.app.SSHApplication
 import com.miiikr.taixian.entity.MessageEvent
+import com.miiikr.taixian.ui.activity.MainActivity
+import com.miiikr.taixian.utils.SharedPreferenceUtils
 import com.ssh.net.ssh.utils.AppConfig
 import com.ssh.net.ssh.utils.IntentUtils
 import com.tencent.mm.opensdk.constants.Build
-import com.tencent.mm.opensdk.constants.ConstantsAPI
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX.Req.WXSceneSession
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage
 import com.tencent.mm.opensdk.modelmsg.WXTextObject
-import kotlinx.android.synthetic.main.activity_main.*
 import org.greenrobot.eventbus.EventBus
 
 class MainFragmentRight : BaseMvpFragment<MainPresenter>() {
@@ -57,21 +57,30 @@ class MainFragmentRight : BaseMvpFragment<MainPresenter>() {
         mRvItem.adapter = personItemAdapter
         personItemAdapter.setItemClickListener(object : OnClickItemListener {
             override fun clickItem(position: Int) {
-                when (position) {
-                    0 -> IntentUtils.toCheck(activity!!, 0)
-                    1 -> IntentUtils.toCheck(activity!!, 1)
-                    2 -> IntentUtils.toEva(activity!!)
-                    3 -> IntentUtils.toSub(activity!!)
-                    5 -> IntentUtils.toWallet(activity!!)
-                    6 -> IntentUtils.toNews(activity!!)
-                    7 -> {//分享
-                        IntentUtils.toShare(activity!!)
+                if (position == 8) {
+                    IntentUtils.toQuestion(activity!!)
+                }else{
+                    if((activity as MainActivity).getSharedPreferences()!!.getValue(SharedPreferenceUtils.PREFERENCE_U_I).equals("")){
+                        IntentUtils.toLogin(activity!!)
+                        return
                     }
-                    8 -> IntentUtils.toQuestion(activity!!)
-                    else -> {
-                        EventBus.getDefault().post(MessageEvent(position))
+                    when (position) {
+                        0 -> IntentUtils.toCheck(activity!!, 0)
+                        1 -> IntentUtils.toCheck(activity!!, 1)
+                        2 -> IntentUtils.toEva(activity!!)
+                        3 -> IntentUtils.toSub(activity!!)
+                        5 -> IntentUtils.toWallet(activity!!)
+                        6 -> IntentUtils.toNews(activity!!)
+                        7 -> {//分享
+                            IntentUtils.toShare(activity!!)
+                        }
+                        8 -> IntentUtils.toQuestion(activity!!)
+                        else -> {
+                            EventBus.getDefault().post(MessageEvent(position))
+                        }
                     }
                 }
+
             }
         })
     }

@@ -15,6 +15,7 @@ class CheckViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var mTvFlag: TextView
     var mTvNotify: TextView
     var mLayout: RelativeLayout
+    var mTvType:TextView
 
     init {
         mIvPic = itemView.findViewById(R.id.iv_pic)
@@ -23,6 +24,7 @@ class CheckViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         mTvFlag = itemView.findViewById(R.id.tv_flag)
         mTvNotify = itemView.findViewById(R.id.tv_notify)
         mLayout = itemView.findViewById(R.id.layout_item)
+        mTvType = itemView.findViewById(R.id.tv_type)
     }
 
 

@@ -37,6 +37,7 @@
                 android:textColor="@color/color_000000"
                 android:textColorHint="@color/color_CACACA"
                 android:maxLines="1"
+                android:maxLength="20"
                 android:textSize="@dimen/sp_12" />
         </FrameLayout>
 
@@ -64,6 +65,7 @@
                 android:textColorHint="@color/color_CACACA"
                 android:maxLines="1"
                 android:textSize="@dimen/sp_12"
+                android:inputType="number"
                 android:layout_weight="1"/>
 
             <TextView
@@ -76,10 +78,6 @@
                 android:paddingRight="@dimen/dp_11"/>
 
         </LinearLayout>
-
-
-
-
 
         <TextView
             android:id="@+id/tv_check"
@@ -94,6 +92,7 @@
             android:textColor="@android:color/white"
             android:textColorHint="@color/color_CACACA"
             android:layout_below="@+id/layout_edt_name"
+            android:enabled="false"
             android:textSize="@dimen/sp_14" />
 
 

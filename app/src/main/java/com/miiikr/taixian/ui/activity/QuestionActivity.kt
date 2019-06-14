@@ -2,6 +2,7 @@ package com.miiikr.taixian.ui.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.ImageView
 import android.widget.TextView
 import com.miiikr.taixian.R
 import com.ssh.net.ssh.utils.SpannableUtils
@@ -33,6 +34,7 @@ class QuestionActivity : AppCompatActivity() {
         SpannableUtils.setMargin(this, mTvDetailsD)
         SpannableUtils.setMargin(this, mTvDetailsE)
         SpannableUtils.setMargin(this, mTvDetailsF)
+        findViewById<ImageView>(R.id.iv_back).setOnClickListener { finish() }
     }
 
 }

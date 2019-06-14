@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/dp_2"
         android:textSize="@dimen/sp_9"
-        android:textColor="@color/color_FF4343"
+        android:textColor="@color/color_43C8FF"
         android:text=""
         android:layout_alignParentRight="true"/>
 
@@ -47,7 +47,7 @@
         android:layout_toRightOf="@+id/iv_pic"
         android:layout_below="@+id/tv_date"
         android:paddingLeft="@dimen/dp_17"
-        android:paddingTop="@dimen/dp_16"
+        android:paddingTop="@dimen/dp_10"
         android:textSize="@dimen/sp_17"
         android:textColor="@color/color_252525"/>
 
@@ -60,9 +60,10 @@
         android:layout_below="@+id/tv_type"
         android:paddingLeft="@dimen/dp_17"
         android:paddingTop="@dimen/dp_8"
-        android:textSize="@dimen/sp_10"
+        android:textSize="@dimen/sp_17"
         android:maxLines="1"
-        android:textColor="@color/color_252525"/>
+        android:textColor="@color/color_43C8FF"
+        />
 
 
     <TextView

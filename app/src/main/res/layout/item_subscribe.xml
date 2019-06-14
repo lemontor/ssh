@@ -46,6 +46,23 @@
                 />
 
             <TextView
+                android:id="@+id/tv_title_notify"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_56"
+                android:layout_below="@id/line"
+                android:layout_marginLeft="@dimen/dp_9"
+                android:layout_marginTop="@dimen/dp_13"
+                android:layout_marginBottom="@dimen/dp_12"
+                android:maxLength="10"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/color_000000"
+                android:visibility="gone"
+                android:text=""
+                />
+
+
+            <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -78,7 +95,7 @@
                 android:layout_marginTop="@dimen/dp_13"
                 android:background="@drawable/bg_sub_time_border"
                 android:gravity="center"
-                android:text="预约时间\n 06月"
+                android:text="预约时间\n"
                 android:textColor="@color/color_000000"
                 android:textSize="@dimen/sp_12" />
 

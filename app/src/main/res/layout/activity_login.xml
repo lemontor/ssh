@@ -39,6 +39,7 @@
             android:textSize="@dimen/dp_16"
             android:maxLength="11"
             android:maxLines="1"
+            android:inputType="number"
             />
         
         <TextView
@@ -71,6 +72,7 @@
         android:layout_marginTop="@dimen/dp_17"
         android:paddingLeft="@dimen/dp_24"
         android:layout_below="@+id/layout_phone"
+        android:inputType="number"
         />
 
     <Button

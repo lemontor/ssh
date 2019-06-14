@@ -19,7 +19,7 @@ class LoginActivity : BaseMvpActivity<AccountPresenter>(), AccountView {
     override fun <T : Any> onSuccess(responseId: Int, response: T) {
         if(RequestInterface.REQUEST_CODE_ID == responseId){
             val result = response as? CommonEntity
-            if (result != null && result.state == 200) {
+            if (result != null && result.state == 1) {
                 mTvCode.isEnabled = false
                 mPresenter.calculateTime(mTvCode)
                 Toast.makeText(LoginActivity@ this, "获取验证码成功", Toast.LENGTH_SHORT).show()
@@ -27,7 +27,7 @@ class LoginActivity : BaseMvpActivity<AccountPresenter>(), AccountView {
         }else if(RequestInterface.REQUEST_LOGIN_ID == responseId){
             val result = response as? LoginEntity
             if (result != null) {
-                if(result.erroCode == 200||result.erroCode == 201){
+                if(result.state == 1){
                     mPresenter.putValues(result)
                     if(!SharedPreferenceUtils(this@LoginActivity).isChose(SharedPreferenceUtils.PREFERENCE_U_C)){
                         IntentUtils.toSex(this@LoginActivity)
@@ -39,6 +39,7 @@ class LoginActivity : BaseMvpActivity<AccountPresenter>(), AccountView {
     }
 
     override fun onFailue(responseId: Int, msg: String) {
+            Toast.makeText(LoginActivity@ this, msg, Toast.LENGTH_SHORT).show()
 
     }
 

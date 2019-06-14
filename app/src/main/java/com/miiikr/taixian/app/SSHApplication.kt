@@ -6,6 +6,7 @@ import android.content.Context
 import android.support.multidex.MultiDex
 import android.util.SparseArray
 import com.miiikr.taixian.`interface`.MemoryListenerInterface
+import com.squareup.leakcanary.LeakCanary
 import com.tencent.mm.opensdk.openapi.IWXAPI
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import okhttp3.internal.Internal.instance
@@ -19,6 +20,7 @@ class SSHApplication : Application() {
         super.onCreate()
         MultiDex.install(this)
         registerComponentCallbacks(MemoryListenerInterface())
+        LeakCanary.install(this)
         instance = this
         regToWx()
     }

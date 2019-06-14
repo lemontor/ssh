@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:orientation="vertical">
 
     <include layout="@layout/layout_main_title" />
 
@@ -19,7 +19,28 @@
             <ImageView
                 android:id="@+id/iv_pic"
                 android:layout_width="match_parent"
-                android:layout_height="440dp" />
+                android:layout_height="@dimen/dp_250" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_19"
+                android:paddingTop="@dimen/dp_20"
+                android:paddingBottom="@dimen/dp_24"
+                android:text="每邀请一位好友成功售卖商品\n你即获得￥50可提现收入。奖励无线叠加。"
+                android:textColor="@color/color_252525"
+                android:textSize="@dimen/sp_17" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_19"
+                android:paddingRight="@dimen/dp_19"
+                android:paddingBottom="@dimen/dp_40"
+                android:text="好友通过你的邀请成功注册APP，其也可获赠50元红包，售卖商品后即可提现！"
+                android:textColor="@color/color_888888"
+                android:textSize="@dimen/sp_12" />
+
 
             <Button
                 android:id="@+id/btn_share"
@@ -36,54 +57,92 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/dp_46">
+                android:layout_marginTop="@dimen/dp_46"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_num"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/color_A7A7AA"
-                    android:textSize="@dimen/sp_12"
                     android:gravity="center"
                     android:lineSpacingExtra="@dimen/dp_15"
-                    android:text="成功邀请（1）3"
-                    />
+                    android:text="成功邀请(1)"
+                    android:textColor="@color/color_A7A7AA"
+                    android:textSize="@dimen/sp_12" />
+
                 <TextView
                     android:id="@+id/tv_money_get"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/color_A7A7AA"
-                    android:textSize="@dimen/sp_12"
                     android:gravity="center"
                     android:lineSpacingExtra="@dimen/dp_15"
-                    android:text="奖励现金（可领）"
-                    />
+                    android:text="奖励现金(可领)"
+                    android:textColor="@color/color_A7A7AA"
+                    android:textSize="@dimen/sp_12" />
+
                 <TextView
                     android:id="@+id/tv_money_all"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/color_A7A7AA"
-                    android:textSize="@dimen/sp_12"
                     android:gravity="center"
                     android:lineSpacingExtra="@dimen/dp_15"
-                    android:text="奖励现金（总共）"
-                    />
+                    android:text="奖励现金(总共)"
+                    android:textColor="@color/color_A7A7AA"
+                    android:textSize="@dimen/sp_12" />
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_num_value"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:lineSpacingExtra="@dimen/dp_15"
+                    android:text="3"
+                    android:textColor="@color/color_000000"
+                    android:textSize="@dimen/sp_24" />
+
+                <TextView
+                    android:id="@+id/tv_money_get_value"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:lineSpacingExtra="@dimen/dp_15"
+                    android:text="500"
+                    android:textColor="@color/color_E36B57"
+                    android:textSize="@dimen/sp_24" />
+
+                <TextView
+                    android:id="@+id/tv_money_all_value"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:lineSpacingExtra="@dimen/dp_15"
+                    android:text="150.0"
+                    android:textColor="@color/color_A7A7AA"
+                    android:textSize="@dimen/sp_24" />
+            </LinearLayout>
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="查看我的奖励 >"
-                android:layout_marginTop="@dimen/dp_30"
-                android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF4343"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_30"
                 android:layout_marginBottom="@dimen/dp_25"
-                />
+                android:text="查看我的奖励 >"
+                android:textColor="@color/color_FF4343"
+                android:textSize="@dimen/sp_12" />
 
             <View
                 android:layout_width="match_parent"
@@ -99,43 +158,197 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_000000"
-                    android:textSize="@dimen/sp_18"
-                    android:text="推荐规则"
                     android:layout_gravity="center_horizontal"
                     android:paddingBottom="@dimen/dp_25"
-                    />
+                    android:text="推荐规则"
+                    android:textColor="@color/color_000000"
+                    android:textSize="@dimen/sp_18" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_20"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/dp_30">
-                
+                android:paddingLeft="@dimen/dp_30"
+                android:paddingRight="@dimen/dp_30">
+
                 <FrameLayout
                     android:layout_width="@dimen/dp_20"
                     android:layout_height="@dimen/dp_20"
-                    android:background="@drawable/bg_rule"
-                    android:layout_marginRight="@dimen/dp_20">
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:background="@drawable/bg_rule">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="1"
                         android:gravity="center"
-                        android:textColor="@color/color_000000"/>
+                        android:text="1"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/sp_14" />
                 </FrameLayout>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/share_rule_1"/>
+                    android:text="@string/share_rule_1" />
 
-                
+
             </LinearLayout>
 
-            
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_30"
+                android:paddingRight="@dimen/dp_30">
+
+                <FrameLayout
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:background="@drawable/bg_rule">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="2"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/sp_14" />
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/share_rule_2" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_30"
+                android:paddingRight="@dimen/dp_30">
+
+                <FrameLayout
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:background="@drawable/bg_rule">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="3"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/sp_14" />
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/share_rule_3" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_30"
+                android:paddingRight="@dimen/dp_30">
+
+                <FrameLayout
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:background="@drawable/bg_rule">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="4"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/sp_14" />
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/share_rule_4" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_30"
+                android:paddingRight="@dimen/dp_30">
+
+                <FrameLayout
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:background="@drawable/bg_rule">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="5"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/sp_14" />
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/share_rule_5" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_30"
+                android:paddingRight="@dimen/dp_30">
+
+                <FrameLayout
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:background="@drawable/bg_rule">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="6"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/sp_14" />
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/share_rule_6" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

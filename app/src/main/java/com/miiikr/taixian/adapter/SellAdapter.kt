@@ -8,11 +8,12 @@ import android.view.ViewGroup
 import ccom.miiikr.taixian.`interface`.OnClickItemListener
 import com.miiikr.taixian.R
 import com.miiikr.taixian.entity.CheckEntity
+import com.miiikr.taixian.entity.SellEntity
 import com.ssh.net.ssh.utils.GlideHelper
 import com.ssh.net.ssh.utils.SpannableUtils
 import com.ssh.net.ssh.viewHolder.CheckViewHolder
 
-class CheckAdapter(val context: Context, val datas:ArrayList<CheckEntity.CheckDataEntity>, val onClickItemListener: OnClickItemListener) : RecyclerView.Adapter<CheckViewHolder>() {
+class SellAdapter(val context: Context, val datas:ArrayList<SellEntity.SellDataEntity>, val onClickItemListener: OnClickItemListener) : RecyclerView.Adapter<CheckViewHolder>() {
 
     var mLayoutInflater: LayoutInflater
 
@@ -37,11 +38,15 @@ class CheckAdapter(val context: Context, val datas:ArrayList<CheckEntity.CheckDa
         p0.mTvType.text = datas[p1].brandName
         p0.mTvDate.text = SpannableUtils.millisecond2Date(datas[p1].createTime)
         when(datas[p1].state){
-            0 -> p0.mTvState.text = "#鉴定中"
-            1 -> p0.mTvState.text = "#真品"
-            2 -> p0.mTvState.text = "#防品"
+            0 -> p0.mTvState.text = "#进行中"
+            1 -> p0.mTvState.text = "#完成"
+            2 -> p0.mTvState.text = "#取消"
         }
-        p0.mTvFlag.text = "#${datas[p1].gemmologistExplain}"
+        when(datas[p1].recoveryType){
+            1->p0.mTvFlag.text = "#上门回收"
+            2->p0.mTvFlag.text = "#到店回收"
+            3->p0.mTvFlag.text = "#快递回收"
+        }
         p0.mLayout.setOnClickListener {
             onClickItemListener.clickItem(p1)
         }

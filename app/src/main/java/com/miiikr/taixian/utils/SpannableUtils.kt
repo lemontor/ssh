@@ -2,11 +2,14 @@ package com.ssh.net.ssh.utils
 
 import android.content.Context
 import android.text.SpannableString
+import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.text.style.LeadingMarginSpan
 import android.widget.TextView
 import android.text.style.RelativeSizeSpan
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class SpannableUtils {
@@ -18,6 +21,16 @@ class SpannableUtils {
             spannableString.setSpan(foregroundColorSpan, start, end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
             textView.text = spannableString
         }
+
+        fun setTextStateColorAndSize(context: Context, textView: TextView, start: Int, end: Int, color: Int) {
+            var spannableString = SpannableStringBuilder(textView.text.toString().trim())
+            val foregroundColorSpan = ForegroundColorSpan(color)
+            val sizeSpan = RelativeSizeSpan(2.0f)
+            spannableString.setSpan(foregroundColorSpan, start, end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+            spannableString.setSpan(sizeSpan, start, end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+            textView.text = spannableString
+        }
+
 
 
         fun setMargin(context: Context, textView: TextView) {
@@ -46,6 +59,16 @@ class SpannableUtils {
             spannableString.setSpan(sizeSpan02, endIndex, textView.text.toString().length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
             textView.text = spannableString
         }
+
+
+        fun millisecond2Date(m:Long):String{
+            var date = Date()
+            date.time = m
+            return SimpleDateFormat("yyyy/MM/dd hh:mm").format(date).toString()
+        }
+
+
+
 
     }
 

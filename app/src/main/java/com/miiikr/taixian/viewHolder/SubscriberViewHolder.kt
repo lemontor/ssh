@@ -15,6 +15,11 @@ class SubscriberViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
     var mTvConusult:TextView
     var mTvCancel:TextView
     var mIvPic:ImageView
+    var mTitleNotify:TextView?=null
+    var mViewLineA:View
+    var mViewLineB:View
+    var mViewLineC:View
+
 
     init {
         mTvDate = itemView.findViewById(R.id.tv_date)
@@ -24,6 +29,18 @@ class SubscriberViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
         mTvConusult = itemView.findViewById(R.id.tv_consult)
         mTvCancel = itemView.findViewById(R.id.tv_sub_cancel)
         mIvPic = itemView.findViewById(R.id.iv_head)
+        mViewLineA = itemView.findViewById(R.id.line)
+        mViewLineB = itemView.findViewById(R.id.line_b)
+        mViewLineC = itemView.findViewById(R.id.line_c)
+
+    }
+
+
+    fun getTv(res:Int):TextView?{
+        if(mTitleNotify == null){
+            mTitleNotify = itemView.findViewById(res)
+        }
+        return mTitleNotify
     }
 
 

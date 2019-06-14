@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    >
 
     <include
         android:id="@+id/layout_title"
@@ -10,32 +12,43 @@
 
     <TextView
         android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:paddingTop="@dimen/dp_10"
         android:paddingBottom="@dimen/dp_20"
+        android:gravity="center_horizontal"
+        android:background="@android:color/white"
         android:text="@string/main_right_notify_price"
         android:textColor="@color/color_000000"
         android:textSize="@dimen/sp_17"
         android:layout_below="@+id/layout_title"
         android:layout_centerHorizontal="true"/>
 
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/color_F2F2F2"
+        android:layout_below="@+id/tv_title"/>
+
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_eva"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tv_title">
+        android:layout_below="@+id/line">
     </android.support.v7.widget.RecyclerView>
-    
-    <TextView
-        android:id="@+id/tv_eva"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
-        android:layout_alignParentBottom="true"
-        android:textSize="@dimen/sp_14"
-        android:textColor="@color/color_000000"
-        android:text="@string/check_consult"
-        android:gravity="center"/>
+
+    <ViewStub
+        android:id="@+id/contentPanel"
+        android:inflatedId="@+id/inflatedStart"
+        android:layout="@layout/layout_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        />
+
     
 </RelativeLayout>
