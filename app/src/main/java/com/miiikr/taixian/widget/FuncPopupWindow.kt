@@ -5,9 +5,11 @@ import android.view.View
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
+import ccom.miiikr.taixian.`interface`.OnClickItemListener
 import com.miiikr.taixian.R
+import com.miiikr.taixian.`interface`.PopupClickListener
 
-class FuncPopupWindow(mContext: Context, var type: Int) : BasePopupWindow(mContext,type) {
+class FuncPopupWindow(mContext: Context, var type: Int,onClickItemListener: PopupClickListener) : BasePopupWindow(mContext,type,onClickItemListener) {
 
     lateinit var mIvDismiss: ImageView
     lateinit var mCbNormal: CheckBox
@@ -44,7 +46,7 @@ class FuncPopupWindow(mContext: Context, var type: Int) : BasePopupWindow(mConte
         }
     }
 
-    override fun initView(context:Context,view: View,mType:Int) {
+    override fun initView(context:Context,view: View,mType:Int,clickItemListener: PopupClickListener) {
         mTvTitle = view.findViewById(R.id.tv_title)
         mIvDismiss = view.findViewById(R.id.iv_dismiss)
         mCbNormal = view.findViewById(R.id.cb_sure)

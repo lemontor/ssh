@@ -10,12 +10,13 @@ import android.widget.ImageView
 import ccom.miiikr.taixian.`interface`.OnClickItemListener
 import ccom.miiikr.taixian.entity.FlagEntity
 import com.miiikr.taixian.R
+import com.miiikr.taixian.`interface`.PopupClickListener
 import com.miiikr.taixian.adapter.FileAdapter
 import com.ssh.net.ssh.utils.ScreenUtils
 import com.ssh.net.ssh.utils.SpannableUtils
 import com.yo.lg.yocheck.widget.RecycleViewDivider
 
-class FilePopupWindow(mContext: Context,type: Int) : BasePopupWindow(mContext, type) {
+class FilePopupWindow(mContext: Context,type: Int,onClickItemListener: PopupClickListener) : BasePopupWindow(mContext, type,onClickItemListener) {
 
     lateinit var mIvDismiss: ImageView
     lateinit var mRvFiles: RecyclerView
@@ -30,7 +31,7 @@ class FilePopupWindow(mContext: Context,type: Int) : BasePopupWindow(mContext, t
 
     }
 
-    override fun initView(context: Context, view: View, type: Int) {
+    override fun initView(context: Context, view: View, type: Int,clickItemListener: PopupClickListener) {
         mIvDismiss = view.findViewById(R.id.iv_dismiss)
         mRvFiles = view.findViewById(R.id.rv_file)
 
@@ -56,8 +57,6 @@ class FilePopupWindow(mContext: Context,type: Int) : BasePopupWindow(mContext, t
                 mDatas.put(2, FlagEntity(context.resources.getString(R.string.chose_goods_notify_c), false))
                 mDatas.put(3, FlagEntity(context.resources.getString(R.string.chose_goods_notify_d), false))
                 mDatas.put(4, FlagEntity(context.resources.getString(R.string.chose_goods_notify_e), false))
-                mDatas.put(5, FlagEntity(context.resources.getString(R.string.chose_goods_notify_f), false))
-
             }
         }
         var gridLayoutManager = GridLayoutManager(context, 3)
@@ -67,6 +66,7 @@ class FilePopupWindow(mContext: Context,type: Int) : BasePopupWindow(mContext, t
         adapter = FileAdapter(context, mDatas, object : OnClickItemListener {
             override fun clickItem(position: Int) {
                 mDatas.get(position).click = !mDatas.get(position).click
+                clickItemListener.onClick(position,type,mDatas[position].flag)
                 adapter!!.notifyItemChanged(position)
             }
         })

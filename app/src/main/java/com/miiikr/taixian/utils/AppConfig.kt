@@ -21,7 +21,7 @@ class AppConfig {
         val FRAGMENT_RIGHT_OPEN_CLOSE = 10
         val FRAGMENT_LEFT_OPEN_CLOSE = 11
         val FRAGMENT_RIGHT_OPEN_NICK_PHONE = 12
-        val REQUEST_ID_GET_PIC = 0
+        val REQUEST_ID_GET_PIC = 1001
 
 
     }

@@ -1,6 +1,7 @@
 package com.miiikr.taixian.ui.activity
 
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.ImageView
@@ -21,7 +22,7 @@ class SubscribeActivity : BaseMvpActivity<PersonPresenter>(), PersonView,OnClick
 
     override fun clickItem(position: Int) {
         cancelIndex = position
-        mPresenter.getCancelEvaData(RequestInterface.REQUEST_CANCEL_EVA_ID,"10086",mSubData[position].productId!!,mSubData[position].state)
+        notifyCancel()
     }
 
     override fun <T : Any> onSuccess(responseId: Int, response: T) {
@@ -47,7 +48,6 @@ class SubscribeActivity : BaseMvpActivity<PersonPresenter>(), PersonView,OnClick
                     ToastUtils.toastShow(this, result.message)
                 }
             }
-
         }
     }
 
@@ -111,5 +111,14 @@ class SubscribeActivity : BaseMvpActivity<PersonPresenter>(), PersonView,OnClick
         mSSHProgressHUD.show()
     }
 
+    private fun notifyCancel() {
+        val builder = AlertDialog.Builder(this)
+        val dialog = builder.setMessage("确认删除预约信息")
+                .setPositiveButton("确定") { dialogInterface, i ->
+//                    mPresenter.getCancelSellData(RequestInterface.REQUEST_CANCEL_SELL_ID, "10086", mSellData[cancelIndex].prodctId!!)
+                    mPresenter.getCancelEvaData(RequestInterface.REQUEST_CANCEL_EVA_ID,"10086",mSubData[cancelIndex].productId!!,mSubData[cancelIndex].state)
+                }.create()
+        dialog.show()
+    }
 
 }

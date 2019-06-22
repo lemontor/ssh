@@ -13,7 +13,9 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.PopupWindow
+import ccom.miiikr.taixian.`interface`.OnClickItemListener
 import com.miiikr.taixian.R
+import com.miiikr.taixian.`interface`.PopupClickListener
 
 
 /**
@@ -40,7 +42,7 @@ abstract class BasePopupWindow : PopupWindow, View.OnClickListener {
      */
 
 
-    constructor(context: Context,type: Int) : super(context) {
+    constructor(context: Context,type: Int,clickItemListener: PopupClickListener) : super(context) {
         this.context = context
         val view = View.inflate(context, R.layout.base_popupwindow_layou, null)
         vBgBasePicker = view.findViewById(R.id.v_bg_base_picker)
@@ -73,13 +75,13 @@ abstract class BasePopupWindow : PopupWindow, View.OnClickListener {
         }
         //设置SelectPicPopupWindow弹出窗体动画效果
         this.animationStyle = R.style.BottomDialogWindowAnim
-        initView(context,view,type)
+        initView(context,view,type,clickItemListener)
         initListener(context)
         initData()
         vBgBasePicker!!.setOnClickListener(this)
     }
 
-    constructor(context: Context, isShowBackGround: Boolean, h: Int,type: Int) : super(context) {
+    constructor(context: Context, isShowBackGround: Boolean, h: Int,type: Int,clickItemListener: PopupClickListener) : super(context) {
         this.context = context
         val view = View.inflate(context, R.layout.base_popupwindow_layou, null)
         vBgBasePicker = view.findViewById(R.id.v_bg_base_picker)
@@ -120,7 +122,7 @@ abstract class BasePopupWindow : PopupWindow, View.OnClickListener {
 
         //设置SelectPicPopupWindow弹出窗体动画效果
         this.animationStyle = R.style.BottomDialogWindowAnim
-        initView(context,view,type)
+        initView(context,view,type,clickItemListener)
         initListener(context)
         initData()
         vBgBasePicker!!.setOnClickListener(this)
@@ -141,7 +143,7 @@ abstract class BasePopupWindow : PopupWindow, View.OnClickListener {
      *
      * @param view
      */
-    protected abstract fun initView(context: Context,view: View,type:Int)
+    protected abstract fun initView(context: Context,view: View,type:Int,clickItemListener: PopupClickListener)
 
     protected abstract fun getContentViews():Int
 

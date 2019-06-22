@@ -6,11 +6,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.miiikr.taixian.R
+import com.miiikr.taixian.entity.ProductEntity
 import com.ssh.net.ssh.utils.GlideHelper
 import com.ssh.net.ssh.utils.IntentUtils
 import com.ssh.net.ssh.viewHolder.TypeViewHolder
 
-class TypeAdapter(val context: Context):RecyclerView.Adapter<TypeViewHolder>() {
+class TypeAdapter(val context: Context,val datas: ArrayList<ProductEntity.DetailsEntity>,val type:Int):RecyclerView.Adapter<TypeViewHolder>() {
 
     val layoutInflater:LayoutInflater
 
@@ -23,18 +24,19 @@ class TypeAdapter(val context: Context):RecyclerView.Adapter<TypeViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return datas.size
     }
 
     override fun onBindViewHolder(p0: TypeViewHolder, p1: Int) {
-        p0.mIvPic.setImageResource(R.mipmap.test)
+//        p0.mIvPic.setImageResource(R.mipmap.test)
+        if(datas[p1].img != null){
+            GlideHelper.loadBitmapByNormalWithPlaceholder(context as Activity,p0.mIvPic,datas[p1].img!!,R.mipmap.icon_empty_type)
+        }
         p0.mIvPic.setOnClickListener {
-            if(p1 == 0){
-                IntentUtils.toGoodsDetails(context,0)
-            }else if(p1 == 1){
-                IntentUtils.toGoodsDetails(context,1)
-            }else if(p1 == 2){
-                IntentUtils.toGoodsDetails(context,2)
+            when (datas[p1].categoryId) {
+                "1" -> IntentUtils.toGoodsDetails(context,1,type)
+                "2" -> IntentUtils.toGoodsDetails(context,2,type)
+                "3" -> IntentUtils.toGoodsDetails(context,3,type)
             }
 
         }

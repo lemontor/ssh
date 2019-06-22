@@ -34,7 +34,8 @@
         android:id="@+id/iv_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/icon_cancel"
+        android:src="@mipmap/icon_cancel_pic"
         android:layout_alignParentRight="true"
+        android:padding="@dimen/dp_5"
         />
 </RelativeLayout>

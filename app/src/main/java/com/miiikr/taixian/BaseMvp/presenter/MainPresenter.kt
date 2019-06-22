@@ -6,6 +6,7 @@ import com.miiikr.taixian.entity.CommonEntity
 import com.miiikr.taixian.entity.MainEntity
 import com.miiikr.taixian.net.RetrofitApiInterface
 import com.miiikr.taixian.net.RetrofitManager
+import com.miiikr.taixian.net.RetrofitManager2
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.ObservableOnSubscribe
@@ -21,17 +22,18 @@ class MainPresenter : BasePresenter<MainView>() {
     fun getMainData(requestId: Int) {
         mView.showLoading()
         Observable.create(ObservableOnSubscribe<MainEntity> {
-            val api = RetrofitManager.initRetrofit()!!.create(RetrofitApiInterface::class.java)
+            val api = RetrofitManager2.initRetrofit()!!.create(RetrofitApiInterface::class.java)
             api.getMainData().enqueue(object : Callback<MainEntity> {
                 override fun onFailure(call: Call<MainEntity>, t: Throwable) {
                     mView.onFailue(requestId, t.message!!)
                     mView.hideLoading()
                 }
+
                 override fun onResponse(call: Call<MainEntity>, response: Response<MainEntity>) {
                     if (response?.body() != null) {
                         it.onNext(response.body()!!)
-                    }else{
-
+                    } else {
+                        mView.hideLoading()
                     }
                 }
             })
@@ -54,8 +56,8 @@ class MainPresenter : BasePresenter<MainView>() {
                 override fun onResponse(call: Call<CommonEntity>, response: Response<CommonEntity>) {
                     if (response?.body() != null) {
                         it.onNext(response.body()!!)
-                    }else{
-
+                    } else {
+                        mView.hideLoading()
                     }
                 }
             })

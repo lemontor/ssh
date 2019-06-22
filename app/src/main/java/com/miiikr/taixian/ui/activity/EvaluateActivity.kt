@@ -3,9 +3,11 @@ package com.miiikr.taixian.ui.activity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import android.view.ViewStub
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.TextView
 import ccom.miiikr.taixian.`interface`.OnClickItemListener
 import com.miiikr.taixian.BaseMvp.IView.PersonView
 import com.miiikr.taixian.BaseMvp.View.BaseMvpActivity
@@ -17,6 +19,7 @@ import com.miiikr.taixian.entity.EvaEntity
 import com.miiikr.taixian.utils.RequestInterface
 import com.miiikr.taixian.utils.ToastUtils
 import com.miiikr.taixian.widget.SSHProgressHUD
+import com.ssh.net.ssh.utils.IntentUtils
 import com.yo.lg.yocheck.widget.RecycleViewDivider
 
 class EvaluateActivity : BaseMvpActivity<PersonPresenter>(), OnClickItemListener, PersonView {
@@ -38,7 +41,6 @@ class EvaluateActivity : BaseMvpActivity<PersonPresenter>(), OnClickItemListener
                   }
               }else{
                   showEmptyNotify()
-
               }
         }
     }
@@ -47,7 +49,7 @@ class EvaluateActivity : BaseMvpActivity<PersonPresenter>(), OnClickItemListener
     }
 
     override fun clickItem(position: Int) {
-
+         IntentUtils.toEvaDetails(this,mEvaData[position].productId!!,mEvaData[position].categoryId!!)
     }
 
     lateinit var mRvEva: RecyclerView
@@ -78,6 +80,7 @@ class EvaluateActivity : BaseMvpActivity<PersonPresenter>(), OnClickItemListener
         mRvEva = findViewById(R.id.rv_eva)
         mIvBack = findViewById(R.id.iv_back)
         viewStub = findViewById(R.id.contentPanel)
+
         mSSHProgressHUD = SSHProgressHUD.getInstance(this)
         mSSHProgressHUD.setMessage("获取数据中")
         mSSHProgressHUD.setCancelable(false)

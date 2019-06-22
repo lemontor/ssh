@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/layout_root"
+    >
+
+    <include
+        android:id="@+id/layout_title"
+        layout="@layout/layout_main_title" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_below="@+id/layout_title"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:text="填写信息"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/sp_14" />
+
+    <LinearLayout
+        android:id="@+id/layout_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_below="@+id/tv_title"
+        android:layout_marginLeft="@dimen/dp_18"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginRight="@dimen/dp_18"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_25"
+        android:paddingRight="@dimen/dp_10">
+
+        <EditText
+            android:id="@+id/edt_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawableLeft="@mipmap/icon_name"
+            android:drawablePadding="@dimen/dp_10"
+            android:hint="请问您贵姓"
+            android:textColor="@color/color_000000"
+            android:textColorHint="@color/color_CACACA"
+            android:maxLines="1"
+            android:textSize="@dimen/sp_14" />
+
+        <RadioGroup
+            android:id="@+id/rg_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_man"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/dp_26"
+                android:drawablePadding="@dimen/dp_10"
+                android:gravity="center"
+                android:text="男士"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_14" />
+
+            <RadioButton
+                android:id="@+id/rb_women"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:drawablePadding="@dimen/dp_10"
+                android:gravity="center"
+                android:text="女士"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_14" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/layout_name"
+        android:layout_marginLeft="@dimen/dp_18"
+        android:layout_marginRight="@dimen/dp_18"
+        android:background="@color/color_F2F2F2" />
+
+    <FrameLayout
+        android:id="@+id/layout_conn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_below="@+id/view_line"
+        android:layout_marginLeft="@dimen/dp_18"
+        android:layout_marginRight="@dimen/dp_18"
+        android:background="@android:color/white"
+        android:paddingLeft="@dimen/dp_25">
+
+        <EditText
+            android:id="@+id/edt_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@null"
+            android:drawableLeft="@mipmap/icon_phone"
+            android:drawablePadding="@dimen/dp_10"
+            android:hint="请输入您的联系方式"
+            android:textColor="@color/color_000000"
+            android:textColorHint="@color/color_CACACA"
+            android:maxLines="1"
+            android:inputType="number"
+            android:textSize="@dimen/sp_14" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_below="@+id/layout_conn"
+        android:layout_marginLeft="@dimen/dp_18"
+        android:layout_marginTop="@dimen/dp_14"
+        android:layout_marginRight="@dimen/dp_18"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_24"
+            android:text="预约时间"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/tv_time_value"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableRight="@mipmap/icon_next"
+            android:drawablePadding="@dimen/dp_10"
+            android:gravity="center_vertical"
+            android:paddingRight="@dimen/dp_10"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_14" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_sure"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_alignParentBottom="true"
+        android:text="确认"
+        android:textColor="@color/color_ffffff"
+        android:background="@drawable/bg_click_state_sure"
+        android:textSize="@dimen/sp_14"/>
+
+
+    <FrameLayout
+        android:id="@+id/layout_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        ></FrameLayout>
+
+</RelativeLayout>

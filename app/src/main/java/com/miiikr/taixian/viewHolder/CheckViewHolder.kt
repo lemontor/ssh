@@ -9,6 +9,10 @@ import com.miiikr.taixian.R
 
 class CheckViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+
+
+
+
     var mIvPic: ImageView
     var mTvDate: TextView
     var mTvState: TextView

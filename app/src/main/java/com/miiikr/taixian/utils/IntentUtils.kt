@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import com.miiikr.taixian.app.SSHApplication
 import com.miiikr.taixian.ui.activity.*
+import com.miiikr.taixian.ui.fragment.LocationActivity
+import com.miiikr.taixian.ui.fragment.WriteConnInfoActivity
 
 class IntentUtils {
 
@@ -77,28 +79,37 @@ class IntentUtils {
             context.startActivity(intent)
         }
 
-        fun toType(context: Context) {
+        fun toType(context: Context,type: Int) {
             var intent = Intent()
             intent.setClass(context, ChoseTypeActivity::class.java)
+            intent.putExtra("isSell",type)
             context.startActivity(intent)
         }
 
-        fun toGoodsDetails(context: Context, from: Int) {
+        fun toGoodsDetails(context: Context, from: Int,type: Int) {
             var intent = Intent()
-            if (from == 0) {
-                intent.setClass(context, SellWatchActivity::class.java)
-            }else if(from == 1){
-                intent.setClass(context, SellBagActivity::class.java)
-            }else{
-                intent.setClass(context, SellJewelryActivity::class.java)
+            when (from) {
+                1 -> {
+                    intent.setClass(context, SellWatchActivity::class.java)
+                    intent.putExtra("isSell",type)
+                }
+                2 -> {
+                    intent.setClass(context, SellBagActivity::class.java)
+                    intent.putExtra("isSell",type)
+                }
+                3 -> {
+                    intent.setClass(context, SellJewelryActivity::class.java)
+                    intent.putExtra("isSell",type)
+                }
             }
             context.startActivity(intent)
         }
 
-        fun toBrand(context: Context) {
+        fun toBrand(context: Context,request:Int,type:Int) {
             var intent = Intent()
             intent.setClass(context, BrandActivity::class.java)
-            context.startActivity(intent)
+            intent.putExtra("type",type)
+            (context as Activity).startActivityForResult(intent,request)
         }
 
         fun toWallet(context: Context) {
@@ -107,11 +118,30 @@ class IntentUtils {
             context.startActivity(intent)
         }
 
-        fun toDetails(context: Context){
+        fun toCheckDetails(context: Context,productId:String,categoryId: String){
             var intent = Intent()
             intent.setClass(context, CheckDetailsActivity::class.java)
+            intent.putExtra("productId",productId)
+            intent.putExtra("categoryId",categoryId)
             context.startActivity(intent)
         }
+
+        fun toEvaDetails(context: Context,productId:String,categoryId: String){
+            var intent = Intent()
+            intent.setClass(context, EvaluateDetailsActivity::class.java)
+            intent.putExtra("productId",productId)
+            intent.putExtra("categoryId",categoryId)
+            context.startActivity(intent)
+        }
+
+        fun toSellDetails(context: Context,productId:String,categoryId: String){
+            var intent = Intent()
+            intent.setClass(context, SellDetailsActivity::class.java)
+            intent.putExtra("productId",productId)
+            intent.putExtra("categoryId",categoryId)
+            context.startActivity(intent)
+        }
+
 
         fun toAppoint(context: Context){
             var intent = Intent()
@@ -157,6 +187,41 @@ class IntentUtils {
             context.startActivity(intent)
         }
 
+
+        fun toBigPic(context: Context,picPath:String){
+            var intent = Intent()
+            intent.putExtra("path",picPath)
+            intent.setClass(context, BigPicActivity::class.java)
+            context.startActivity(intent)
+        }
+
+        fun toRecover(context: Context,productId: String){
+            var intent = Intent()
+            intent.setClass(context, RecoverActivity::class.java)
+            intent.putExtra("productId",productId)
+            context.startActivity(intent)
+        }
+
+        fun toLocation(context: Context,productId: String){
+            var intent = Intent()
+            intent.setClass(context, LocationActivity::class.java)
+            intent.putExtra("productId",productId)
+            context.startActivity(intent)
+        }
+
+        fun toWriteInfo(context: Context,productId: String,from: Int){
+            var intent = Intent()
+            intent.setClass(context, WriteConnInfoActivity::class.java)
+            intent.putExtra("productId",productId)
+            intent.putExtra("from",from)
+            context.startActivity(intent)
+        }
+
+        fun toRecoverStore(context: Context){
+            var intent = Intent()
+            intent.setClass(context, StoreRecoverActivity::class.java)
+            context.startActivity(intent)
+        }
 
     }
 

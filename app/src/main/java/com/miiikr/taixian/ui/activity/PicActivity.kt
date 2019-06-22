@@ -10,6 +10,7 @@ import com.miiikr.taixian.BaseMvp.IView.AccountView
 import com.miiikr.taixian.BaseMvp.View.BaseMvpActivity
 import com.miiikr.taixian.BaseMvp.presenter.AccountPresenter
 import com.miiikr.taixian.R
+import com.miiikr.taixian.`interface`.PopupClickListener
 import com.miiikr.taixian.entity.CommonEntity
 import com.miiikr.taixian.utils.*
 import com.ssh.net.ssh.utils.GlideHelper
@@ -110,8 +111,8 @@ class PicActivity : BaseMvpActivity<AccountPresenter>(), AccountView {
 
 
     fun showPhotoPopupWindow() {
-        photoPopupWindow = PhotoPopupWindow(this, object : OnClickItemListener {
-            override fun clickItem(position: Int) {
+        photoPopupWindow = PhotoPopupWindow(this, object : PopupClickListener {
+            override fun onClick(position: Int, type: Int, flag: String) {
                 photoPopupWindow!!.dismiss()
                 imageFile = File(fileHelper!!.CACHE_PATH + System.currentTimeMillis() + "photo.jpg")
                 when (position) {

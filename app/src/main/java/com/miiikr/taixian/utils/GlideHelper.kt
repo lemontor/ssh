@@ -34,15 +34,17 @@ class GlideHelper {
         fun loadBitmpaByCircle(activity: Activity?, imageView: ImageView?, url: String) {
             if (activity != null && !activity.isFinishing && imageView != null) {
                 val requestOptions = RequestOptions.circleCropTransform().diskCacheStrategy(DiskCacheStrategy.ALL).dontAnimate()
-                Glide.with(activity).load(url).apply(requestOptions).into(object :SimpleTarget<Drawable>(){
-                    override fun onResourceReady(resource: Drawable?, transition: Transition<in Drawable>?) {
-//                        val width = resource!!.intrinsicWidth
-//                        val height = resource!!.intrinsicHeight
-                        imageView.setImageDrawable(resource)
-                    }
-                })
+                Glide.with(activity).load(url).apply(requestOptions).into(imageView)
             }
         }
+
+        fun loadBitmpaByCircleWithPlaceholder(activity: Activity?, imageView: ImageView?, url: String,res: Int) {
+            if (activity != null && !activity.isFinishing && imageView != null) {
+                val requestOptions = RequestOptions.circleCropTransform().placeholder(res).fallback(res).error(res).diskCacheStrategy(DiskCacheStrategy.ALL).dontAnimate()
+                Glide.with(activity).load(url).apply(requestOptions).into(imageView)
+            }
+        }
+
 
         fun loadBitmpaByCircleWithSize(activity: Activity?, imageView: ImageView?, url: String,width:Int,height: Int) {
             if (activity != null && !activity.isFinishing && imageView != null) {
@@ -138,6 +140,26 @@ class GlideHelper {
             }
         }
 
+        fun loadBitmapByNormalWithSize(activity: Activity?, imageView: ImageView?, url: String,width: Int,height: Int) {
+            if (activity != null && !activity.isFinishing && imageView != null) {
+                val requestOptions = RequestOptions().override(width,height).diskCacheStrategy(DiskCacheStrategy.ALL).dontAnimate().centerCrop()
+                Glide.with(activity).load(url).apply(requestOptions).into(object :SimpleTarget<Drawable>(){
+                    override fun onResourceReady(resource: Drawable?, transition: Transition<in Drawable>?) {
+                        imageView.setImageDrawable(resource)
+                    }
+                })
+            }
+        }
+
+
+        fun loadBitmapByNormalWithPlaceholder(activity: Activity?, imageView: ImageView?, url: String,placeholderId: Int) {
+            if (activity != null && !activity.isFinishing && imageView != null) {
+                val requestOptions = RequestOptions().placeholder(placeholderId).fallback(placeholderId).error(placeholderId).diskCacheStrategy(DiskCacheStrategy.ALL).dontAnimate().centerCrop()
+                Glide.with(activity).load(url).apply(requestOptions).into(imageView)
+            }
+        }
+
+
         fun loadBitmapByNormal2(activity: Activity?, imageView: ImageView?, url: String) {
             if (activity != null && !activity.isFinishing && imageView != null) {
                 val cornerOptions = RoundedCorners(1)
@@ -150,10 +172,9 @@ class GlideHelper {
             }
         }
 
-        fun loadInt(activity: Activity?, imageView: ImageView?, res: Int) {
+        fun loadInt(activity: Activity?, imageView: ImageView?, res: Int,width: Int,height: Int) {
             if (activity != null && !activity.isFinishing && imageView != null) {
-                val cornerOptions = RoundedCorners(10)
-                val requestOptions = RequestOptions.bitmapTransform(cornerOptions).diskCacheStrategy(DiskCacheStrategy.ALL).dontAnimate()
+                val requestOptions = RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL).override(width,height).dontAnimate()
                 Glide.with(activity).load(res).apply(requestOptions).into(object :SimpleTarget<Drawable>(){
                     override fun onResourceReady(resource: Drawable?, transition: Transition<in Drawable>?) {
                         imageView.setImageDrawable(resource)

@@ -176,7 +176,7 @@
 
 
     <string name="goods_details_title">商品参数</string>
-    <string name="goods_details_constituent">成分</string>
+    <string name="goods_details_constituent">成色</string>
     <string name="goods_details_meterial">材质</string>
     <string name="goods_details_files">附件</string>
     <string name="share_notify">每邀请一位好友成功售卖商品，\n你即获得￥50可提现收入。\n奖励无限叠加。</string>

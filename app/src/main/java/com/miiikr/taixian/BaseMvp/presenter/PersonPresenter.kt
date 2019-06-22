@@ -147,6 +147,7 @@ class PersonPresenter : BasePresenter<PersonView>() {
                 override fun onFailure(call: Call<EvaEntity>, t: Throwable) {
                     if (isViewAttached()) {
                         mainView!!.onFailue(requestId, t.message!!)
+                        mainView!!.hideLoading()
                     }
                 }
 
@@ -205,6 +206,41 @@ class PersonPresenter : BasePresenter<PersonView>() {
                     }
                 }
     }
+
+    fun getCancelSellData(requestId: Int, userId: String,productId:String) {
+        if (isViewAttached()) {
+            mainView!!.showLoading()
+        }
+        Observable.create(ObservableOnSubscribe<CommonEntity> {
+            val api = RetrofitManager2.initRetrofit()!!.create(RetrofitApiInterface::class.java)
+            api.cancelSell(userId,productId).enqueue(object : Callback<CommonEntity> {
+                override fun onFailure(call: Call<CommonEntity>, t: Throwable) {
+                    if (isViewAttached()) {
+                        mainView!!.onFailue(requestId, t.message!!)
+                    }
+                }
+
+                override fun onResponse(call: Call<CommonEntity>, response: Response<CommonEntity>) {
+                    if (response?.body() != null) {
+                        it.onNext(response.body()!!)
+                    }else{
+                        if (isViewAttached()) {
+                            mainView!!.onFailue(requestId,"接口出现错误")
+                            mainView!!.hideLoading()
+                        }
+                    }
+                }
+            })
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    if(isViewAttached()){
+                        mainView!!.onSuccess(requestId,it)
+                        mainView!!.hideLoading()
+                    }
+                }
+    }
+
 
 
 

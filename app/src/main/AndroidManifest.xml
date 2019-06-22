@@ -156,9 +156,36 @@
         <activity
             android:name=".ui.activity.PostActivity"
             android:theme="@style/TranslucentTheme" />
+
         <activity
             android:name=".ui.activity.PicActivity"
             android:theme="@style/TranslucentTheme" />
+
+        <activity
+            android:name=".ui.activity.BigPicActivity"
+            android:theme="@style/TranslucentTheme" />
+
+        <activity android:name=".ui.activity.EvaluateDetailsActivity"
+            android:theme="@style/TranslucentTheme"/>
+
+        <activity android:name=".ui.activity.SellDetailsActivity"
+            android:theme="@style/TranslucentTheme"/>
+
+        <activity android:name=".ui.activity.RecoverActivity"
+            android:theme="@style/TranslucentTheme"/>
+
+        <activity android:name=".ui.activity.StoreRecoverActivity"
+            android:theme="@style/TranslucentTheme"/>
+
+
+        <activity android:name=".ui.fragment.LocationActivity"
+            android:theme="@style/TranslucentTheme"/>
+
+
+        <activity android:name=".ui.fragment.WriteConnInfoActivity"
+            android:theme="@style/TranslucentTheme"/>
+
+
 
         <service android:name=".service.LocationService" />
 

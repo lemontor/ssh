@@ -65,8 +65,8 @@ class MainFragmentRight : BaseMvpFragment<MainPresenter>() {
                         return
                     }
                     when (position) {
-                        0 -> IntentUtils.toCheck(activity!!, 0)
-                        1 -> IntentUtils.toCheck(activity!!, 1)
+                        0 -> IntentUtils.toCheck(activity!!, 1)
+                        1 -> IntentUtils.toCheck(activity!!, 2)
                         2 -> IntentUtils.toEva(activity!!)
                         3 -> IntentUtils.toSub(activity!!)
                         5 -> IntentUtils.toWallet(activity!!)

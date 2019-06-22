@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_cancel"
+        android:layout_width="@dimen/dp_62"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/card_view"
+        android:layout_alignBottom="@+id/card_view"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/dp_17"
+        android:background="@android:color/white"
+        app:cardCornerRadius="@dimen/dp_4">
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_B90000"
+            android:gravity="center"
+            android:text="@string/news_cancel"
+            android:textColor="@android:color/white" />
+
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:tag="slide_flag"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp_37"
+            android:paddingTop="@dimen/dp_25"
+            android:paddingBottom="@dimen/dp_25"
+            android:paddingRight="@dimen/dp_34"
+            >
+            <ImageView
+                android:id="@+id/iv_pic"
+                android:layout_width="@dimen/dp_92"
+                android:layout_height="@dimen/dp_92"
+                android:src="@mipmap/icon_empty_pic"
+                />
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_toRightOf="@+id/iv_pic"
+                android:paddingLeft="@dimen/dp_17"
+                android:paddingTop="@dimen/dp_2"
+                android:textSize="@dimen/sp_10"
+                android:textColor="@color/color_767676"/>
+
+            <TextView
+                android:id="@+id/tv_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/dp_2"
+                android:textSize="@dimen/sp_9"
+                android:textColor="@color/color_FF4343"
+                android:text=""
+                android:layout_alignParentRight="true"/>
+
+            <TextView
+                android:id="@+id/tv_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_toRightOf="@+id/iv_pic"
+                android:layout_below="@+id/tv_date"
+                android:paddingLeft="@dimen/dp_17"
+                android:paddingTop="@dimen/dp_16"
+                android:textSize="@dimen/sp_17"
+                android:textColor="@color/color_252525"/>
+
+            <TextView
+                android:id="@+id/tv_flag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_toRightOf="@+id/iv_pic"
+                android:layout_below="@+id/tv_type"
+                android:paddingLeft="@dimen/dp_17"
+                android:paddingTop="@dimen/dp_8"
+                android:textSize="@dimen/sp_10"
+                android:maxLines="1"
+                android:textColor="@color/color_252525"/>
+
+
+            <TextView
+                android:id="@+id/tv_notify"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="*图片鉴定有一定局限性，结果仅供参考"
+                android:layout_toRightOf="@+id/iv_pic"
+                android:paddingLeft="@dimen/dp_17"
+                android:paddingTop="@dimen/dp_10"
+                android:textSize="@dimen/sp_10"
+                android:maxLines="1"
+                android:textColor="@color/color_EAEAEA"
+                android:layout_alignBottom="@+id/iv_pic"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

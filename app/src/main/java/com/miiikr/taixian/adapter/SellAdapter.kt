@@ -7,13 +7,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import ccom.miiikr.taixian.`interface`.OnClickItemListener
 import com.miiikr.taixian.R
-import com.miiikr.taixian.entity.CheckEntity
+import com.miiikr.taixian.`interface`.OnCancelAndClickItemListener
 import com.miiikr.taixian.entity.SellEntity
 import com.ssh.net.ssh.utils.GlideHelper
 import com.ssh.net.ssh.utils.SpannableUtils
-import com.ssh.net.ssh.viewHolder.CheckViewHolder
+import com.ssh.net.ssh.viewHolder.SellViewHolder
 
-class SellAdapter(val context: Context, val datas:ArrayList<SellEntity.SellDataEntity>, val onClickItemListener: OnClickItemListener) : RecyclerView.Adapter<CheckViewHolder>() {
+class SellAdapter(val context: Context, val datas:ArrayList<SellEntity.SellDataEntity>, val onClickItemListener: OnCancelAndClickItemListener) : RecyclerView.Adapter<SellViewHolder>() {
 
     var mLayoutInflater: LayoutInflater
 
@@ -21,8 +21,8 @@ class SellAdapter(val context: Context, val datas:ArrayList<SellEntity.SellDataE
         mLayoutInflater = LayoutInflater.from(context)
     }
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): CheckViewHolder {
-        return CheckViewHolder(mLayoutInflater.inflate(R.layout.item_check, null))
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): SellViewHolder {
+        return SellViewHolder(mLayoutInflater.inflate(R.layout.item_sell, null))
     }
 
     override fun getItemCount(): Int {
@@ -32,7 +32,7 @@ class SellAdapter(val context: Context, val datas:ArrayList<SellEntity.SellDataE
         return datas.size
     }
 
-    override fun onBindViewHolder(p0: CheckViewHolder, p1: Int) {
+    override fun onBindViewHolder(p0: SellViewHolder, p1: Int) {
 
         GlideHelper.loadBitmapByCornerWithPlaceholder(context as Activity, p0.mIvPic, datas[p1].img,R.mipmap.icon_empty_pic)
         p0.mTvType.text = datas[p1].brandName
@@ -47,8 +47,11 @@ class SellAdapter(val context: Context, val datas:ArrayList<SellEntity.SellDataE
             2->p0.mTvFlag.text = "#到店回收"
             3->p0.mTvFlag.text = "#快递回收"
         }
-        p0.mLayout.setOnClickListener {
+        p0.cartView.setOnClickListener {
             onClickItemListener.clickItem(p1)
+        }
+        p0.cancel.setOnClickListener {
+            onClickItemListener.cancel(p1)
         }
     }
 

@@ -34,10 +34,10 @@ class MainFragmentLeft : BaseMvpFragment<MainPresenter>() {
 
     private fun initListener() {
         mTvSell.setOnClickListener {
-               IntentUtils.toType(activity!!)
+               IntentUtils.toType(activity!!,1)
         }
         mTvPrice.setOnClickListener {
-            IntentUtils.toType(activity!!)
+            IntentUtils.toType(activity!!,2)
         }
         mIvBack.setOnClickListener {
             EventBus.getDefault().post(MessageEvent(AppConfig.FRAGMENT_LEFT_OPEN_CLOSE))

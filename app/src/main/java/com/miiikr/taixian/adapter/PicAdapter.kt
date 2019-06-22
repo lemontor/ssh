@@ -16,7 +16,7 @@ import com.ssh.net.ssh.utils.GlideHelper
 import com.ssh.net.ssh.utils.ScreenUtils
 import com.ssh.net.ssh.viewHolder.PicViewHolder
 
-class PicAdapter(val context: Context, var datas: ArrayList<PicEntity.PicData>, var onClickItemListener: OnClickItemListener) : RecyclerView.Adapter<PicViewHolder>() {
+class PicAdapter(val context: Context, var datas: ArrayList<PicEntity.PicData>, var onClickItemListener: OnPicListener) : RecyclerView.Adapter<PicViewHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): PicViewHolder {
         return PicViewHolder(View.inflate(context, R.layout.item_pic, null))
@@ -32,21 +32,13 @@ class PicAdapter(val context: Context, var datas: ArrayList<PicEntity.PicData>, 
         lp.height = width
         lp.width = width
         p0.mLayout.layoutParams = lp
-//        Log.e("tag_real_width", "" + width)
-//        if(p1 == 0){
-//            var lp = RelativeLayout.LayoutParams(p0.mIvPic.layoutParams)
-//            lp.height = width
-//            lp.width = width
-//            lp.setMargins(ScreenUtils.dp2px(context,20),0,0,0)
-//            p0.mLayout.layoutParams = lp
-//        }
-
         if (!TextUtils.isEmpty(datas[p1].img)) {
-            GlideHelper.loadBitmapByNormal(context as Activity, p0.mIvPic, datas[p1].img!!)
+            GlideHelper.loadBitmapByNormalWithSize(context as Activity, p0.mIvPic, datas[p1].img!!,width,width)
             p0.mTvNotify.setBackgroundColor(context.resources.getColor(R.color.color_000000))
             p0.mIvCancel.visibility = View.VISIBLE
         } else {
-            p0.mIvPic.setImageResource(datas[p1].default)
+//            p0.mIvPic.setImageResource(datas[p1].default)
+            GlideHelper.loadInt(context as Activity,p0.mIvPic,datas[p1].default,width,width)
             p0.mTvNotify.setBackgroundColor(context.resources.getColor(R.color.color_888888))
             p0.mIvCancel.visibility = View.GONE
         }
@@ -56,7 +48,18 @@ class PicAdapter(val context: Context, var datas: ArrayList<PicEntity.PicData>, 
         }
         p0.mIvCancel.setOnClickListener {
             datas[p1].img = ""
+            onClickItemListener.cancel(p1)
             notifyItemChanged(p1)
         }
     }
+
+
+
+
+    interface OnPicListener {
+        fun clickItem(position: Int)
+        fun cancel(position: Int)
+    }
+
+
 }

@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/dp_20">
+    android:paddingBottom="@dimen/dp_20"
+    android:focusableInTouchMode="true">
 
     <include layout="@layout/layout_main_title" />
 
@@ -209,6 +210,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:tag="9成新"
                     android:layout_toRightOf="@+id/tv_old"></com.ssh.net.ssh.widget.TextSeekBar>
 
                 <TextView
@@ -230,7 +232,9 @@
                 android:maxLines="1"
                 android:paddingLeft="@dimen/dp_19"
                 android:paddingRight="@dimen/dp_19"
+                android:paddingBottom="@dimen/dp_23"
                 android:textColor="@color/color_888888"
+                android:text="9成新 日常使用痕迹 商品状态良好"
                 android:textSize="@dimen/sp_12" />
 
             <TextView
@@ -248,7 +252,6 @@
                 android:id="@+id/rv_pic"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:nestedScrollingEnabled="false"
                 android:layout_marginLeft="@dimen/dp_20"
                 android:layout_marginRight="@dimen/dp_20"
                 >
@@ -271,7 +274,7 @@
                 />
 
             <Button
-                android:id="@+id/tv_login_last"
+                android:id="@+id/btn_upload"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_50"
                 android:layout_marginLeft="@dimen/dp_22"

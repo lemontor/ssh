@@ -2,6 +2,7 @@ package com.ssh.net.ssh.utils
 
 import android.content.Context
 import android.util.Log
+import android.util.TypedValue
 
 class ScreenUtils {
 
@@ -37,6 +38,16 @@ class ScreenUtils {
             return (dpValue * scale + 0.5f).toInt()
         }
 
+        fun dpToPx(context: Context, valueInDp: Float): Float {
+            val metrics = context.resources.displayMetrics
+            return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, valueInDp, metrics)
+        }
+
+        fun dip2px(context: Context, dpValue: Float): Int {
+            val scale = context.resources.displayMetrics.density
+            return (dpValue * scale + 0.5f).toInt()
+        }
+
         fun getPicWidthWithThreeCell(context: Context): Int {
             val screenWidth = getScreenWidth(context)
             Log.e("tag_width", "" + screenWidth)
@@ -52,6 +63,7 @@ class ScreenUtils {
 
 
     }
+
 
 
 }

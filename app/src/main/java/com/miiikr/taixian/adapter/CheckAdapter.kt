@@ -7,12 +7,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import ccom.miiikr.taixian.`interface`.OnClickItemListener
 import com.miiikr.taixian.R
+import com.miiikr.taixian.`interface`.OnCancelAndClickItemListener
 import com.miiikr.taixian.entity.CheckEntity
 import com.ssh.net.ssh.utils.GlideHelper
 import com.ssh.net.ssh.utils.SpannableUtils
 import com.ssh.net.ssh.viewHolder.CheckViewHolder
 
-class CheckAdapter(val context: Context, val datas:ArrayList<CheckEntity.CheckDataEntity>, val onClickItemListener: OnClickItemListener) : RecyclerView.Adapter<CheckViewHolder>() {
+class CheckAdapter(val context: Context, val datas:ArrayList<CheckEntity.CheckDataEntity>, val onClickItemListener: OnCancelAndClickItemListener) : RecyclerView.Adapter<CheckViewHolder>() {
 
     var mLayoutInflater: LayoutInflater
 

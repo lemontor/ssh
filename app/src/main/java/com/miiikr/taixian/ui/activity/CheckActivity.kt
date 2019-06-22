@@ -1,7 +1,8 @@
 package com.miiikr.taixian.ui.activity
 
-import android.content.Intent
+import android.content.DialogInterface
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -9,25 +10,41 @@ import android.view.ViewStub
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import ccom.miiikr.taixian.`interface`.OnClickItemListener
 import com.miiikr.taixian.BaseMvp.IView.PersonView
 import com.miiikr.taixian.BaseMvp.View.BaseMvpActivity
 import com.miiikr.taixian.BaseMvp.presenter.PersonPresenter
 import com.miiikr.taixian.R
+import com.miiikr.taixian.`interface`.OnCancelAndClickItemListener
 import com.miiikr.taixian.adapter.CheckAdapter
 import com.miiikr.taixian.adapter.SellAdapter
 import com.miiikr.taixian.entity.CheckEntity
+import com.miiikr.taixian.entity.CommonEntity
 import com.miiikr.taixian.entity.SellEntity
 import com.miiikr.taixian.utils.RequestInterface
-import com.miiikr.taixian.utils.SharedPreferenceUtils
 import com.miiikr.taixian.utils.ToastUtils
-import com.miiikr.taixian.widget.ProgressDialog
 import com.miiikr.taixian.widget.SSHProgressHUD
+import com.miiikr.taixian.widget.slide.PlusItemSlideCallback
+import com.miiikr.taixian.widget.slide.WItemTouchHelperPlus
 import com.ssh.net.ssh.utils.IntentUtils
 import com.yo.lg.yocheck.widget.RecycleViewDivider
 
 
-class CheckActivity : BaseMvpActivity<PersonPresenter>(), OnClickItemListener, PersonView {
+class CheckActivity : BaseMvpActivity<PersonPresenter>(), OnCancelAndClickItemListener, PersonView {
+
+    override fun cancel(position: Int) {
+        cancelIndex = position
+        notifyCancel()
+    }
+
+    override fun clickItem(position: Int) {
+        when (from) {
+            1 -> IntentUtils.toCheckDetails(this, mCheckData[position].productId!!, mCheckData[position].categoryId!!)//我的鉴定
+            2 -> IntentUtils.toSellDetails(this, mSellData[position].prodctId!!, mSellData[position].categoryId!!)
+
+        }
+    }
+
+
     override fun <T : Any> onSuccess(responseId: Int, response: T) {
         when (responseId) {
             RequestInterface.REQUEST_CHECK_ID -> {
@@ -66,6 +83,23 @@ class CheckActivity : BaseMvpActivity<PersonPresenter>(), OnClickItemListener, P
                     showEmptyNotify()
                 }
             }
+            RequestInterface.REQUEST_CANCEL_SELL_ID -> {
+                val resultSell = response as? CommonEntity
+                if (resultSell != null) {
+                    if (resultSell.state == 1) {
+                        mSellData.removeAt(cancelIndex)
+                        mSellAdapter.notifyDataSetChanged()
+                        if (mSellData.size == 0) {
+                            showEmptyNotify()
+                        }
+                    } else {
+                        ToastUtils.toastShow(this, resultSell.message)
+                        showEmptyNotify()
+                    }
+                } else {
+                    showEmptyNotify()
+                }
+            }
         }
 
     }
@@ -77,14 +111,11 @@ class CheckActivity : BaseMvpActivity<PersonPresenter>(), OnClickItemListener, P
 
     override fun onFailue(responseId: Int, msg: String) {
         showEmptyNotify()
-        if(responseId == RequestInterface.REQUEST_CHECK_ID){
-           Log.e("tag_thread",Thread.currentThread().name)
+        if (responseId == RequestInterface.REQUEST_CHECK_ID) {
+            Log.e("tag_thread", Thread.currentThread().name)
         }
     }
 
-    override fun clickItem(position: Int) {
-        IntentUtils.toDetails(this)
-    }
 
     lateinit var mRvCheck: RecyclerView
     lateinit var mAdapter: CheckAdapter
@@ -96,6 +127,7 @@ class CheckActivity : BaseMvpActivity<PersonPresenter>(), OnClickItemListener, P
     lateinit var mSSHProgressHUD: SSHProgressHUD
     lateinit var mFrameLayout: FrameLayout
     lateinit var viewStub: ViewStub
+    var cancelIndex = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,24 +143,27 @@ class CheckActivity : BaseMvpActivity<PersonPresenter>(), OnClickItemListener, P
         mIvBack.setOnClickListener { finish() }
     }
 
+    var from = 0
     private fun initObj() {
-        val from = intent.getIntExtra("from", 0)
-        if (from == 0) {
+        from = intent.getIntExtra("from", 0)
+        if (from == 1) {
             mTvTitle.text = resources.getString(R.string.check_title)
             mCheckData = ArrayList()
             mAdapter = CheckAdapter(this, mCheckData, this)
             mRvCheck.adapter = mAdapter
 //            mPresenter.getCheckData(RequestInterface.REQUEST_CHECK_ID, SharedPreferenceUtils(this).getValue(SharedPreferenceUtils.PREFERENCE_U_I)!!)
             mPresenter.getCheckData(RequestInterface.REQUEST_CHECK_ID, "10086")
-        } else {
+        } else if (from == 2) {
             mTvTitle.text = resources.getString(R.string.sell_title)
             mSellData = ArrayList()
             mSellAdapter = SellAdapter(this, mSellData, this)
             mRvCheck.adapter = mSellAdapter
+            val callback = PlusItemSlideCallback()
+            val extension = WItemTouchHelperPlus(callback)
+            extension.attachToRecyclerView(mRvCheck)
 //            mPresenter.getSellData(RequestInterface.REQUEST_SELL_ID, SharedPreferenceUtils(this).getValue(SharedPreferenceUtils.PREFERENCE_U_I)!!)
             mPresenter.getSellData(RequestInterface.REQUEST_SELL_ID, "10086")
         }
-
     }
 
     private fun initUI() {
@@ -160,6 +195,15 @@ class CheckActivity : BaseMvpActivity<PersonPresenter>(), OnClickItemListener, P
     override fun onDestroy() {
         mPresenter.detachView()
         super.onDestroy()
+    }
+
+    private fun notifyCancel() {
+        val builder = AlertDialog.Builder(this)
+        val dialog = builder.setMessage("确认删除售卖信息")
+                .setPositiveButton("确定") { dialogInterface, i ->
+                    mPresenter.getCancelSellData(RequestInterface.REQUEST_CANCEL_SELL_ID, "10086", mSellData[cancelIndex].prodctId!!)
+                }.create()
+        dialog.show()
     }
 
 

@@ -38,11 +38,13 @@ class EvaAdapter(val context: Context, val datas:ArrayList<EvaEntity.EvaDataEnti
         p0.mTvType.text = datas[p1].brandName
         p0.mTvDate.text = SpannableUtils.millisecond2Date(datas[p1].createTime)
         when(datas[p1].state){
-            0 -> p0.mTvState.text = "#进行中"
-            1 -> p0.mTvState.text = "#完成"
-            2 -> p0.mTvState.text = "#取消"
+            0 -> p0.mTvState.text = "#正在估价"
+            1 ->{
+                p0.mTvState.text = "#估价成功"
+                p0.mTvFlag.text = if(datas[p1].price == null) "" else "￥ ${datas[p1].price}"
+            }
+            2 -> p0.mTvState.text = "#估价取消"
         }
-        p0.mTvFlag.text = if(datas[p1].price == null) "" else "￥ ${datas[p1].price}"
         p0.mLayout.setOnClickListener {
             onClickItemListener.clickItem(p1)
         }

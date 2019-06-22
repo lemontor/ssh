@@ -47,6 +47,7 @@
                 />
 
             <LinearLayout
+                android:id="@+id/layout_old"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
@@ -68,12 +69,42 @@
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/dp_17"
-                    android:text="#95新"
+                    android:text="#"
                     android:maxLines="1"
                     />
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layout_style"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_20"
+                android:paddingRight="@dimen/dp_20"
+                android:paddingBottom="@dimen/dp_45">
+                <TextView
+                    android:id="@+id/tv_style_notify"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/dp_17"
+                    android:layout_weight="1"
+                    android:text="款式"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_value_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/dp_17"
+                    android:text=""
+                    android:maxLines="1"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_material"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
@@ -86,7 +117,7 @@
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/dp_17"
                     android:layout_weight="1"
-                    android:text="@string/goods_details_meterial"
+                    android:text="材质"
                     />
 
                 <TextView
@@ -95,7 +126,35 @@
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/dp_17"
-                    android:text="金子"
+                    android:text=""
+                    android:maxLines="1"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_func"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_20"
+                android:paddingRight="@dimen/dp_20"
+                android:paddingBottom="@dimen/dp_45">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/dp_17"
+                    android:layout_weight="1"
+                    android:text="功能状态"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_value_func"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/dp_17"
+                    android:text=""
                     android:maxLines="1"
                     />
             </LinearLayout>
@@ -106,7 +165,7 @@
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/dp_20"
                 android:paddingRight="@dimen/dp_20"
-                android:paddingBottom="@dimen/dp_100">
+                android:paddingBottom="@dimen/dp_90">
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -122,11 +181,11 @@
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/dp_17"
-                    android:text="肩带，保修卡，五金配件"
+                    android:text=""
                     android:maxLines="1"
                     />
             </LinearLayout>
-             
+
             <ImageView
                 android:id="@+id/iv_head"
                 android:layout_width="@dimen/dp_56"
@@ -142,10 +201,22 @@
                 android:textSize="@dimen/sp_12"
                 android:textColor="@android:color/white"
                 android:text="鉴定结果：根据图片鉴定，与正品工艺相符合。最终鉴定结果以实物鉴定为准。"
-                android:paddingBottom="@dimen/dp_100"
+                android:gravity="center_horizontal"
+                android:paddingBottom="@dimen/dp_40"
                 />
 
-            
+            <TextView
+                android:id="@+id/tv_notify"
+                android:layout_width="@dimen/dp_250"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@android:color/white"
+                android:text="（点击“下一步”，马上预约鉴定师回收！）"
+                android:gravity="center_horizontal"
+                android:paddingBottom="@dimen/dp_30"
+                android:visibility="invisible"
+                />
         </LinearLayout>
     </ScrollView>
 
