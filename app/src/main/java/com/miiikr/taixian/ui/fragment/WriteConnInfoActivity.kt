@@ -8,6 +8,7 @@ import com.miiikr.taixian.BaseMvp.presenter.RecoverPersenter
 import com.miiikr.taixian.R
 import com.miiikr.taixian.`interface`.PopupClickListener
 import com.miiikr.taixian.entity.CommonEntity
+import com.miiikr.taixian.utils.AndroidWorkaround
 import com.miiikr.taixian.utils.RequestInterface
 import com.miiikr.taixian.utils.ToastUtils
 import com.miiikr.taixian.widget.DatePickerPopupWindow
@@ -47,6 +48,8 @@ class WriteConnInfoActivity : BaseMvpActivity<RecoverPersenter>(), RecoverView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_conn_info)
+        val layout = findViewById<RelativeLayout>(R.id.layout_root)
+        layout.setPadding(0, 0, 0, AndroidWorkaround.getNavigationBarHeight(this))
         mPresenter = RecoverPersenter()
         mPresenter.attachView(this)
         productId = intent.getStringExtra("productId")
@@ -56,15 +59,11 @@ class WriteConnInfoActivity : BaseMvpActivity<RecoverPersenter>(), RecoverView {
         } else {
             recoveryType = 1
         }
-//        mRootLayout = findViewById(R.id.layout_root)
         mTvTimeValue = findViewById(R.id.tv_time_value)
         mEdtName = findViewById(R.id.edt_name)
         mEdtPhone = findViewById(R.id.edt_phone)
         findViewById<ImageView>(R.id.iv_back).setOnClickListener { finish() }
         findViewById<TextView>(R.id.tv_time).setOnClickListener {
-//            if (isOpenBroad) {
-//                backKeyBroad()
-//            }
             initPopupWindow()
         }
         findViewById<Button>(R.id.btn_sure).setOnClickListener {
@@ -82,10 +81,6 @@ class WriteConnInfoActivity : BaseMvpActivity<RecoverPersenter>(), RecoverView {
                 R.id.rb_women -> isWomen = "2"
             }
         }
-//        mRootLayout.viewTreeObserver.addOnGlobalLayoutListener {
-//            val heightDiff = mRootLayout.rootView.height - mRootLayout.height
-//            isOpenBroad = heightDiff > ScreenUtils.dpToPx(this@WriteConnInfoActivity, 200f)
-//        }
     }
 
     var datePickerPopupWindow: DatePickerPopupWindow? = null
@@ -122,12 +117,6 @@ class WriteConnInfoActivity : BaseMvpActivity<RecoverPersenter>(), RecoverView {
         mPresenter.detachView()
         super.onDestroy()
     }
-
-//    fun backKeyBroad() {
-//        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-//        // 隐藏软键盘
-//        imm.hideSoftInputFromWindow(window.decorView.windowToken, 0)
-//    }
 
 
 }

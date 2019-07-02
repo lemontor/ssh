@@ -3,9 +3,7 @@ package com.miiikr.taixian.ui.fragment
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.MapView
@@ -15,6 +13,7 @@ import com.amap.api.maps.model.MarkerOptions
 import com.miiikr.taixian.BaseMvp.View.BaseMvpActivity
 import com.miiikr.taixian.BaseMvp.presenter.RecoverPersenter
 import com.miiikr.taixian.R
+import com.miiikr.taixian.utils.AndroidWorkaround
 import com.ssh.net.ssh.utils.IntentUtils
 
 class LocationActivity : BaseMvpActivity<RecoverPersenter>() {
@@ -30,6 +29,8 @@ class LocationActivity : BaseMvpActivity<RecoverPersenter>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_location)
+        val layout = findViewById<RelativeLayout>(R.id.root_layout)
+        layout.setPadding(0, 0, 0, AndroidWorkaround.getNavigationBarHeight(this))
         initUI()
         mMapView.onCreate(savedInstanceState)
     }

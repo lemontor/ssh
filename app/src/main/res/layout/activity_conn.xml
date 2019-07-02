@@ -1,95 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@android:color/white"
-    >
+    android:id="@+id/layout_content">
 
-    <include
-        layout="@layout/layout_main_title"/>
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="联系方式"
-        android:textSize="@dimen/sp_14"
-        android:textColor="@color/color_000000"
-        android:gravity="center"
-        android:paddingTop="@dimen/dp_10"
-        android:paddingBottom="@dimen/dp_10"
-        />
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="联系方式"
-        android:textColor="@color/color_000000"
-        android:textSize="@dimen/sp_18"
-        android:paddingTop="@dimen/dp_18"
-        android:textStyle="bold"
-        android:paddingLeft="@dimen/dp_18"
-        android:paddingBottom="@dimen/dp_30"/>
+        <include layout="@layout/layout_main_title" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="联系电话"
-            android:paddingLeft="@dimen/dp_18"
+            android:gravity="center"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10"
+            android:text="联系方式"
             android:textColor="@color/color_000000"
-            android:textStyle="bold"
-            android:textSize="@dimen/sp_12"
-            />
+            android:textSize="@dimen/sp_14" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="400-833-1577"
             android:paddingLeft="@dimen/dp_18"
-            android:textColor="@color/color_45C4FF"
-            android:textStyle="bold"
-            android:textSize="@dimen/sp_10"
-            />
-    </LinearLayout>
-
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="联系顺时行客服中心，请致电星期一至星期日：早10时至晚7时"
-        android:paddingLeft="@dimen/dp_18"
-        android:textColor="@color/color_000000"
-        android:textSize="@dimen/sp_11"
-        android:paddingTop="@dimen/dp_8"
-        />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="@dimen/dp_19">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="公司官网"
-            android:paddingLeft="@dimen/dp_18"
+            android:paddingTop="@dimen/dp_18"
+            android:paddingBottom="@dimen/dp_30"
+            android:text="联系方式"
             android:textColor="@color/color_000000"
-            android:textStyle="bold"
-            android:textSize="@dimen/sp_12"
-            />
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_18"
+                android:text="联系电话"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_12"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_18"
+                android:text="400-833-1577"
+                android:textColor="@color/color_45C4FF"
+                android:textSize="@dimen/sp_10"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="http://www.shunshihang.com/"
             android:paddingLeft="@dimen/dp_18"
-            android:textColor="@color/color_45C4FF"
-            android:textStyle="bold"
-            android:textSize="@dimen/sp_10"
-            />
+            android:paddingTop="@dimen/dp_8"
+            android:text="联系顺时行客服中心，请致电星期一至星期日：早10时至晚7时"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/sp_11" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/dp_19">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_18"
+                android:text="公司官网"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_12"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_net"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_18"
+                android:text="http://www.shunshihang.com/"
+                android:textColor="@color/color_45C4FF"
+                android:textSize="@dimen/sp_10"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
-
-
-</LinearLayout>
+</FrameLayout>

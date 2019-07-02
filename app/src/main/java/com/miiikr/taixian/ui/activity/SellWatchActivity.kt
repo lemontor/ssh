@@ -10,9 +10,7 @@ import android.util.ArrayMap
 import android.util.Log
 import android.util.SparseArray
 import android.view.View
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import ccom.miiikr.taixian.`interface`.OnClickItemListener
 import com.miiikr.taixian.BaseMvp.IView.MainView
 import com.miiikr.taixian.BaseMvp.View.BaseMvpActivity
@@ -20,11 +18,14 @@ import com.miiikr.taixian.BaseMvp.presenter.UpdatePresenter
 import com.miiikr.taixian.R
 import com.miiikr.taixian.`interface`.PopupClickListener
 import com.miiikr.taixian.adapter.PicAdapter
+import com.miiikr.taixian.app.SSHApplication
 import com.miiikr.taixian.entity.*
 import com.miiikr.taixian.utils.*
+import com.miiikr.taixian.widget.SSHProgressHUD
 import com.ssh.net.ssh.utils.AppConfig
 import com.ssh.net.ssh.utils.GlideHelper
 import com.ssh.net.ssh.utils.IntentUtils
+import com.ssh.net.ssh.utils.ScreenUtils
 import com.ssh.net.ssh.widget.FilePopupWindow
 import com.ssh.net.ssh.widget.NormalPopupWindow
 import com.ssh.net.ssh.widget.PhotoPopupWindow
@@ -34,11 +35,15 @@ import java.io.File
 import java.lang.StringBuilder
 
 
-class SellWatchActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickListener, MainView, PicAdapter.OnPicListener, TextSeekBar.OnSeekListener {
-    override fun onSeek(value: String, old: String) {
-        tvNewNotify.text = value
-        tvNewNotify.tag = old
-    }
+class SellWatchActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickListener, MainView, PicAdapter.OnPicListener {
+//    override fun start() {
+//        tvProgress.visibility = View.VISIBLE
+//    }
+//
+//    override fun progress(progress: Int) {
+//        tvProgress.text = "$progress"
+//    }
+
 
     override fun cancel(position: Int) {
         if (compressForTarget!!.contains(position)) {
@@ -75,15 +80,24 @@ class SellWatchActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickListen
                 if (file != null) {
                     compressForTarget!![indexPic] = file
                 }
-                compressForTarget!!.forEach {
-                    Log.e("tag_map", "key:${it.key} value:${it.value}")
-                }
             }
             RequestInterface.REQUEST_SELL_WATCH_ID -> {
                 val result = response as? CommonEntity
                 if (result != null) {
                     if (result.state == 1) {
                         ToastUtils.toastShow(this, "提交成功")
+                        SSHApplication.activitys[ActivityNameTag.TYPE_TAG]!!.finish()
+                        finish()
+                    }
+                }
+            }
+            RequestInterface.REQUEST_CHECK_WATCH_ID -> {
+                val result = response as? CommonEntity
+                if (result != null) {
+                    if (result.state == 1) {
+                        ToastUtils.toastShow(this, "提交成功")
+                        SSHApplication.activitys[ActivityNameTag.TYPE_TAG]!!.finish()
+                        finish()
                     }
                 }
             }
@@ -103,7 +117,7 @@ class SellWatchActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickListen
                         mPresenter.uploadInfoForSell(RequestInterface.REQUEST_SELL_WATCH_ID, SharedPreferenceUtils(this).getValue(SharedPreferenceUtils.PREFERENCE_U_I)!!, brandId, "1", tvFlag.text.toString(), tvNewNotify.tag.toString(),
                                 mTvFunc.text.toString(), mTvMaterial.text.toString(), mTvStyle.text.toString(), mTvFile.text.toString(), uploadPic!!)
                     } else if (isSell == 2) {
-                        mPresenter.uploadInfoForCheck(RequestInterface.REQUEST_SELL_WATCH_ID, SharedPreferenceUtils(this).getValue(SharedPreferenceUtils.PREFERENCE_U_I)!!, brandId, "1", tvFlag.text.toString(), tvNewNotify.tag.toString(),
+                        mPresenter.uploadInfoForCheck(RequestInterface.REQUEST_CHECK_WATCH_ID, SharedPreferenceUtils(this).getValue(SharedPreferenceUtils.PREFERENCE_U_I)!!, brandId, "1", tvFlag.text.toString(), tvNewNotify.tag.toString(),
                                 mTvFunc.text.toString(), mTvMaterial.text.toString(), mTvStyle.text.toString(), mTvFile.text.toString(), uploadPic!!)
                     }
 
@@ -145,9 +159,18 @@ class SellWatchActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickListen
                     mStyleDatas
                 })
             }
-            v!!.id == R.id.layout_file -> showFilePopupWindow()
+            v!!.id == R.id.layout_file -> {
+                newInstanceFileItemArrayList()
+                showFilePopupWindow(if (mFileDatas!!.size > 0) {
+                    mFileDatas!!
+                } else {
+                    mFileDatas!!.addAll(mPresenter.getFileWatchChose(this))
+                    mFileDatas!!
+                })
+            }
             v!!.id == R.id.btn_upload -> {
                 if (mPresenter.checkInfo(this, mSeek.getTextCount(), mTvFunc.text.toString(), mTvStyle.text.toString(), mTvMaterial.text.toString(), compressForTarget!!)) {
+                    mSSHProgressHUD.show()
                     compressForTarget!!.forEach {
                         mPresenter.uploadFile(it.key, it.value)
                     }
@@ -175,6 +198,7 @@ class SellWatchActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickListen
     lateinit var picAdapter: PicAdapter
     lateinit var tvNewNotify: TextView
     lateinit var tvFlag: TextView
+    lateinit var tvProgress: TextView
 
     var chosePopupWindow: NormalPopupWindow? = null
     var filesPopupWindow: FilePopupWindow? = null
@@ -188,10 +212,12 @@ class SellWatchActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickListen
     var fileHelper: FileHelper? = null
     var brandId = "0"
     var isSell = 0 // 1 售卖  2 鉴定
+    lateinit var mSSHProgressHUD: SSHProgressHUD
 
     var mFuncDatas: ArrayList<ChoseEntity>? = null
     var mMaterialDatas: ArrayList<ChoseEntity>? = null
     var mStyleDatas: ArrayList<ChoseEntity>? = null
+    var mFileDatas: ArrayList<ChoseEntity>? = null
     var choseArrayMap: ArrayList<String>? = null
     var compressForTarget: HashMap<Int, File>? = null
     var uploadPic: HashMap<Int, String>? = null
@@ -200,6 +226,8 @@ class SellWatchActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickListen
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_watch_details)
+        val layout = findViewById<FrameLayout>(R.id.root_layout)
+        layout.setPadding(0, 0, 0, AndroidWorkaround.getNavigationBarHeight(this))
         mPresenter = UpdatePresenter()
         mPresenter.attachView(this)
         initUI()
@@ -208,6 +236,7 @@ class SellWatchActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickListen
     }
 
     private fun initObj() {
+        isSell = intent.getIntExtra("isSell", 0)
         mPicDatas = ArrayList()
         picAdapter = PicAdapter(this, mPicDatas, this)
         fileHelper = FileHelper()
@@ -220,6 +249,22 @@ class SellWatchActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickListen
         mLayoutMaterial.setOnClickListener(this)
         mLayoutStyle.setOnClickListener(this)
         mBtnUpload.setOnClickListener(this)
+        findViewById<ImageView>(R.id.iv_back).setOnClickListener { finish() }
+        mSeek.setOnSeekListener(object : TextSeekBar.OnSeekListener {
+            override fun seekProgress(pro: Int) {
+                tvProgress.text = "$pro"
+            }
+
+            override fun start() {
+                tvProgress.visibility = View.VISIBLE
+            }
+
+            override fun onSeek(value: String, old: String) {
+                tvProgress.visibility = View.GONE
+                tvNewNotify.text = value
+                tvNewNotify.tag = old
+            }
+        })
         mRvPic.adapter = picAdapter
         mPresenter.getPicDataForWatch(AppConfig.REQUEST_ID_GET_PIC)
     }
@@ -242,13 +287,15 @@ class SellWatchActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickListen
         tvNewNotify = findViewById(R.id.tv_notify)
         mSeek = findViewById(R.id.tsbar)
         tvFlag = findViewById(R.id.edt_remark)
-        mSeek.setOnSeekListener(this)
+        tvProgress = findViewById(R.id.tv_progress)
         val gridLayoutManager = GridLayoutManager(this, 3)
         gridLayoutManager.isSmoothScrollbarEnabled = true
         gridLayoutManager.isAutoMeasureEnabled = true
         mRvPic.setHasFixedSize(true)
         mRvPic.isNestedScrollingEnabled = false
         mRvPic.layoutManager = gridLayoutManager
+        mSSHProgressHUD = SSHProgressHUD.getInstance(this@SellWatchActivity)
+        mSSHProgressHUD.setMessage("提交数据中")
     }
 
 
@@ -258,6 +305,7 @@ class SellWatchActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickListen
     fun showFuncPopupWindow(itemType: Int, datas: ArrayList<ChoseEntity>?) {
         chosePopupWindow = NormalPopupWindow(this, itemType, object : PopupClickListener {
             override fun onClick(position: Int, type: Int, flag: String) {
+                chosePopupWindow!!.dismiss()
                 when (type) {
                     1 -> mTvFunc.text = flag
                     2 -> mTvMaterial.text = flag
@@ -268,7 +316,7 @@ class SellWatchActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickListen
         chosePopupWindow!!.showAtLocation(R.layout.activity_watch_details)
     }
 
-    fun showFilePopupWindow() {
+    fun showFilePopupWindow(data: ArrayList<ChoseEntity>?) {
         newInstanceFileArrayList()
         filesPopupWindow = FilePopupWindow(this, 1, object : PopupClickListener {
             override fun onClick(position: Int, type: Int, flag: String) {
@@ -280,7 +328,7 @@ class SellWatchActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickListen
                 mTvFile.text = if (choseArrayMap!!.size == 0) "" else getTextFromArray()
 
             }
-        })
+        }, data!!)
         filesPopupWindow!!.showAtLocation(R.layout.activity_watch_details)
     }
 
@@ -350,6 +398,12 @@ class SellWatchActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickListen
         }
     }
 
+    private fun newInstanceFileItemArrayList() {
+        if (mFileDatas == null) {
+            mFileDatas = ArrayList()
+        }
+    }
+
     private fun newInstanceStyleArrayList() {
         if (mStyleDatas == null) {
             mStyleDatas = ArrayList()
@@ -387,6 +441,10 @@ class SellWatchActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickListen
 
     var stringBuilder: StringBuilder? = null
 
+    override fun hideLoading() {
+        super.hideLoading()
+        mSSHProgressHUD.dismiss()
+    }
 
     override fun onDestroy() {
         mPresenter.detachView()

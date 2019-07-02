@@ -1,6 +1,5 @@
 package com.miiikr.taixian.ui.activity
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -20,17 +19,14 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.support.v7.widget.CardView
 import android.view.*
-import android.widget.Button
-import android.widget.PopupWindow
-import android.widget.RelativeLayout
-import android.widget.TextView
+import android.widget.*
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.BitmapDescriptorFactory
 import com.amap.api.maps.model.LatLng
 import com.amap.api.maps.model.MarkerOptions
-import com.miiikr.taixian.`interface`.PopupClickListener
+import com.miiikr.taixian.utils.AndroidWorkaround
 import com.miiikr.taixian.utils.ToastUtils
-import com.miiikr.taixian.widget.MapPopupWindow
+import com.ssh.net.ssh.utils.ScreenUtils
 
 
 class MapActivity : BaseMvpActivity<MainPresenter>(), AMapLocationListener {
@@ -109,6 +105,8 @@ class MapActivity : BaseMvpActivity<MainPresenter>(), AMapLocationListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
+        val layout = findViewById<RelativeLayout>(R.id.root_layout)
+        layout.setPadding(0, 0, 0, AndroidWorkaround.getNavigationBarHeight(this))
         initUI()
         mMapView.onCreate(savedInstanceState)
         initLocation()
@@ -125,10 +123,11 @@ class MapActivity : BaseMvpActivity<MainPresenter>(), AMapLocationListener {
     }
 
     private fun initUI() {
-        rootView = findViewById(R.id.layout_root)
+        rootView = findViewById(R.id.root_layout)
         findViewById<Button>(R.id.tv_next).setOnClickListener {
             newInstancePopuWindow()
         }
+        findViewById<ImageView>(R.id.iv_back).setOnClickListener { finish() }
         mMapView = findViewById(R.id.map_view)
         if (mAMap == null) {
             mAMap = mMapView.map

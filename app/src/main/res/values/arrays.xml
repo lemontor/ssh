@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="animator">
+        <item>@drawable/icon_anim_a</item>
+        <item>@drawable/icon_anim_b</item>
+        <item>@drawable/icon_anim_c</item>
+        <item>@drawable/icon_anim_d</item>
+        <item>@drawable/icon_anim_e</item>
+        <item>@drawable/icon_anim_f</item>
+        <item>@drawable/icon_anim_g</item>
+        <item>@drawable/icon_anim_h</item>
+        <item>@drawable/icon_anim_i</item>
+        <item>@drawable/icon_anim_j</item>
+        <item>@drawable/icon_anim_k</item>
+        <item>@drawable/icon_anim_l</item>
+        <item>@drawable/icon_anim_m</item>
+        <item>@drawable/icon_anim_n</item>
+        <item>@drawable/icon_anim_o</item>
+        <item>@drawable/icon_anim_p</item>
+        <item>@drawable/icon_anim_q</item>
+        <item>@drawable/icon_anim_r</item>
+        <item>@drawable/icon_anim_s</item>
+        <item>@drawable/icon_anim_t</item>
+    </array>
+
+
+
+</resources>

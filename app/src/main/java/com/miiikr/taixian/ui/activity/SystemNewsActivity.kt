@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.widget.ImageView
 import android.widget.TextView
 import ccom.miiikr.taixian.`interface`.OnClickItemListener
 import com.miiikr.taixian.BaseMvp.View.BaseMvpActivity
@@ -35,6 +36,7 @@ class SystemNewsActivity : BaseMvpActivity<SinglePresenter>() {
     }
 
     private fun initUI() {
+        findViewById<ImageView>(R.id.iv_back).setOnClickListener { finish() }
         mTvTitle = findViewById(R.id.tv_title)
         mRvNews = findViewById(R.id.rv_sub)
         mTvTitle.text = resources.getString(R.string.system_news_title)

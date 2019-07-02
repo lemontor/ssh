@@ -3,15 +3,14 @@ package com.miiikr.taixian.ui.activity
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
+import com.hyphenate.EMCallBack
+import com.hyphenate.chat.EMClient
 import com.miiikr.taixian.BaseMvp.IView.AccountView
 import com.miiikr.taixian.BaseMvp.View.BaseMvpActivity
 import com.miiikr.taixian.BaseMvp.presenter.AccountPresenter
 import com.miiikr.taixian.R
 import com.miiikr.taixian.app.SSHApplication
-import com.miiikr.taixian.entity.CodeEvent
-import com.miiikr.taixian.entity.CommonEntity
-import com.miiikr.taixian.entity.LoginEntity
-import com.miiikr.taixian.entity.MessageEvent
+import com.miiikr.taixian.entity.*
 import com.miiikr.taixian.utils.RequestInterface
 import com.miiikr.taixian.utils.SharedPreferenceUtils
 import com.miiikr.taixian.utils.ToastUtils
@@ -25,7 +24,7 @@ import org.greenrobot.eventbus.ThreadMode
 class LoginActivity : BaseMvpActivity<AccountPresenter>(), AccountView {
     override fun <T : Any> onSuccess(responseId: Int, response: T) {
         if (RequestInterface.REQUEST_CODE_ID == responseId) {
-            val result = response as? CommonEntity
+            val result = response as? CommonBody
             if (result != null && result.state == 1) {
                 mTvCode.isEnabled = false
                 mPresenter.calculateTime(mTvCode)
@@ -35,10 +34,39 @@ class LoginActivity : BaseMvpActivity<AccountPresenter>(), AccountView {
             val result = response as? LoginEntity
             if (result != null) {
                 if (result.state == 1) {
+
                     mPresenter.putValues(result)
                     if (!SharedPreferenceUtils(this@LoginActivity).isChose(SharedPreferenceUtils.PREFERENCE_U_C)) {
                         IntentUtils.toSex(this@LoginActivity)
                     }
+                    finish()
+                }
+            }
+        } else if (RequestInterface.REQUEST_LOGIN_WX_ID == responseId) {
+            val result = response as? WxLoginEntity
+            if (result != null) {
+                if (result.state == 1) {
+                    if (result.data != null) {
+                        targetId = result.data!!.targetId
+                        mode = result.data!!.mode
+                        if(mode == "2"){//跳转
+                           IntentUtils.toConnPhone(this,targetId,mode)
+                        }else{
+                           mPresenter.wxLoginNoPhone(RequestInterface.REQUEST_NO_PHONE_ID,targetId,mode)
+                        }
+                    }
+                } else {
+                    ToastUtils.toastShow(this, result.message)
+                }
+            }
+        }else if(RequestInterface.REQUEST_NO_PHONE_ID == responseId){
+            val result = response as? LoginEntity
+            if (result != null) {
+                if (result.state == 1) {
+                    mPresenter.putValues(result)
+//                    if (!SharedPreferenceUtils(this@LoginActivity).isChose(SharedPreferenceUtils.PREFERENCE_U_C)) {
+//                        IntentUtils.toSex(this@LoginActivity)
+//                    }
                     finish()
                 }
             }
@@ -47,8 +75,8 @@ class LoginActivity : BaseMvpActivity<AccountPresenter>(), AccountView {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(event: CodeEvent) {
-        Log.e("tag_code","${event.code}")
-        mPresenter.uploadCode(RequestInterface.REQUEST_LOGIN_WX_ID,event.code)
+        Log.e("tag_code", "${event.code}")
+        mPresenter.uploadCode(RequestInterface.REQUEST_LOGIN_WX_ID, event.code)
     }
 
     override fun onFailue(responseId: Int, msg: String) {
@@ -62,7 +90,8 @@ class LoginActivity : BaseMvpActivity<AccountPresenter>(), AccountView {
     lateinit var mEdtCode: EditText
     lateinit var mIvWx: ImageView
     lateinit var mSSHProgressHUD: SSHProgressHUD
-
+    var targetId = ""
+    var mode = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -134,5 +163,19 @@ class LoginActivity : BaseMvpActivity<AccountPresenter>(), AccountView {
         super.onDestroy()
     }
 
+    fun EMLogin(userName:String,passWord:String){
+        EMClient.getInstance().login(userName,passWord,object :EMCallBack{
+            override fun onSuccess() {
+               EMClient.getInstance().groupManager().loadAllGroups()
+               EMClient.getInstance().chatManager().loadAllConversations()
+            }
+
+            override fun onProgress(p0: Int, p1: String?) {
+            }
+
+            override fun onError(p0: Int, p1: String?) {
+            }
+        })
+    }
 
 }

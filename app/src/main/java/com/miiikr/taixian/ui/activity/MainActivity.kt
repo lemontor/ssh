@@ -9,7 +9,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.view.ViewPager
 import android.support.v4.widget.DrawerLayout
-import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import android.widget.*
 import com.miiikr.taixian.BaseMvp.IView.MainView
@@ -36,6 +36,8 @@ import com.tencent.mm.opensdk.constants.ConstantsAPI
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import android.view.KeyEvent.KEYCODE_BACK
+import com.miiikr.taixian.utils.ToastUtils
 
 
 class MainActivity : BaseMvpActivity<MainPresenter>(), MainView {
@@ -56,7 +58,6 @@ class MainActivity : BaseMvpActivity<MainPresenter>(), MainView {
                 val result = response as? CommonEntity
                 if (result != null) {
                     if (result.state == 1) {
-                        Log.e("tag_chose", "chose")
                         getSharedPreferences()!!.setChose(SharedPreferenceUtils.PREFERENCE_U_C, true)
                     }
                 }
@@ -88,7 +89,7 @@ class MainActivity : BaseMvpActivity<MainPresenter>(), MainView {
     var mFragmentNickName: SetNameFragment? = null
     lateinit var mSSHProgressHUD: SSHProgressHUD
     var share: SharedPreferenceUtils? = null
-
+    var fragmentStackCount = 0
 
     /*
     0:显示主页
@@ -109,7 +110,7 @@ class MainActivity : BaseMvpActivity<MainPresenter>(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mPresenter = MainPresenter()
-        mPresenter.mView = this
+        mPresenter.attachView(this)
         EventBus.getDefault().register(this)
         initUI()
         initData()
@@ -203,7 +204,7 @@ class MainActivity : BaseMvpActivity<MainPresenter>(), MainView {
         mIvPreson = findViewById(R.id.iv_person)
         mSSHProgressHUD = SSHProgressHUD.getInstance(this@MainActivity)
         mSSHProgressHUD.setMessage("获取数据中")
-        mSSHProgressHUD.setCancelable(true)
+//        mSSHProgressHUD.setCancelable(true)
     }
 
     private fun initData() {
@@ -219,16 +220,18 @@ class MainActivity : BaseMvpActivity<MainPresenter>(), MainView {
 
     fun showLeftFragment(fragment: Fragment) {
         val transaction = mFragmentManager.beginTransaction()
-        transaction.addToBackStack(null)
-        transaction.replace(R.id.layout_left, fragment)
-        transaction.commit()
+                .replace(R.id.layout_left, fragment)
+                .addToBackStack(null)
+                .commit()
+        fragmentStackCount++
     }
 
     fun showRightFragment(fragment: Fragment) {
-        val transaction = mFragmentManager.beginTransaction()
-        transaction.addToBackStack(null)
-        transaction.replace(R.id.layout_right, fragment)
-        transaction.commit()
+        mFragmentManager.beginTransaction()
+                .replace(R.id.layout_right, fragment)
+                .addToBackStack(null)
+                .commit()
+        fragmentStackCount++
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -252,6 +255,7 @@ class MainActivity : BaseMvpActivity<MainPresenter>(), MainView {
 
     override fun onDestroy() {
         EventBus.getDefault().unregister(this)
+        mPresenter.detachView()
         super.onDestroy()
     }
 
@@ -270,35 +274,29 @@ class MainActivity : BaseMvpActivity<MainPresenter>(), MainView {
         return mFragmentNickName
     }
 
-    override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount <= 2) {
-            when (mShowFrag) {
-                1 -> {
-                    mDrawerLayout.closeDrawer(mFrameLayoutForLeft)
-                }
-                2 -> {
-                    mDrawerLayout.closeDrawer(mFrameLayoutForRight)
-                }
-                else -> {
-                    finish()
-                    Toast.makeText(this, "再次点击回退将推出", Toast.LENGTH_SHORT).show()
-                }
+    private var mExitTime: Long = 0
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (keyCode == KEYCODE_BACK) {
+            if (System.currentTimeMillis() - mExitTime > 2000) {
+                ToastUtils.toastShow(this, "再按一次退出程序")
+                mExitTime = System.currentTimeMillis()
+            } else {
+                finish()
             }
-        } else {
-            supportFragmentManager.popBackStack()
+            return true
         }
+        return super.onKeyDown(keyCode, event)
     }
 
-
     override fun showLoading() {
-//        super.showLoading()
         mSSHProgressHUD.show()
     }
 
     override fun hideLoading() {
-//        super.hideLoading()
         mSSHProgressHUD.dismiss()
     }
+
 
 
 }

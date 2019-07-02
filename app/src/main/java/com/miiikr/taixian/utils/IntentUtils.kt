@@ -3,10 +3,12 @@ package com.ssh.net.ssh.utils
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import com.miiikr.taixian.R
 import com.miiikr.taixian.app.SSHApplication
 import com.miiikr.taixian.ui.activity.*
 import com.miiikr.taixian.ui.fragment.LocationActivity
 import com.miiikr.taixian.ui.fragment.WriteConnInfoActivity
+import com.miiikr.taixian.utils.ActivityNameTag
 
 class IntentUtils {
 
@@ -22,8 +24,6 @@ class IntentUtils {
             intent.setClass(context, PhoneLoginActivity::class.java)
             intent.putExtra("from", from)
             context.startActivity(intent)
-            val ac = context as Activity
-            SSHApplication.addActivity(ac)
         }
 
         fun toLogin(context: Context) {
@@ -38,7 +38,6 @@ class IntentUtils {
             intent.setClass(context, CheckCodeActivity::class.java)
             intent.putExtra("phone", phone)
             context.startActivity(intent)
-            SSHApplication.addActivity(context as Activity)
         }
 
         fun toMain(context: Context) {
@@ -52,6 +51,7 @@ class IntentUtils {
             var intent = Intent()
             intent.setClass(context, CheckActivity::class.java)
             intent.putExtra("from", from)
+//            SSHApplication.addActivity(ActivityNameTag.CHECK_TAG,context as Activity)
             context.startActivity(intent)
         }
 
@@ -102,6 +102,7 @@ class IntentUtils {
                     intent.putExtra("isSell",type)
                 }
             }
+            SSHApplication.addActivity(ActivityNameTag.TYPE_TAG,context as Activity)
             context.startActivity(intent)
         }
 
@@ -220,6 +221,33 @@ class IntentUtils {
         fun toRecoverStore(context: Context){
             var intent = Intent()
             intent.setClass(context, StoreRecoverActivity::class.java)
+            context.startActivity(intent)
+        }
+
+        fun toMoneyState(context: Context,from: Int){
+            var intent = Intent()
+            intent.setClass(context, MoneyStateActivity::class.java)
+            intent.putExtra("from",from)
+            context.startActivity(intent)
+        }
+
+        fun toConnPhone(context: Context,targetId:String,mode:String){
+            var intent = Intent()
+            intent.setClass(context, ConnectionPhone::class.java)
+            intent.putExtra("targetId",targetId)
+            intent.putExtra("mode",mode)
+            context.startActivity(intent)
+        }
+
+        fun toChat(context: Context){
+            var intent = Intent()
+            intent.setClass(context, ChatActivity::class.java)
+            context.startActivity(intent)
+        }
+
+        fun toAdvice(context: Context){
+            var intent = Intent()
+            intent.setClass(context, AdviceActivity::class.java)
             context.startActivity(intent)
         }
 

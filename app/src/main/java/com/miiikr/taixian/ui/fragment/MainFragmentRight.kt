@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.SparseArray
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import ccom.miiikr.taixian.`interface`.OnClickItemListener
 import com.miiikr.taixian.BaseMvp.View.BaseMvpFragment
 import com.miiikr.taixian.BaseMvp.presenter.MainPresenter
@@ -16,6 +19,7 @@ import com.miiikr.taixian.adapter.PersonItemAdapter
 import com.miiikr.taixian.app.SSHApplication
 import com.miiikr.taixian.entity.MessageEvent
 import com.miiikr.taixian.ui.activity.MainActivity
+import com.miiikr.taixian.utils.AndroidWorkaround
 import com.miiikr.taixian.utils.SharedPreferenceUtils
 import com.ssh.net.ssh.utils.AppConfig
 import com.ssh.net.ssh.utils.IntentUtils
@@ -59,8 +63,8 @@ class MainFragmentRight : BaseMvpFragment<MainPresenter>() {
             override fun clickItem(position: Int) {
                 if (position == 8) {
                     IntentUtils.toQuestion(activity!!)
-                }else{
-                    if((activity as MainActivity).getSharedPreferences()!!.getValue(SharedPreferenceUtils.PREFERENCE_U_I).equals("")){
+                } else {
+                    if ((activity as MainActivity).getSharedPreferences()!!.getValue(SharedPreferenceUtils.PREFERENCE_U_I).equals("")) {
                         IntentUtils.toLogin(activity!!)
                         return
                     }
@@ -69,6 +73,7 @@ class MainFragmentRight : BaseMvpFragment<MainPresenter>() {
                         1 -> IntentUtils.toCheck(activity!!, 2)
                         2 -> IntentUtils.toEva(activity!!)
                         3 -> IntentUtils.toSub(activity!!)
+                        4 -> IntentUtils.toChat(activity!!)
                         5 -> IntentUtils.toWallet(activity!!)
                         6 -> IntentUtils.toNews(activity!!)
                         7 -> {//分享
@@ -80,10 +85,25 @@ class MainFragmentRight : BaseMvpFragment<MainPresenter>() {
                         }
                     }
                 }
-
             }
         })
     }
+
+    override fun onResume() {
+        super.onResume()
+        view!!.isFocusableInTouchMode = true
+        view!!.requestFocus()
+        view!!.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(view: View, i: Int, keyEvent: KeyEvent): Boolean {
+                if (keyEvent.action === KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_BACK) {
+                    EventBus.getDefault().post(MessageEvent(AppConfig.FRAGMENT_RIGHT_OPEN_CLOSE))
+                    return true
+                }
+                return false
+            }
+        })
+    }
+
 
     fun share() {
         var textObj = WXTextObject()
@@ -107,6 +127,8 @@ class MainFragmentRight : BaseMvpFragment<MainPresenter>() {
 
 
     private fun initUI(contentView: View?) {
+        val layout = contentView!!.findViewById<LinearLayout>(R.id.root_layout)
+        layout.setPadding(0, 0, 0, AndroidWorkaround.getNavigationBarHeight(activity!!))
         mRvItem = contentView!!.findViewById(R.id.rv_item)
         mIvCancel = contentView!!.findViewById(R.id.iv_cancel)
         var linearLayoutManager = LinearLayoutManager(activity)

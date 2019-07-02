@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_F2F2F2">
+
+    <include
+        layout="@layout/layout_main_title"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:text="投诉与建议"
+        android:background="@android:color/white"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/dp_14"
+        android:gravity="center"/>
+    
+    
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/dp_140"
+        android:layout_margin="@dimen/dp_18"
+        android:background="@android:color/white">
+
+        <EditText
+            android:id="@+id/edt_advice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:minHeight="@dimen/dp_140"
+            android:hint="描述你的问题"
+            android:background="@null"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/color_000000"
+            android:gravity="top"
+            android:paddingTop="@dimen/dp_16"
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingRight="@dimen/dp_20"
+            android:paddingBottom="@dimen/dp_16"
+            android:textColorHint="@color/color_F2F2F2"/>
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/btn_up"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_35"
+        android:background="@drawable/bg_click_state_login"
+        android:text="提交"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/dp_14"
+        android:layout_marginLeft="@dimen/dp_35"
+        android:layout_marginRight="@dimen/dp_35"
+        />
+
+
+    
+
+
+</LinearLayout>

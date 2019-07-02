@@ -33,8 +33,8 @@ class TextSeekBar : RelativeLayout {
         val contentView = View.inflate(context, R.layout.layout_text_seekbar, this)
         mTvFlag = contentView.findViewById(R.id.seek_text)
         mSbar = contentView.findViewById(R.id.seek_bar)
-        val leftIndex = mSbar.left.toFloat()
-        Log.e("tag_text_x", "" + mTvFlag.x + "    " + leftIndex)
+//        val leftIndex = mSbar.left.toFloat()
+//        Log.e("tag_text_x", "" + mTvFlag.x + "    " + leftIndex)
         mSbar.viewTreeObserver.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 mSbar.viewTreeObserver.removeGlobalOnLayoutListener(this)
@@ -58,10 +58,12 @@ class TextSeekBar : RelativeLayout {
         })
         mSbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+//                onSeekListener!!.progress(progress)
                 if (!scroll) {
                     mTvFlag.setPadding(0, 0, 0, 0)
                     scroll = true
                 }
+                onSeekListener!!.seekProgress(progress)
                 //进度是从-50~50的,但是seekbar.getmin()有限制,所以这里用0~100 -50;
                 //                int text = progress - 50;
                 //设置文本显示
@@ -84,23 +86,41 @@ class TextSeekBar : RelativeLayout {
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
-
+                 onSeekListener!!.start()
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
                 val progress = seekBar.progress
                 when {
-                    progress <= 65 -> onSeekListener!!.onSeek("其他  无法判断成色","七成新以下")
-                    progress <= 75 -> onSeekListener!!.onSeek("7新 有明显划痕、污渍磨损","7成新")
-                    progress <= 85 -> onSeekListener!!.onSeek("85成新 日常使用痕迹 有少量划痕、污渍磨损","85成新")
-                    progress <= 90 -> onSeekListener!!.onSeek("9成新 日常使用痕迹 商品状态良好","9成新")
-                    progress <= 95 -> onSeekListener!!.onSeek("95新 轻微使用，商品状态几乎接近新品","95新 ")
-                    progress <= 99 -> onSeekListener!!.onSeek("99新 基本上未使用过","99新")
-                    progress <= 100 -> onSeekListener!!.onSeek("全新 从未使用过","全新")
+                    progress <= 65 -> {
+                        onSeekListener!!.onSeek("其他  无法判断成色", "七成新以下")
+                        mSbar.progress = 65
+                    }
+                    progress <= 75 -> {
+                        onSeekListener!!.onSeek("7新 有明显划痕、污渍磨损", "7成新")
+                        mSbar.progress = 75
+                    }
+                    progress <= 85 -> {
+                        onSeekListener!!.onSeek("85成新 日常使用痕迹 有少量划痕、污渍磨损", "85成新")
+                        mSbar.progress = 85
+                    }
+                    progress <= 90 -> {
+                        onSeekListener!!.onSeek("9成新 日常使用痕迹 商品状态良好", "9成新")
+                        mSbar.progress = 90
+                    }
+                    progress <= 95 -> {
+                        onSeekListener!!.onSeek("95新 轻微使用，商品状态几乎接近新品", "95新 ")
+                        mSbar.progress = 95
+                    }
+                    progress <= 99 -> {
+                        onSeekListener!!.onSeek("99新 基本上未使用过", "99新")
+                        mSbar.progress = 99
+                    }
+                    progress <= 100 -> onSeekListener!!.onSeek("全新 从未使用过", "全新")
                 }
             }
         })
-        mSbar.progress = 100
+//        mSbar.progress = 100
     }
 
     fun getTextCount(): String {
@@ -113,14 +133,16 @@ class TextSeekBar : RelativeLayout {
         return (dpValue * scale + 0.5f).toInt()
     }
 
-    fun setOnSeekListener(listener:OnSeekListener){
+    fun setOnSeekListener(listener: OnSeekListener) {
         onSeekListener = listener
     }
 
-    private var onSeekListener:OnSeekListener?=null
+    private var onSeekListener: OnSeekListener? = null
 
     interface OnSeekListener {
-       fun onSeek(value:String,old:String)
+        fun start()
+        fun seekProgress(pro:Int)
+        fun onSeek(value: String, old: String)
     }
 
 }

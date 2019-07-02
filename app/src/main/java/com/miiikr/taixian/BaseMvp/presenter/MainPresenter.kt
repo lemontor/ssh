@@ -1,7 +1,10 @@
 package com.miiikr.taixian.BaseMvp.presenter
 
+import android.content.Context
 import com.miiikr.taixian.BaseMvp.IView.AccountView
 import com.miiikr.taixian.BaseMvp.IView.MainView
+import com.miiikr.taixian.BaseMvp.IView.PersonView
+import com.miiikr.taixian.R
 import com.miiikr.taixian.entity.CommonEntity
 import com.miiikr.taixian.entity.MainEntity
 import com.miiikr.taixian.net.RetrofitApiInterface
@@ -19,29 +22,54 @@ import retrofit2.Response
 
 class MainPresenter : BasePresenter<MainView>() {
 
+    private var mainView: MainView? = null
+
+    fun attachView(view: MainView) {
+        this.mainView = view
+    }
+
+    fun detachView() {
+        this.mainView = null
+    }
+
+    fun isViewAttached(): Boolean {
+        return mainView != null
+    }
+
+
     fun getMainData(requestId: Int) {
-        mView.showLoading()
+        if(isViewAttached()){
+            mainView!!.showLoading()
+        }
         Observable.create(ObservableOnSubscribe<MainEntity> {
             val api = RetrofitManager2.initRetrofit()!!.create(RetrofitApiInterface::class.java)
             api.getMainData().enqueue(object : Callback<MainEntity> {
                 override fun onFailure(call: Call<MainEntity>, t: Throwable) {
-                    mView.onFailue(requestId, t.message!!)
-                    mView.hideLoading()
+                    if(isViewAttached()) {
+                        mainView!!.onFailue(requestId, t.message!!)
+                        mainView!!.hideLoading()
+                    }
                 }
 
                 override fun onResponse(call: Call<MainEntity>, response: Response<MainEntity>) {
                     if (response?.body() != null) {
                         it.onNext(response.body()!!)
                     } else {
-                        mView.hideLoading()
+                        if(isViewAttached()){
+                            mainView!!.hideLoading()
+
+                        }
                     }
                 }
             })
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    mView.onSuccess(requestId, it)
-                    mView.hideLoading()
+                    if(isViewAttached()){
+                        mainView!!.onSuccess(requestId, it)
+                        mainView!!.hideLoading()
+                    }
+
                 }
     }
 
@@ -50,23 +78,39 @@ class MainPresenter : BasePresenter<MainView>() {
             val api = RetrofitManager.initRetrofit()!!.create(RetrofitApiInterface::class.java)
             api.setSex(userId, sex).enqueue(object : Callback<CommonEntity> {
                 override fun onFailure(call: Call<CommonEntity>, t: Throwable) {
-                    mView.onFailue(requestId, t.message!!)
+                    if(isViewAttached()){
+                        mView.onFailue(requestId, t.message!!)
+                    }
                 }
 
                 override fun onResponse(call: Call<CommonEntity>, response: Response<CommonEntity>) {
                     if (response?.body() != null) {
                         it.onNext(response.body()!!)
                     } else {
-                        mView.hideLoading()
+                        if(isViewAttached()){
+                            mView.hideLoading()
+                        }
                     }
                 }
             })
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    mView.onSuccess(requestId, it)
+                    if(isViewAttached()){
+                        mView.onSuccess(requestId, it)
+                    }
                 }
     }
 
+    fun getRes(context: Context):IntArray{
+        val imgArray = context.resources.obtainTypedArray(R.array.animator)
+        val len = imgArray.length()
+        val resId = IntArray(len)
+        for(index in 0 until len){
+            resId[index] = imgArray.getResourceId(index, -1)
+        }
+        imgArray.recycle()
+        return resId
+    }
 
 }

@@ -13,9 +13,7 @@ import com.miiikr.taixian.BaseMvp.IView.AccountView
 import com.miiikr.taixian.BaseMvp.IView.MainView
 import com.miiikr.taixian.R
 import com.miiikr.taixian.app.SSHApplication
-import com.miiikr.taixian.entity.CommonEntity
-import com.miiikr.taixian.entity.LoginEntity
-import com.miiikr.taixian.entity.UploadEntity
+import com.miiikr.taixian.entity.*
 import com.miiikr.taixian.net.RetrofitApiInterface
 import com.miiikr.taixian.net.RetrofitManager
 import com.miiikr.taixian.net.RetrofitManager2
@@ -72,10 +70,10 @@ class AccountPresenter : BasePresenter<AccountView>() {
         if (isViewAttached()) {
             mainView!!.showLoading()
         }
-        Observable.create(ObservableOnSubscribe<CommonEntity> {
-            val api = RetrofitManager.initRetrofit()!!.create(RetrofitApiInterface::class.java)
-            api.getCode(phone).enqueue(object : Callback<CommonEntity> {
-                override fun onFailure(call: Call<CommonEntity>, t: Throwable) {
+        Observable.create(ObservableOnSubscribe<CommonBody> {
+            val api = RetrofitManager2.initRetrofit()!!.create(RetrofitApiInterface::class.java)
+            api.getCode(phone).enqueue(object : Callback<CommonBody> {
+                override fun onFailure(call: Call<CommonBody>, t: Throwable) {
                     if (isViewAttached()) {
                         mainView!!.onFailue(requestId, t.message!!)
                         mainView!!.hideLoading()
@@ -83,11 +81,13 @@ class AccountPresenter : BasePresenter<AccountView>() {
 
                 }
 
-                override fun onResponse(call: Call<CommonEntity>, response: Response<CommonEntity>) {
+                override fun onResponse(call: Call<CommonBody>, response: Response<CommonBody>) {
                     if (response?.body() != null) {
                         it.onNext(response.body()!!)
                     } else {
-
+                        if (isViewAttached()){
+                            mainView!!.hideLoading()
+                        }
                     }
                 }
             })
@@ -135,7 +135,7 @@ class AccountPresenter : BasePresenter<AccountView>() {
             mainView!!.showLoading()
         }
         Observable.create(ObservableOnSubscribe<LoginEntity> { e ->
-            val api = RetrofitManager.initRetrofit()!!.create(RetrofitApiInterface::class.java)
+            val api = RetrofitManager2.initRetrofit()!!.create(RetrofitApiInterface::class.java)
             api.doLogin(phone, code).enqueue(object : Callback<LoginEntity> {
                 override fun onFailure(call: Call<LoginEntity>, t: Throwable) {
                     if (isViewAttached()) {
@@ -149,7 +149,9 @@ class AccountPresenter : BasePresenter<AccountView>() {
                     if (response?.body() != null) {
                         e.onNext(response.body()!!)
                     } else {
-
+                        if (isViewAttached()){
+                            mainView!!.hideLoading()
+                        }
                     }
                 }
             })
@@ -209,7 +211,7 @@ class AccountPresenter : BasePresenter<AccountView>() {
                         if (totalSeconds == 0) {
                             tvTime.text = reStart
                             tvTime.isEnabled = true
-                            tvTime.setTextColor(tvTime.context.resources.getColor(R.color.color_EB1616))
+//                            tvTime.setTextColor(tvTime.context.resources.getColor(R.color.color_EB1616))
                             totalSeconds = 60
                         } else {
                             tvTime.text = " ${totalSeconds}s $tag"
@@ -238,6 +240,14 @@ class AccountPresenter : BasePresenter<AccountView>() {
 
     }
 
+    fun clearValues(context: Context){
+        SharedPreferenceUtils(context).putValue(SharedPreferenceUtils.PREFERENCE_U_I, "")
+                .putValue(SharedPreferenceUtils.PREFERENCE_U_P, "")
+                .putValue(SharedPreferenceUtils.PREFERENCE_U_H, "")
+                .putValue(SharedPreferenceUtils.PREFERENCE_U_N, "")
+                .putValueForInt(SharedPreferenceUtils.PREFERENCE_U_S,0)
+    }
+
 
     fun getUserInfo(requestId: Int, context: Context) {
         Observable.create(ObservableOnSubscribe<LoginEntity.UserData> {
@@ -263,12 +273,16 @@ class AccountPresenter : BasePresenter<AccountView>() {
                 .setCompressListener(object : OnCompressListener {
                     override fun onSuccess(file: File?) {
                         if (file != null && file.exists()) {
-                            mainView!!.onSuccess(requestId, file)
+                            if (isViewAttached()){
+                                mainView!!.onSuccess(requestId, file)
+                            }
                         }
                     }
 
                     override fun onError(e: Throwable?) {//压缩失败时 使用原图
-                        mainView!!.onSuccess(requestId, normalFile)
+                        if (isViewAttached()) {
+                            mainView!!.onSuccess(requestId, normalFile)
+                        }
                     }
 
                     override fun onStart() {
@@ -347,6 +361,10 @@ class AccountPresenter : BasePresenter<AccountView>() {
                 override fun onResponse(call: Call<CommonEntity>, response: Response<CommonEntity>) {
                     if (response?.body() != null) {
                         it.onNext(response.body()!!)
+                    }else{
+                        if(isViewAttached()){
+                            mainView!!.hideLoading()
+                        }
                     }
                 }
             })
@@ -387,6 +405,10 @@ class AccountPresenter : BasePresenter<AccountView>() {
                 override fun onResponse(call: Call<CommonEntity>, response: Response<CommonEntity>) {
                     if (response?.body() != null) {
                         it.onNext(response.body()!!)
+                    }else{
+                        if(isViewAttached()){
+                            mainView!!.hideLoading()
+                        }
                     }
                 }
             })
@@ -401,20 +423,23 @@ class AccountPresenter : BasePresenter<AccountView>() {
 
 
     fun uploadCode(requestId: Int,code: String){
-
-        Observable.create(ObservableOnSubscribe <CommonEntity>{
+        Observable.create(ObservableOnSubscribe <WxLoginEntity>{
             val api = RetrofitManager2.initRetrofit()!!.create(RetrofitApiInterface::class.java)
-            api.pushCode(code).enqueue(object :Callback<CommonEntity>{
-                override fun onFailure(call: Call<CommonEntity>, t: Throwable) {
+            api.pushCode(code).enqueue(object :Callback<WxLoginEntity>{
+                override fun onFailure(call: Call<WxLoginEntity>, t: Throwable) {
                     if(isViewAttached()){
                         mainView!!.onFailue(requestId,t.message!!)
                         mainView!!.hideLoading()
                     }
                 }
 
-                override fun onResponse(call: Call<CommonEntity>, response: Response<CommonEntity>) {
+                override fun onResponse(call: Call<WxLoginEntity>, response: Response<WxLoginEntity>) {
                     if(response?.body() != null){
                         it.onNext(response.body()!!)
+                    }else{
+                        if(isViewAttached()){
+                            mainView!!.hideLoading()
+                        }
                     }
                 }
             })
@@ -426,7 +451,69 @@ class AccountPresenter : BasePresenter<AccountView>() {
                         mainView!!.hideLoading()
                     }
                 }
+    }
 
+    fun wxLoginNoPhone(requestId: Int,targetId:String,mode:String){
+        Observable.create(ObservableOnSubscribe <LoginEntity>{
+            val api = RetrofitManager2.initRetrofit()!!.create(RetrofitApiInterface::class.java)
+            api.wxLoginNoPhone(targetId,mode).enqueue(object :Callback<LoginEntity>{
+                override fun onFailure(call: Call<LoginEntity>, t: Throwable) {
+                    if(isViewAttached()){
+                        mainView!!.onFailue(requestId,t.message!!)
+                        mainView!!.hideLoading()
+                    }
+                }
+
+                override fun onResponse(call: Call<LoginEntity>, response: Response<LoginEntity>) {
+                    if(response?.body() != null){
+                        it.onNext(response.body()!!)
+                    }else{
+                        if(isViewAttached()){
+                            mainView!!.hideLoading()
+                        }
+                    }
+                }
+            })
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    if(isViewAttached()){
+                        mainView!!.onSuccess(requestId,it)
+                        mainView!!.hideLoading()
+                    }
+                }
+    }
+
+
+    fun wxLoginHasPhone(requestId: Int,targetId:String,mode:String,phone:String,verifyCode:String){
+        Observable.create(ObservableOnSubscribe <LoginEntity>{
+            val api = RetrofitManager2.initRetrofit()!!.create(RetrofitApiInterface::class.java)
+            api.wxLoginHasPhone(targetId,mode,phone,verifyCode).enqueue(object :Callback<LoginEntity>{
+                override fun onFailure(call: Call<LoginEntity>, t: Throwable) {
+                    if(isViewAttached()){
+                        mainView!!.onFailue(requestId,t.message!!)
+                        mainView!!.hideLoading()
+                    }
+                }
+
+                override fun onResponse(call: Call<LoginEntity>, response: Response<LoginEntity>) {
+                    if(response?.body() != null){
+                        it.onNext(response.body()!!)
+                    }else{
+                        if(isViewAttached()){
+                            mainView!!.hideLoading()
+                        }
+                    }
+                }
+            })
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    if(isViewAttached()){
+                        mainView!!.onSuccess(requestId,it)
+                        mainView!!.hideLoading()
+                    }
+                }
     }
 
 

@@ -1,6 +1,8 @@
 package com.miiikr.taixian.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +21,10 @@ import com.ssh.net.ssh.utils.AppConfig
 import com.ssh.net.ssh.utils.GlideHelper
 import com.ssh.net.ssh.utils.IntentUtils
 import org.greenrobot.eventbus.EventBus
+import com.hyphenate.EMCallBack
+import com.hyphenate.chat.EMClient
+import com.miiikr.taixian.ui.activity.MainActivity
+
 
 class SettingFragment : BaseMvpFragment<AccountPresenter>(), View.OnClickListener, AccountView {
 
@@ -97,12 +103,37 @@ class SettingFragment : BaseMvpFragment<AccountPresenter>(), View.OnClickListene
         when {
             v!!.id == R.id.layout_name -> EventBus.getDefault().post(MessageEvent(AppConfig.FRAGMENT_RIGHT_OPEN_NICK_NAME))
             v!!.id == R.id.layout_phone -> EventBus.getDefault().post(MessageEvent(AppConfig.FRAGMENT_RIGHT_OPEN_NICK_PHONE))
-            v!!.id == R.id.iv_cancel -> activity!!.supportFragmentManager.popBackStack()
-            v!!.id == R.id.layout_head -> IntentUtils.toPic(activity!!,sex, headUrl)
-            else -> {
+            v!!.id == R.id.iv_cancel -> {
+                activity!!.supportFragmentManager.popBackStack()
+            }
+            v!!.id == R.id.layout_head -> IntentUtils.toPic(activity!!, sex, headUrl)
+            v!!.id == R.id.tv_out -> {
+                mPresenter.clearValues(activity!!)
+                out()
+
             }
         }
     }
+
+    fun out() {
+        EMClient.getInstance().logout(true, object : EMCallBack {
+
+            override fun onSuccess() {
+                activity!!.supportFragmentManager.popBackStack()
+            }
+
+            override fun onProgress(progress: Int, status: String) {
+
+            }
+
+            override fun onError(code: Int, message: String) {
+                Log.e("tag_onError","$message")
+                activity!!.supportFragmentManager.popBackStack()
+
+            }
+        })
+    }
+
 
     lateinit var mLayoutName: LinearLayout
     lateinit var mLayoutPhone: LinearLayout
@@ -112,6 +143,7 @@ class SettingFragment : BaseMvpFragment<AccountPresenter>(), View.OnClickListene
     lateinit var mTvName: TextView
     lateinit var mTvPhone: TextView
     lateinit var mTvId: TextView
+    lateinit var mTvOut: TextView
     var sex = 0
     var headUrl = ""
 
@@ -139,10 +171,28 @@ class SettingFragment : BaseMvpFragment<AccountPresenter>(), View.OnClickListene
         mTvId = contentView.findViewById(R.id.tv_id)
         mIvCancel = contentView.findViewById(R.id.iv_cancel)
         mLayoutHead = contentView.findViewById(R.id.layout_head)
+        mTvOut = contentView.findViewById(R.id.tv_out)
         mLayoutName.setOnClickListener(this)
         mLayoutPhone.setOnClickListener(this)
         mIvCancel.setOnClickListener(this)
         mLayoutHead.setOnClickListener(this)
+        mTvOut.setOnClickListener(this)
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        view!!.isFocusableInTouchMode = true
+        view!!.requestFocus()
+        view!!.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(view: View, i: Int, keyEvent: KeyEvent): Boolean {
+                if (keyEvent.action === KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_BACK) {
+                    activity!!.supportFragmentManager.popBackStack()
+                    return true
+                }
+                return false
+            }
+        })
     }
 
 

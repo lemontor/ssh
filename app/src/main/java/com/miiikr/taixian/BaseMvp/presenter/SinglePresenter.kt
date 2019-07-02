@@ -4,10 +4,13 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.view.View
 import com.miiikr.taixian.BaseMvp.IView.MainView
+import com.miiikr.taixian.entity.CommonEntity
 import com.miiikr.taixian.entity.LoginEntity
+import com.miiikr.taixian.entity.MoneyEntity
 import com.miiikr.taixian.entity.ProductEntity
 import com.miiikr.taixian.net.RetrofitApiInterface
 import com.miiikr.taixian.net.RetrofitManager
+import com.miiikr.taixian.net.RetrofitManager2
 import com.miiikr.taixian.utils.QRUtils
 import com.miiikr.taixian.utils.SharedPreferenceUtils
 import io.reactivex.Observable
@@ -54,7 +57,9 @@ class SinglePresenter : BasePresenter<MainView>() {
                     if (response != null && response.body() != null) {
                         it.onNext(response.body()!!)
                     } else {
-
+                        if(isViewAttached()){
+                            mainView!!.hideLoading()
+                        }
                     }
                 }
 
@@ -110,6 +115,78 @@ class SinglePresenter : BasePresenter<MainView>() {
                     }
                 }
     }
+
+    fun getMoneyData(requestId: Int,userId:String){
+        if(isViewAttached()){
+            mainView!!.showLoading()
+        }
+        Observable.create(ObservableOnSubscribe<MoneyEntity> {
+                val api = RetrofitManager.initRetrofit()!!.create(RetrofitApiInterface::class.java)
+            api.getMoneyData(userId).enqueue(object :Callback<MoneyEntity>{
+                override fun onFailure(call: Call<MoneyEntity>, t: Throwable) {
+                       if(isViewAttached()){
+                           mainView!!.onFailue(requestId,t.message!!)
+                           mainView!!.hideLoading()
+                       }
+                }
+
+                override fun onResponse(call: Call<MoneyEntity>, response: Response<MoneyEntity>) {
+                    if(response?.body()!=null){
+                        it.onNext(response.body()!!)
+                    }else{
+                        if(isViewAttached()){
+                            mainView!!.hideLoading()
+                        }
+                    }
+
+                }
+            })
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    if(isViewAttached()){
+                        mainView!!.onSuccess(requestId,it)
+                        mainView!!.hideLoading()
+                    }
+                }
+    }
+
+    fun advice(requestId: Int,userId:String,content:String){
+        if(isViewAttached()){
+            mainView!!.showLoading()
+        }
+        Observable.create(ObservableOnSubscribe<CommonEntity> {
+            val api = RetrofitManager2.initRetrofit()!!.create(RetrofitApiInterface::class.java)
+            api.addAdvice(userId,content).enqueue(object :Callback<CommonEntity>{
+                override fun onFailure(call: Call<CommonEntity>, t: Throwable) {
+                    if(isViewAttached()){
+                        mainView!!.onFailue(requestId,t.message!!)
+                        mainView!!.hideLoading()
+                    }
+                }
+
+                override fun onResponse(call: Call<CommonEntity>, response: Response<CommonEntity>) {
+                    if(response?.body()!=null){
+                        it.onNext(response.body()!!)
+                    }else{
+                        if(isViewAttached()){
+                            mainView!!.hideLoading()
+                        }
+                    }
+
+                }
+            })
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    if(isViewAttached()){
+                        mainView!!.onSuccess(requestId,it)
+                        mainView!!.hideLoading()
+                    }
+                }
+    }
+
+
 
 
 }

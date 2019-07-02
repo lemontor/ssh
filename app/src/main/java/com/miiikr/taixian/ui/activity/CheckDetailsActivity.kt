@@ -2,24 +2,19 @@ package com.miiikr.taixian.ui.activity
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AlertDialog
 import android.util.SparseArray
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import com.miiikr.taixian.BaseMvp.IView.DetailsView
 import com.miiikr.taixian.BaseMvp.View.BaseMvpActivity
 import com.miiikr.taixian.BaseMvp.presenter.DetailsPresenter
 import com.miiikr.taixian.R
 import com.miiikr.taixian.adapter.GoodsDetailsAdapter
+import com.miiikr.taixian.app.SSHApplication
 import com.miiikr.taixian.entity.CheckDetailsEntity
 import com.miiikr.taixian.entity.CommonEntity
 import com.miiikr.taixian.ui.fragment.GoodsDetailsFragment
-import com.miiikr.taixian.utils.RequestInterface
-import com.miiikr.taixian.utils.SharedPreferenceUtils
-import com.miiikr.taixian.utils.ToastUtils
+import com.miiikr.taixian.utils.*
 import com.miiikr.taixian.widget.CustomViewPager
 import com.miiikr.taixian.widget.SSHProgressHUD
 import com.miiikr.taixian.widget.SureDialog
@@ -27,6 +22,11 @@ import com.miiikr.taixian.widget.card.CardPageTransformer
 import com.miiikr.taixian.widget.card.PageTransformerConfig
 import com.ssh.net.ssh.utils.GlideHelper
 import com.ssh.net.ssh.utils.IntentUtils
+import android.view.KeyCharacterMap
+import android.view.KeyEvent
+import android.view.ViewConfiguration
+
+
 
 class CheckDetailsActivity : BaseMvpActivity<DetailsPresenter>(), DetailsView {
 
@@ -68,6 +68,7 @@ class CheckDetailsActivity : BaseMvpActivity<DetailsPresenter>(), DetailsView {
             if (result != null) {
                 if (result.state == 1) {
                     ToastUtils.toastShow(this, "提交成功")
+                    SSHApplication.activitys[ActivityNameTag.CHECK_TAG]?.finish()
                     IntentUtils.toEva(this)
                     finish()
                 } else {
@@ -99,7 +100,6 @@ class CheckDetailsActivity : BaseMvpActivity<DetailsPresenter>(), DetailsView {
     lateinit var mIvHead: ImageView
     lateinit var mTvFlag: TextView
 
-
     var productId = ""
     var categoryId = ""
     var state = 0 //进行状态
@@ -108,6 +108,8 @@ class CheckDetailsActivity : BaseMvpActivity<DetailsPresenter>(), DetailsView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_goods_details)
+        val layout = findViewById<RelativeLayout>(R.id.root_layout)
+        layout.setPadding(0, 0, 0, AndroidWorkaround.getNavigationBarHeight(this))
         mPresenter = DetailsPresenter()
         mPresenter.attachView(this)
         initUI()
@@ -121,12 +123,25 @@ class CheckDetailsActivity : BaseMvpActivity<DetailsPresenter>(), DetailsView {
         }
         mTvSell.setOnClickListener {
             showDialog()
-            //            IntentUtils.toAppoint(CheckDetailsActivity@ this)
         }
 //        mPresenter.getCheckDetailsInfo(RequestInterface.REQUEST_CHECK_DETAILS_ID, SharedPreferenceUtils(this).getValue(SharedPreferenceUtils.PREFERENCE_U_I)!!, productId, categoryId)
         mPresenter.getCheckDetailsInfo(RequestInterface.REQUEST_CHECK_DETAILS_ID, "10086", productId, categoryId)
 
     }
+
+//    fun getNavigationBarHeight(): Int {
+//        val hasMenuKey = ViewConfiguration.get(this).hasPermanentMenuKey()
+//        val hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK)
+//        if (!hasMenuKey && !hasBackKey) {
+//            val resources = resources
+//            val resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android")
+//            //获取NavigationBar的高度
+//            return resources.getDimensionPixelSize(resourceId)
+//        } else {
+//            return 0
+//        }
+//    }
+
 
     fun setWatchInfo(data: CheckDetailsEntity.CheckDataEntity) {
         mTvOld.append(data.degree)
@@ -270,18 +285,9 @@ class CheckDetailsActivity : BaseMvpActivity<DetailsPresenter>(), DetailsView {
 
 
     fun showDialog() {
-//        val builder = AlertDialog.Builder(this)
-//        val dialogView = View.inflate(this, R.layout.dialog_commit, null)
-//        dialogView.findViewById<Button>(R.id.btn_sure).setOnClickListener {
-////            mPresenter.confirmSellDetailsInfo(RequestInterface.REQUEST_Sell_CONFIRM_ID,SharedPreferenceUtils(this).getValue(SharedPreferenceUtils.PREFERENCE_U_I)!!, productId)
-//
-//        }
-//        dialogView.findViewById<TextView>(R.id.tv_back).setOnClickListener { }
-//        builder.setView(dialogView)
-//        val dialog = builder.create()
-//        dialog.show()
         val contentView = View.inflate(this, R.layout.dialog_commit, null)
         contentView.findViewById<Button>(R.id.btn_sure).setOnClickListener { mPresenter.confirmSellDetailsInfo(RequestInterface.REQUEST_Sell_CONFIRM_ID, "10086", productId) }
+        contentView.findViewById<TextView>(R.id.tv_back).setOnClickListener {  }
         val sureDialog = SureDialog(this, R.layout.dialog_commit)
         sureDialog.show()
 

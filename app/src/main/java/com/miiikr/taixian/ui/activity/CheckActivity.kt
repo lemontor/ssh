@@ -40,7 +40,6 @@ class CheckActivity : BaseMvpActivity<PersonPresenter>(), OnCancelAndClickItemLi
         when (from) {
             1 -> IntentUtils.toCheckDetails(this, mCheckData[position].productId!!, mCheckData[position].categoryId!!)//我的鉴定
             2 -> IntentUtils.toSellDetails(this, mSellData[position].prodctId!!, mSellData[position].categoryId!!)
-
         }
     }
 

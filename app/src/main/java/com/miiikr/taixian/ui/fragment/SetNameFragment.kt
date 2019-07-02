@@ -5,6 +5,7 @@ import android.text.Editable
 import android.text.InputType
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,10 @@ import com.miiikr.taixian.utils.RequestInterface
 import com.miiikr.taixian.utils.SharedPreferenceUtils
 import com.miiikr.taixian.utils.ToastUtils
 import com.ssh.net.ssh.utils.SpannableUtils
+import android.widget.Toast
+import android.view.KeyEvent.KEYCODE_BACK
+
+
 
 class SetNameFragment : BaseMvpFragment<AccountPresenter>(), AccountView {
 
@@ -143,6 +148,21 @@ class SetNameFragment : BaseMvpFragment<AccountPresenter>(), AccountView {
         mTvCode = contentView!!.findViewById(R.id.tv_get_code)
         mIvCancel = contentView!!.findViewById(R.id.iv_cancel)
         SpannableUtils.setTextState(activity!!, mTvNotify, mTvNotify.text.toString(), 8, 15, R.color.color_EB1616)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        view!!.isFocusableInTouchMode = true
+        view!!.requestFocus()
+        view!!.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(view: View, i: Int, keyEvent: KeyEvent): Boolean {
+                if (keyEvent.action === KeyEvent.ACTION_DOWN && i == KEYCODE_BACK) {
+                    activity!!.supportFragmentManager.popBackStack()
+                    return true
+                }
+                return false
+            }
+        })
     }
 
 

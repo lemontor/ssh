@@ -55,6 +55,33 @@ class UpdatePresenter : BasePresenter<MainView>() {
                 }
     }
 
+    fun getPicDataForJ(requestId: Int) {
+        Observable.create(ObservableOnSubscribe<PicEntity> {
+            var datas = ArrayList<PicEntity.PicData>()
+            val pic1 = PicEntity.PicData("", "整体照", R.mipmap.icon_top_left)
+            val pic2 = PicEntity.PicData("", "正面图", R.mipmap.icon_center_top)
+            val pic3 = PicEntity.PicData("", "底部图", R.mipmap.icon_top_right)
+            val pic4 = PicEntity.PicData("", " LOGO图", R.mipmap.icon_bottom_left)
+            val pic5 = PicEntity.PicData("", " 内圈刻印", R.mipmap.icon_center_bottom)
+            val pic6 = PicEntity.PicData("", "补充#1", R.mipmap.icon_bottom_right)
+            datas.add(pic1)
+            datas.add(pic2)
+            datas.add(pic3)
+            datas.add(pic4)
+            datas.add(pic5)
+            datas.add(pic6)
+            val data = PicEntity(0, datas)
+            it.onNext(data)
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    if (isViewAttached()) {
+                        mainView!!.onSuccess(requestId, it)
+                    }
+                }
+    }
+
+
     fun getPicDataForBag(requestId: Int) {
         Observable.create(ObservableOnSubscribe<PicEntity> {
             var datas = ArrayList<PicEntity.PicData>()
@@ -164,6 +191,9 @@ class UpdatePresenter : BasePresenter<MainView>() {
                     if (response?.body() != null) {
                         it.onNext(response.body()!!)
                     } else {
+                        if (isViewAttached()) {
+                            mainView!!.hideLoading()
+                        }
                     }
                 }
             })
@@ -177,7 +207,7 @@ class UpdatePresenter : BasePresenter<MainView>() {
     }
 
     fun uploadInfoForSell(requestId: Int, userId: String, brandId: String, categoryId: String, userExplain: String,
-                   oldAndNewState: String, productState: String, watchMaterial: String, watchStyle: String, annexExplain: String, pics: HashMap<Int, String>) {
+                          oldAndNewState: String, productState: String, watchMaterial: String, watchStyle: String, annexExplain: String, pics: HashMap<Int, String>) {
         Observable.create(ObservableOnSubscribe<CommonEntity> {
             val api = RetrofitManager.initRetrofit()!!.create(RetrofitApiInterface::class.java)
 //                if(isSell == 1){
@@ -187,6 +217,7 @@ class UpdatePresenter : BasePresenter<MainView>() {
                 override fun onFailure(call: Call<CommonEntity>, t: Throwable) {
                     if (isViewAttached()) {
                         mainView!!.onFailue(requestId, t.message!!)
+                        mainView!!.hideLoading()
                     }
                 }
 
@@ -194,31 +225,161 @@ class UpdatePresenter : BasePresenter<MainView>() {
                     if (response?.body() != null) {
                         it.onNext(response.body()!!)
                     } else {
-                        mainView!!.onFailue(requestId,"")
-                        mainView!!.hideLoading()
+                        if (isViewAttached()) {
+                            mainView!!.onFailue(requestId, "")
+                            mainView!!.hideLoading()
+                        }
                     }
                 }
             })
-//                }else{
-//                    api.updateCheckWatchInfo(userId,brandId,categoryId,userExplain,oldAndNewState,productState,watchStyle,annexExplain,watchMaterial, pics[0]!!,pics[1]!!,pics[2]!!,pics[3]!!,pics[4]!!,pics[5]!!)
-//                }
-//            a
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    if(isViewAttached()){
-                        mainView!!.onSuccess(requestId,it)
+                    if (isViewAttached()) {
+                        mainView!!.onSuccess(requestId, it)
                         mainView!!.hideLoading()
                     }
                 }
     }
 
     fun uploadInfoForCheck(requestId: Int, userId: String, brandId: String, categoryId: String, userExplain: String,
-                   oldAndNewState: String, productState: String, watchMaterial: String, watchStyle: String, annexExplain: String, pics: HashMap<Int, String>) {
+                           oldAndNewState: String, productState: String, watchMaterial: String, watchStyle: String, annexExplain: String, pics: HashMap<Int, String>) {
         Observable.create(ObservableOnSubscribe<CommonEntity> {
             val api = RetrofitManager.initRetrofit()!!.create(RetrofitApiInterface::class.java)
             api.updateCheckWatchInfo(userId, brandId, categoryId, userExplain, oldAndNewState,
                     productState, watchStyle, annexExplain, watchMaterial,
+                    pics[0]!!, pics[1]!!, pics[2]!!, pics[3]!!, pics[4]!!, pics[5]!!).enqueue(object : Callback<CommonEntity> {
+                override fun onFailure(call: Call<CommonEntity>, t: Throwable) {
+                    if (isViewAttached()) {
+                        mainView!!.onFailue(requestId, t.message!!)
+                        mainView!!.hideLoading()
+                    }
+                }
+
+                override fun onResponse(call: Call<CommonEntity>, response: Response<CommonEntity>) {
+                    if (response?.body() != null) {
+                        it.onNext(response.body()!!)
+                    } else {
+                        if (isViewAttached()) {
+                            mainView!!.onFailue(requestId, "")
+                            mainView!!.hideLoading()
+                        }
+                    }
+                }
+            })
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    if (isViewAttached()) {
+                        mainView!!.onSuccess(requestId, it)
+                        mainView!!.hideLoading()
+                    }
+                }
+    }
+
+    /*
+
+     @FormUrlEncoded
+    @POST("api/sshProductSell/saveSalesProductInfo")
+    fun updateSellWatchInfoWithBag(@Field("userId") userId: String, @Field("brandId") brandId: String, @Field("categoryId") categoryId: String,
+                            @Field("userExplain") userExplain: String, @Field("oldAndNewState") oldAndNewState: String,
+                             @Field("annexExplain") annexExplain: String, @Field("bagsSize") bagsSize  : String,
+                            @Field("leftUpperImg") leftUpperImg: String, @Field("middleUpperImg") middleUpperImg: String, @Field("rightUpperImg") rightUpperImg: String
+                            , @Field("leftLowerImg") leftLowerImg: String, @Field("middleLowerImg") middleLowerImg: String, @Field("rightLowerImg") rightLowerImg: String
+    ): Call<CommonEntity>
+
+
+
+
+     */
+
+    fun uploadInfoForSellWithBag(requestId: Int, userId: String, brandId: String, categoryId: String, userExplain: String,
+                                 oldAndNewState: String, annexExplain: String, bagsSize: String, pics: HashMap<Int, String>) {
+        Observable.create(ObservableOnSubscribe<CommonEntity> {
+            val api = RetrofitManager.initRetrofit()!!.create(RetrofitApiInterface::class.java)
+//                if(isSell == 1){
+            api.updateSellWatchInfoWithBag(userId, brandId, categoryId, userExplain, oldAndNewState,
+                    annexExplain, bagsSize,
+                    pics[0]!!, pics[1]!!, pics[2]!!, pics[3]!!, pics[4]!!, if (pics.size == 6) {
+                pics[5]
+            } else {
+                ""
+            }).enqueue(object : Callback<CommonEntity> {
+                override fun onFailure(call: Call<CommonEntity>, t: Throwable) {
+                    if (isViewAttached()) {
+                        mainView!!.onFailue(requestId, t.message!!)
+                        mainView!!.hideLoading()
+                    }
+                }
+
+                override fun onResponse(call: Call<CommonEntity>, response: Response<CommonEntity>) {
+                    if (response?.body() != null) {
+                        it.onNext(response.body()!!)
+                    } else {
+                        if (isViewAttached()) {
+                            mainView!!.onFailue(requestId, "")
+                            mainView!!.hideLoading()
+                        }
+                    }
+                }
+            })
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    if (isViewAttached()) {
+                        mainView!!.onSuccess(requestId, it)
+                        mainView!!.hideLoading()
+                    }
+                }
+    }
+
+    fun uploadInfoForCheckWithBag(requestId: Int, userId: String, brandId: String, categoryId: String, userExplain: String,
+                                  oldAndNewState: String, annexExplain: String, bagsSize: String, pics: HashMap<Int, String>) {
+        Observable.create(ObservableOnSubscribe<CommonEntity> {
+            val api = RetrofitManager.initRetrofit()!!.create(RetrofitApiInterface::class.java)
+//                if(isSell == 1){
+            api.updateCheckWatchInfoWithBag(userId, brandId, categoryId, userExplain, oldAndNewState,
+                    annexExplain, bagsSize,
+                    pics[0]!!, pics[1]!!, pics[2]!!, pics[3]!!, pics[4]!!, if (pics.size == 6) {
+                pics[5]
+            } else {
+                ""
+            }).enqueue(object : Callback<CommonEntity> {
+                override fun onFailure(call: Call<CommonEntity>, t: Throwable) {
+                    if (isViewAttached()) {
+                        mainView!!.onFailue(requestId, t.message!!)
+                        mainView!!.hideLoading()
+                    }
+                }
+
+                override fun onResponse(call: Call<CommonEntity>, response: Response<CommonEntity>) {
+                    if (response?.body() != null) {
+                        it.onNext(response.body()!!)
+                    } else {
+                        if (isViewAttached()) {
+                            mainView!!.onFailue(requestId, "")
+                            mainView!!.hideLoading()
+                        }
+                    }
+                }
+            })
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    if (isViewAttached()) {
+                        mainView!!.onSuccess(requestId, it)
+                        mainView!!.hideLoading()
+                    }
+                }
+    }
+
+
+    fun uploadInfoForSellWithJ(requestId: Int, userId: String, brandId: String, categoryId: String, userExplain: String,
+                               oldAndNewState: String, annexExplain: String, jewelryDiamond: String, jewelryMaterial: String, pics: HashMap<Int, String>) {
+        Observable.create(ObservableOnSubscribe<CommonEntity> {
+            val api = RetrofitManager.initRetrofit()!!.create(RetrofitApiInterface::class.java)
+            api.updateSellWatchInfoWithJewelry(userId, brandId, categoryId, userExplain, oldAndNewState,
+                    annexExplain, jewelryDiamond, jewelryMaterial,
                     pics[0]!!, pics[1]!!, pics[2]!!, pics[3]!!, pics[4]!!, pics[5]!!).enqueue(object : Callback<CommonEntity> {
                 override fun onFailure(call: Call<CommonEntity>, t: Throwable) {
                     if (isViewAttached()) {
@@ -230,16 +391,52 @@ class UpdatePresenter : BasePresenter<MainView>() {
                     if (response?.body() != null) {
                         it.onNext(response.body()!!)
                     } else {
-                        mainView!!.onFailue(requestId,"")
-                        mainView!!.hideLoading()
+                        if (isViewAttached()) {
+                            mainView!!.onFailue(requestId, "")
+                            mainView!!.hideLoading()
+                        }
                     }
                 }
             })
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    if(isViewAttached()){
-                        mainView!!.onSuccess(requestId,it)
+                    if (isViewAttached()) {
+                        mainView!!.onSuccess(requestId, it)
+                        mainView!!.hideLoading()
+                    }
+                }
+    }
+
+    fun uploadInfoForCheckWithJ(requestId: Int, userId: String, brandId: String, categoryId: String, userExplain: String,
+                                oldAndNewState: String, annexExplain: String, jewelryDiamond: String, jewelryMaterial: String, pics: HashMap<Int, String>) {
+        Observable.create(ObservableOnSubscribe<CommonEntity> {
+            val api = RetrofitManager.initRetrofit()!!.create(RetrofitApiInterface::class.java)
+            api.updateCheckWatchInfoWithJewelry(userId, brandId, categoryId, userExplain, oldAndNewState,
+                    annexExplain, jewelryDiamond, jewelryMaterial,
+                    pics[0]!!, pics[1]!!, pics[2]!!, pics[3]!!, pics[4]!!, pics[5]!!).enqueue(object : Callback<CommonEntity> {
+                override fun onFailure(call: Call<CommonEntity>, t: Throwable) {
+                    if (isViewAttached()) {
+                        mainView!!.onFailue(requestId, t.message!!)
+                    }
+                }
+
+                override fun onResponse(call: Call<CommonEntity>, response: Response<CommonEntity>) {
+                    if (response?.body() != null) {
+                        it.onNext(response.body()!!)
+                    } else {
+                        if (isViewAttached()) {
+                            mainView!!.onFailue(requestId, "")
+                            mainView!!.hideLoading()
+                        }
+                    }
+                }
+            })
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    if (isViewAttached()) {
+                        mainView!!.onSuccess(requestId, it)
                         mainView!!.hideLoading()
                     }
                 }
@@ -263,7 +460,7 @@ class UpdatePresenter : BasePresenter<MainView>() {
             ToastUtils.toastShow(context, "请选择手表材质")
             return false
         }
-        if (pics.size < 6) {
+        if (pics.size == 6) {
             if (!pics.containsKey(0)) {
                 ToastUtils.toastShow(context, "请选择整体照")
                 return false
@@ -290,6 +487,113 @@ class UpdatePresenter : BasePresenter<MainView>() {
                 return false
             }
 
+        }
+
+        return true
+    }
+
+    fun checkBagInfo(context: Context, brand: String, size: String, file: String, oldAndNewState: String, pics: HashMap<Int, File>): Boolean {
+
+        if (TextUtils.isEmpty(brand)) {
+            ToastUtils.toastShow(context, "请选择包包品牌")
+            return false
+        }
+
+        if (TextUtils.isEmpty(size)) {
+            ToastUtils.toastShow(context, "请选择包包大小")
+            return false
+        }
+
+        if (TextUtils.isEmpty(file)) {
+            ToastUtils.toastShow(context, "请选择附件")
+            return false
+        }
+
+        if (TextUtils.isEmpty(oldAndNewState)) {
+            ToastUtils.toastShow(context, "请选择产品新旧程度")
+            return false
+        }
+
+        if (pics.size == 6 || pics.size == 5) {
+            if (!pics.containsKey(0)) {
+                ToastUtils.toastShow(context, "请选择整体照")
+                return false
+            }
+
+            if (!pics.containsKey(1)) {
+                ToastUtils.toastShow(context, "请选择正面照")
+                return false
+            }
+            if (!pics.containsKey(2)) {
+                ToastUtils.toastShow(context, "请选择底部照")
+                return false
+            }
+            if (!pics.containsKey(3)) {
+                ToastUtils.toastShow(context, "请选择内圈刻印照")
+                return false
+            }
+            if (!pics.containsKey(4)) {
+                ToastUtils.toastShow(context, "请选择LOGO照")
+                return false
+            }
+//            if (!pics.containsKey(5)) {
+//                ToastUtils.toastShow(context, "请选择耳标细节照")
+//                return false
+//            }
+
+        }
+
+        return true
+    }
+
+    fun checkBagInfoJewelry(context: Context, brand: String, material: String, diamond: String, file: String, pics: HashMap<Int, File>): Boolean {
+
+        if (TextUtils.isEmpty(brand)) {
+            ToastUtils.toastShow(context, "请选择首饰品牌")
+            return false
+        }
+
+        if (TextUtils.isEmpty(material)) {
+            ToastUtils.toastShow(context, "请选择首饰材质")
+            return false
+        }
+
+        if (TextUtils.isEmpty(diamond)) {
+            ToastUtils.toastShow(context, "请选择首饰是否镶钻")
+            return false
+        }
+
+        if (TextUtils.isEmpty(file)) {
+            ToastUtils.toastShow(context, "请选择首饰附件")
+            return false
+        }
+
+        if (pics.size == 6) {
+            if (!pics.containsKey(0)) {
+                ToastUtils.toastShow(context, "请选择整体照")
+                return false
+            }
+
+            if (!pics.containsKey(1)) {
+                ToastUtils.toastShow(context, "请选择LOGO细节照")
+                return false
+            }
+            if (!pics.containsKey(2)) {
+                ToastUtils.toastShow(context, "请选择中心轴细节照")
+                return false
+            }
+            if (!pics.containsKey(3)) {
+                ToastUtils.toastShow(context, "请选择指针细节照")
+                return false
+            }
+            if (!pics.containsKey(4)) {
+                ToastUtils.toastShow(context, "请选择刻度细节照")
+                return false
+            }
+//            if (!pics.containsKey(5)) {
+//                ToastUtils.toastShow(context, "请选择手表刻度细节照")
+//                return false
+//            }
         }
 
         return true
@@ -343,12 +647,36 @@ class UpdatePresenter : BasePresenter<MainView>() {
     }
 
 
-    fun getFileChose(context: Context): ArrayList<ChoseEntity> {
+    fun getFileWatchChose(context: Context): ArrayList<ChoseEntity> {
         val datas = ArrayList<ChoseEntity>()
-        datas.add(ChoseEntity(context.resources.getString(R.string.chose_goods_style_man), false))
-        datas.add(ChoseEntity(context.resources.getString(R.string.chose_goods_style_women), false))
+        datas.add(ChoseEntity(context.resources.getString(R.string.chose_goods_files_one), false))
+        datas.add(ChoseEntity(context.resources.getString(R.string.chose_goods_files_two), false))
+        datas.add(ChoseEntity(context.resources.getString(R.string.chose_goods_files_three), false))
+        datas.add(ChoseEntity(context.resources.getString(R.string.chose_goods_files_four), false))
+        datas.add(ChoseEntity(context.resources.getString(R.string.chose_goods_files_five), false))
         return datas
     }
+
+    fun getFileBagChose(context: Context): ArrayList<ChoseEntity> {
+        val datas = ArrayList<ChoseEntity>()
+        datas.add(ChoseEntity(context.resources.getString(R.string.chose_goods_files_one), false))
+        datas.add(ChoseEntity(context.resources.getString(R.string.chose_goods_notify_six), false))
+        datas.add(ChoseEntity(context.resources.getString(R.string.chose_goods_files_three), false))
+        datas.add(ChoseEntity(context.resources.getString(R.string.chose_goods_files_four), false))
+        datas.add(ChoseEntity(context.resources.getString(R.string.chose_goods_notify_seven), false))
+        return datas
+    }
+
+    fun getFileJewelryChose(context: Context): ArrayList<ChoseEntity> {
+        val datas = ArrayList<ChoseEntity>()
+        datas.add(ChoseEntity(context.resources.getString(R.string.chose_goods_notify_a), false))
+        datas.add(ChoseEntity(context.resources.getString(R.string.chose_goods_notify_b), false))
+        datas.add(ChoseEntity(context.resources.getString(R.string.chose_goods_notify_c), false))
+        datas.add(ChoseEntity(context.resources.getString(R.string.chose_goods_notify_d), false))
+        datas.add(ChoseEntity(context.resources.getString(R.string.chose_goods_notify_e), false))
+        return datas
+    }
+
 
 
 }

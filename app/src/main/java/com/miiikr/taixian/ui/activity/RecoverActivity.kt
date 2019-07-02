@@ -2,6 +2,7 @@ package com.miiikr.taixian.ui.activity
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.widget.ImageView
 import android.widget.TextView
 import com.miiikr.taixian.BaseMvp.View.BaseMvpActivity
 import com.miiikr.taixian.BaseMvp.presenter.RecoverPersenter
@@ -24,9 +25,10 @@ class RecoverActivity:BaseMvpActivity<RecoverPersenter>() {
 
         findViewById<TextView>(R.id.tv_find).setOnClickListener {
             IntentUtils.toRecoverStore(this)
-
         }
-
+        findViewById<ImageView>(R.id.iv_back).setOnClickListener {
+            finish()
+        }
     }
 
     fun showRightFragment(fragment: Fragment) {

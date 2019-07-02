@@ -12,15 +12,16 @@ import ccom.miiikr.taixian.entity.FlagEntity
 import com.miiikr.taixian.R
 import com.miiikr.taixian.`interface`.PopupClickListener
 import com.miiikr.taixian.adapter.FileAdapter
+import com.miiikr.taixian.entity.ChoseEntity
 import com.ssh.net.ssh.utils.ScreenUtils
 import com.ssh.net.ssh.utils.SpannableUtils
 import com.yo.lg.yocheck.widget.RecycleViewDivider
 
-class FilePopupWindow(mContext: Context,type: Int,onClickItemListener: PopupClickListener) : BasePopupWindow(mContext, type,onClickItemListener) {
+class FilePopupWindow(mContext: Context,type: Int,onClickItemListener: PopupClickListener,datas:ArrayList<ChoseEntity>) : BasePopupWindow2(mContext, type,onClickItemListener,datas) {
 
     lateinit var mIvDismiss: ImageView
     lateinit var mRvFiles: RecyclerView
-    lateinit var mDatas: SparseArray<FlagEntity>
+//    lateinit var mDatas: SparseArray<FlagEntity>
     var adapter: FileAdapter? = null
 
     override fun initData() {
@@ -31,42 +32,17 @@ class FilePopupWindow(mContext: Context,type: Int,onClickItemListener: PopupClic
 
     }
 
-    override fun initView(context: Context, view: View, type: Int,clickItemListener: PopupClickListener) {
+    override fun initView(context: Context, view: View, type: Int,clickItemListener: PopupClickListener,datas:ArrayList<ChoseEntity>) {
         mIvDismiss = view.findViewById(R.id.iv_dismiss)
         mRvFiles = view.findViewById(R.id.rv_file)
-
-        mDatas = SparseArray()
-        when(type){
-            1->{
-                mDatas.put(0, FlagEntity(context.resources.getString(R.string.chose_goods_files_one), false))
-                mDatas.put(1, FlagEntity(context.resources.getString(R.string.chose_goods_files_two), false))
-                mDatas.put(2, FlagEntity(context.resources.getString(R.string.chose_goods_files_three), false))
-                mDatas.put(3, FlagEntity(context.resources.getString(R.string.chose_goods_files_four), false))
-                mDatas.put(4, FlagEntity(context.resources.getString(R.string.chose_goods_files_five), false))
-            }
-            2->{
-                mDatas.put(0, FlagEntity(context.resources.getString(R.string.chose_goods_files_one), false))
-                mDatas.put(1, FlagEntity(context.resources.getString(R.string.chose_goods_notify_six), false))
-                mDatas.put(2, FlagEntity(context.resources.getString(R.string.chose_goods_files_three), false))
-                mDatas.put(3, FlagEntity(context.resources.getString(R.string.chose_goods_files_four), false))
-                mDatas.put(4, FlagEntity(context.resources.getString(R.string.chose_goods_notify_seven), false))
-            }
-            3->{
-                mDatas.put(0, FlagEntity(context.resources.getString(R.string.chose_goods_notify_a), false))
-                mDatas.put(1, FlagEntity(context.resources.getString(R.string.chose_goods_notify_b), false))
-                mDatas.put(2, FlagEntity(context.resources.getString(R.string.chose_goods_notify_c), false))
-                mDatas.put(3, FlagEntity(context.resources.getString(R.string.chose_goods_notify_d), false))
-                mDatas.put(4, FlagEntity(context.resources.getString(R.string.chose_goods_notify_e), false))
-            }
-        }
         var gridLayoutManager = GridLayoutManager(context, 3)
         mRvFiles.layoutManager = gridLayoutManager
         mRvFiles.addItemDecoration(RecycleViewDivider(
                 context, LinearLayoutManager.VERTICAL, ScreenUtils.dp2px(context, 26), context.resources.getColor(R.color.color_ffffff)))
-        adapter = FileAdapter(context, mDatas, object : OnClickItemListener {
+        adapter = FileAdapter(context, datas, object : OnClickItemListener {
             override fun clickItem(position: Int) {
-                mDatas.get(position).click = !mDatas.get(position).click
-                clickItemListener.onClick(position,type,mDatas[position].flag)
+                datas[position].isCheck = !datas[position].isCheck
+                clickItemListener.onClick(position,type,datas[position].flag)
                 adapter!!.notifyItemChanged(position)
             }
         })

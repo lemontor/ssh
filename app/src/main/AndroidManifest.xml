@@ -3,6 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.miiikr.taixian">
 
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WRITE_APN_SETTINGS"></uses-permission>
     <!--允许程序打开网络套接字-->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -49,6 +60,31 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
+
+
+        <!-- 设置环信应用的AppKey -->
+        <meta-data android:name="EASEMOB_APPKEY"  android:value="1104190624168062#shunshihang" />
+        <!-- 声明SDK所需的service SDK核心功能-->
+        <service android:name="com.hyphenate.chat.EMChatService" android:exported="true"/>
+        <service android:name="com.hyphenate.chat.EMJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="true"
+            />
+        <!-- 声明SDK所需的receiver -->
+        <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <data android:scheme="package"/>
+            </intent-filter>
+            <!-- 可选filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+
         <!-- 定义FileProvider -->
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -185,9 +221,36 @@
         <activity android:name=".ui.fragment.WriteConnInfoActivity"
             android:theme="@style/TranslucentTheme"/>
 
-
-
         <service android:name=".service.LocationService" />
+
+        <activity android:name=".ui.activity.MoneyStateActivity"
+            android:theme="@style/TranslucentTheme"/>
+
+        <activity android:name=".ui.activity.ChatActivity"
+            android:theme="@style/TranslucentTheme"/>
+
+        <activity android:name=".ui.activity.ConnectionPhone"
+            android:theme="@style/TranslucentTheme"/>
+
+        <activity android:name=".ui.activity.RecorderVideoActivity"
+            android:theme="@style/TranslucentTheme"/>
+
+        <activity android:name=".ui.activity.VideoThumbActivity"
+            android:theme="@style/TranslucentTheme"/>
+
+        <activity android:name=".ui.activity.ConnActivity"
+            android:theme="@style/TranslucentTheme"/>
+
+        <activity android:name=".ui.activity.AdviceActivity"
+            android:theme="@style/TranslucentTheme"/>
+
+        <activity android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"
+            android:theme="@style/TranslucentTheme"/>
+
+        <activity android:name="com.hyphenate.easeui.ui.EaseShowVideoActivity"
+            android:theme="@style/TranslucentTheme"/>
+
+        <service android:name=".service.NewsService"/>
 
         <activity
             android:name=".wxapi.WXEntryActivity"

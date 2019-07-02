@@ -40,46 +40,31 @@ class NormalPopupWindow(context: Context, type: Int, onClickItemListener: PopupC
             1 -> {
                 mTvTitle.text = context.resources.getString(R.string.chose_goods_func)
                 mTvNotify.text = context.resources.getString(R.string.chose_goods_func_notify)
-//                datas.add(ChoseEntity(context.resources.getString(R.string.chose_goods_func_basic), false))
-//                datas.add(ChoseEntity(context.resources.getString(R.string.chose_goods_func_lost), false))
                 mRvChose.adapter = NormalAdapter(context, datas, onclickListener, type)
             }
             2 -> {
                 mTvTitle.text = context.resources.getString(R.string.chose_goods_material)
                 mTvNotify.text = context.resources.getString(R.string.chose_goods_material_notify)
-//                datas.add(ChoseEntity(context.resources.getString(R.string.chose_goods_material_golden), false))
-//                datas.add(ChoseEntity(context.resources.getString(R.string.chose_goods_material_steel), false))
                 mRvChose.adapter = NormalAdapter(context, datas, onclickListener, type)
             }
             3 -> {
                 mTvTitle.text = context.resources.getString(R.string.chose_goods_style)
                 mTvNotify.text = context.resources.getString(R.string.chose_goods_style_notify)
-//                datas.add(ChoseEntity(context.resources.getString(R.string.chose_goods_style_man), false))
-//                datas.add(ChoseEntity(context.resources.getString(R.string.chose_goods_style_women), false))
                 mRvChose.adapter = NormalAdapter(context, datas, onclickListener, type)
             }
             4 -> {
                 mTvTitle.text = context.resources.getString(R.string.chose_bag_size)
                 mTvNotify.text = context.resources.getString(R.string.bag_size_notify)
-//                datas.add(ChoseEntity(context.resources.getString(R.string.bag_size_mini), false))
-//                datas.add(ChoseEntity(context.resources.getString(R.string.bag_size_big), false))
-//                datas.add(ChoseEntity(context.resources.getString(R.string.bag_size_medium), false))
-//                datas.add(ChoseEntity(context.resources.getString(R.string.bag_size_small), false))
                 mRvChose.adapter = NormalAdapter(context, datas, onclickListener, type)
             }
             5 -> {
                 mTvTitle.text = context.resources.getString(R.string.jewelry_title)
                 mTvNotify.text = context.resources.getString(R.string.jewelry_notify)
-//                datas.add(ChoseEntity(context.resources.getString(R.string.jewelry_org_diamond), false))
-//                datas.add(ChoseEntity(context.resources.getString(R.string.jewelry_last_diamond), false))
                 mRvChose.adapter = NormalAdapter(context, datas, onclickListener, type)
             }
             6 -> {
                 mTvTitle.text = context.resources.getString(R.string.jewelry_material)
                 mTvNotify.text = context.resources.getString(R.string.jewelry_material_notify)
-//                datas.add(ChoseEntity(context.resources.getString(R.string.jewelry_material_pt950), false))
-//                datas.add(ChoseEntity(context.resources.getString(R.string.jewelry_material_au750), false))
-//                datas.add(ChoseEntity(context.resources.getString(R.string.jewelry_material_925), false))
                 mRvChose.adapter = NormalAdapter(context, datas, onclickListener, type)
             }
         }

@@ -1904,7 +1904,7 @@ public class WItemTouchHelperPlus extends RecyclerView.ItemDecoration
          * <code>view.getTop()</code> of the two views before and after drag started. If that value
          * is different, the target view passes the filter.
          * <p>
-         * Among these Views which pass the test, the one closest to the dragged view is chosen.
+         * Among these Views which pass the fragment_cash_info, the one closest to the dragged view is chosen.
          * <p>
          * This method is called on the main thread every time user moves the View. If you want to
          * override it, make sure it does not do any expensive operations.

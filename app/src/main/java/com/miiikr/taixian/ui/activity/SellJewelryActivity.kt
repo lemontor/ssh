@@ -8,6 +8,8 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import ccom.miiikr.taixian.`interface`.OnClickItemListener
@@ -17,17 +19,17 @@ import com.miiikr.taixian.BaseMvp.presenter.UpdatePresenter
 import com.miiikr.taixian.R
 import com.miiikr.taixian.`interface`.PopupClickListener
 import com.miiikr.taixian.adapter.PicAdapter
-import com.miiikr.taixian.entity.ChoseEntity
-import com.miiikr.taixian.entity.PicEntity
-import com.miiikr.taixian.entity.PicEvent
-import com.miiikr.taixian.utils.FileHelper
-import com.miiikr.taixian.utils.PhotoUtils
-import com.miiikr.taixian.utils.RequestInterface
+import com.miiikr.taixian.app.SSHApplication
+import com.miiikr.taixian.entity.*
+import com.miiikr.taixian.utils.*
+import com.miiikr.taixian.widget.SSHProgressHUD
 import com.ssh.net.ssh.utils.AppConfig
 import com.ssh.net.ssh.utils.IntentUtils
+import com.ssh.net.ssh.utils.ScreenUtils
 import com.ssh.net.ssh.widget.FilePopupWindow
 import com.ssh.net.ssh.widget.NormalPopupWindow
 import com.ssh.net.ssh.widget.PhotoPopupWindow
+import com.ssh.net.ssh.widget.TextSeekBar
 import org.greenrobot.eventbus.EventBus
 import java.io.File
 import java.lang.StringBuilder
@@ -74,6 +76,48 @@ class SellJewelryActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickList
                     Log.e("tag_map", "key:${it.key} value:${it.value}")
                 }
             }
+            RequestInterface.REQUEST_SELL_WATCH_ID -> {
+                val result = response as? CommonEntity
+                if (result != null) {
+                    if (result.state == 1) {
+                        ToastUtils.toastShow(this, "提交成功")
+                        SSHApplication.activitys[ActivityNameTag.TYPE_TAG]!!.finish()
+                        finish()
+                    }
+                }
+            }
+            RequestInterface.REQUEST_CHECK_WATCH_ID -> {
+                val result = response as? CommonEntity
+                if (result != null) {
+                    if (result.state == 1) {
+                        ToastUtils.toastShow(this, "提交成功")
+                        SSHApplication.activitys[ActivityNameTag.TYPE_TAG]!!.finish()
+                        finish()
+                    }
+                }
+            }
+            else -> {
+                newInstanceForUpPic()
+                val entity = response as? UploadEntity
+                if (entity != null) {
+                    if (entity.state == 1) {
+                        if (entity.data != null) {
+                            Log.e("tag_", "1")
+                            uploadPic!![responseId] = entity.data!!
+                        }
+                    }
+                }
+                if (uploadPic!!.size == compressForTarget!!.size) {
+                    if (isSell == 1) {
+                        mPresenter.uploadInfoForSellWithJ(RequestInterface.REQUEST_SELL_WATCH_ID, SharedPreferenceUtils(this).getValue(SharedPreferenceUtils.PREFERENCE_U_I)!!, brandId, "3", tvFlag.text.toString(), tvNewNotify.tag.toString(),
+                                mTvFile.text.toString(),mTvDiamendValue.text.toString(), mTvMaterialValue.text.toString(), uploadPic!!)
+                    } else if (isSell == 2) {
+                        mPresenter.uploadInfoForCheckWithJ(RequestInterface.REQUEST_CHECK_WATCH_ID, SharedPreferenceUtils(this).getValue(SharedPreferenceUtils.PREFERENCE_U_I)!!, brandId, "3", tvFlag.text.toString(), tvNewNotify.tag.toString(),
+                                mTvFile.text.toString(),mTvDiamendValue.text.toString(), mTvMaterialValue.text.toString(), uploadPic!!)
+                    }
+
+                }
+            }
         }
     }
 
@@ -101,7 +145,23 @@ class SellJewelryActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickList
                     mDiamandDatas
                 }!!)
             }
-            v!!.id == R.id.layout_file -> showFilePopupWindow()
+            v!!.id == R.id.layout_file -> {
+                newInstanceFileItemArrayList()
+                showFilePopupWindow(if(mFileDatas!!.size > 0){
+                    mFileDatas!!
+                }else{
+                    mFileDatas!!.addAll(mPresenter.getFileJewelryChose(this))
+                    mFileDatas!!
+                })
+            }
+            v!!.id == R.id.btn_upload -> {
+                mSSHProgressHUD.show()
+                if (mPresenter.checkBagInfoJewelry(this, mTvBrand.text.toString(), mTvMaterialValue.text.toString(), mTvDiamendValue.text.toString(), mTvFile.text.toString(), compressForTarget!!)) {
+                    compressForTarget!!.forEach {
+                        mPresenter.uploadFile(it.key, it.value)
+                    }
+                }
+            }
         }
     }
 
@@ -118,6 +178,12 @@ class SellJewelryActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickList
     lateinit var mTvFile:TextView
     lateinit var mTvMaterialValue:TextView
     lateinit var mTvDiamendValue:TextView
+    lateinit var tvFlag: TextView
+    lateinit var tvNewNotify: TextView
+    lateinit var btnUpload: Button
+    lateinit var mSeek: TextSeekBar
+    lateinit var mSSHProgressHUD: SSHProgressHUD
+    lateinit var tvProgress: TextView
 
     var funcPopupWindow: NormalPopupWindow? = null
     var filesPopupWindow: FilePopupWindow? = null
@@ -129,10 +195,13 @@ class SellJewelryActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickList
     val CODE_BRAND_REQUEST = 0xa2
     var fileHelper: FileHelper?=null
 
+    var mFileDatas: ArrayList<ChoseEntity>? = null
     var mMaterialDatas: ArrayList<ChoseEntity>? = null
     var mDiamandDatas: ArrayList<ChoseEntity>? = null
     var choseArrayMap: ArrayList<String>? = null
     var compressForTarget: HashMap<Int, File>? = null
+    var uploadPic: HashMap<Int, String>? = null
+    var isSell = 0 // 1 售卖  2 鉴定
 
 
     var brandId = ""
@@ -142,6 +211,9 @@ class SellJewelryActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_jewelry_details)
+        if (ScreenUtils.checkDeviceHasNavigationBar(this)) {
+            ScreenUtils.assistActivity(findViewById(android.R.id.content))
+        }
         mPresenter = UpdatePresenter()
         mPresenter.attachView(this)
         initUI()
@@ -150,6 +222,7 @@ class SellJewelryActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickList
     }
 
     private fun initObj() {
+        isSell = intent.getIntExtra("isSell",0)
         mPicDatas = ArrayList()
         picAdapter = PicAdapter(this, mPicDatas,this)
         fileHelper = FileHelper()
@@ -160,8 +233,27 @@ class SellJewelryActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickList
         mLayoutFile.setOnClickListener(this)
         mLayoutMaterial.setOnClickListener(this)
         mLayoutStyle.setOnClickListener(this)
+        btnUpload.setOnClickListener(this)
+        findViewById<ImageView>(R.id.iv_back).setOnClickListener { finish() }
+        mSeek.setOnSeekListener(object :TextSeekBar.OnSeekListener{
+            override fun start() {
+                tvProgress.visibility = View.VISIBLE
+            }
+
+            override fun seekProgress(pro: Int) {
+                tvProgress.text="$pro"
+            }
+
+            override fun onSeek(value: String, old: String) {
+                tvProgress.visibility = View.GONE
+                tvNewNotify.text = value
+                tvNewNotify.tag = old
+            }
+
+        })
+
         mRvPic.adapter = picAdapter
-        mPresenter.getPicDataForWatch(AppConfig.REQUEST_ID_GET_PIC)
+        mPresenter.getPicDataForJ(AppConfig.REQUEST_ID_GET_PIC)
     }
 
     private fun initUI() {
@@ -176,12 +268,19 @@ class SellJewelryActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickList
         mTvFile = findViewById(R.id.tv_file_value)
         mTvMaterialValue = findViewById(R.id.tv_material_value)
         mTvDiamendValue = findViewById(R.id.tv_style_value)
+        tvFlag = findViewById(R.id.edt_remark)
+        tvNewNotify = findViewById(R.id.tv_notify)
+        btnUpload = findViewById(R.id.btn_upload)
+        mSeek = findViewById(R.id.tsbar)
+        tvProgress = findViewById(R.id.tv_progress)
         val gridLayoutManager = GridLayoutManager(this, 3)
         gridLayoutManager.isSmoothScrollbarEnabled = true
         gridLayoutManager.isAutoMeasureEnabled = true
         mRvPic.setHasFixedSize(true)
         mRvPic.isNestedScrollingEnabled = false
         mRvPic.layoutManager = gridLayoutManager
+        mSSHProgressHUD = SSHProgressHUD.getInstance(this@SellJewelryActivity)
+        mSSHProgressHUD.setMessage("提交数据中")
 
     }
 
@@ -199,7 +298,7 @@ class SellJewelryActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickList
     }
 
 
-    fun showFilePopupWindow() {
+    fun showFilePopupWindow(data:ArrayList<ChoseEntity>) {
         newInstanceFileArrayList()
         filesPopupWindow = FilePopupWindow(this,2,object :PopupClickListener{
             override fun onClick(position: Int, type: Int, flag: String) {
@@ -211,7 +310,7 @@ class SellJewelryActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickList
                 mTvFile.text = if (choseArrayMap!!.size == 0) "" else getTextFromArray()
 
             }
-        })
+        },data)
         filesPopupWindow!!.showAtLocation(R.layout.activity_jewelry_details)
     }
 
@@ -281,6 +380,11 @@ class SellJewelryActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickList
 
     var stringBuilder: StringBuilder? = null
 
+    fun newInstanceForUpPic() {
+        if (uploadPic == null) {
+            uploadPic = HashMap()
+        }
+    }
 
     fun newInstanceFileArrayList() {
         if (choseArrayMap == null) {
@@ -305,6 +409,18 @@ class SellJewelryActivity : BaseMvpActivity<UpdatePresenter>(), View.OnClickList
             compressForTarget = HashMap()
         }
     }
+
+    private fun newInstanceFileItemArrayList() {
+        if (mFileDatas == null) {
+            mFileDatas = ArrayList()
+        }
+    }
+
+    override fun hideLoading() {
+        super.hideLoading()
+        mSSHProgressHUD.dismiss()
+    }
+
 
     override fun onDestroy() {
         mPresenter.detachView()

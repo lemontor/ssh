@@ -17,7 +17,8 @@
         android:paddingEnd="@dimen/dp_15"
         android:progress="0"
         android:progressDrawable="@drawable/seek_progress"
-        android:thumb="@drawable/seek_thumb" />
+        android:thumb="@drawable/seek_thumb"
+        android:layout_marginLeft="0dp"/>
 
     <TextView
         android:id="@+id/seek_text"
@@ -28,7 +29,7 @@
         android:gravity="center|center_vertical"
         android:paddingBottom="@dimen/dp_3"
         android:text="0"
-        android:textSize="@dimen/sp_10"
+        android:textSize="@dimen/sp_8"
         android:textColor="@android:color/white"
         android:layout_alignParentLeft="true"/>
 

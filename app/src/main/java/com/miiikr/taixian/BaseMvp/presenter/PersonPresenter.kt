@@ -1,6 +1,10 @@
 package com.miiikr.taixian.BaseMvp.presenter
 
 import android.util.Log
+import com.hyphenate.chat.EMClient
+import com.hyphenate.chat.EMConversation
+import com.hyphenate.easeui.utils.EaseCommonUtils
+import com.hyphenate.exceptions.HyphenateException
 import com.miiikr.taixian.BaseMvp.IView.AccountView
 import com.miiikr.taixian.BaseMvp.IView.PersonView
 import com.miiikr.taixian.entity.*
@@ -18,6 +22,7 @@ import retrofit2.Response
 
 class PersonPresenter : BasePresenter<PersonView>() {
 
+    var pagesize=20
 
     private var mainView: PersonView? = null
 
@@ -239,6 +244,23 @@ class PersonPresenter : BasePresenter<PersonView>() {
                         mainView!!.hideLoading()
                     }
                 }
+    }
+
+
+    fun readHisMessage(toChatUsername:String,conversation: EMConversation){
+        Observable.create(ObservableOnSubscribe<CommonEntity> {
+            val msgs = conversation.getAllMessages()
+            val msgCount = if (msgs != null) msgs!!.size else 0
+            if (msgCount < conversation.getAllMsgCount() && msgCount < pagesize) {
+                var msgId: String? = null
+                if (msgs != null && msgs!!.size > 0) {
+                    msgId = msgs!!.get(0).getMsgId()
+                }
+                conversation.loadMoreMsgFromDB(msgId, pagesize - msgCount)
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {  }
     }
 
 

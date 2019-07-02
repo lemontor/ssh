@@ -52,10 +52,11 @@ public class SSHProgressHUD extends Dialog {
 
 	public SSHProgressHUD(Context context) {
 		super(context, R.style.DialogTheme);
+		this.setCanceledOnTouchOutside(false);
+		this.setCancelable(true);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-		this.setCanceledOnTouchOutside(false);
-		this.setOnKeyListener(keylistener);
+//		this.setOnKeyListener(keylistener);
 		this.context = context;
 		view = getLayoutInflater().inflate(R.layout.dialog_progress, null);
 		tvMessage = (TextView) view.findViewById(R.id.textview_message);
@@ -68,15 +69,15 @@ public class SSHProgressHUD extends Dialog {
 		this.setContentView(view);
 	}
 
-	private OnKeyListener keylistener = new OnKeyListener() {
-		public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-			if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-	};
+//	private OnKeyListener keylistener = new OnKeyListener() {
+//		public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+//			if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {//点击回退键不消失
+//				return true;
+//			} else {
+//				return false;
+//			}
+//		}
+//	};
 
 	public void setSpinnerType(int spinnerType) {
 		switch (spinnerType) {

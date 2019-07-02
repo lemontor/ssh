@@ -1,4 +1,7 @@
-<resources>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
+
     <string name="app_name">顺时行</string>
     <string name="login_edt_account">请输入用户名/手机号</string>
     <string name="login_check_phone">手机号</string>
@@ -35,7 +38,7 @@
 
     <string name="main_left_notify_story">寻找销售店铺</string>
     <string name="main_left_notify_conn">联系方式</string>
-    <string name="main_left_notify_notify">法律声明</string>
+    <string name="main_left_notify_notify">投诉与建议</string>
 
     <string name="main_right_notify_title">我的账户</string>
     <!--<string name="main_right_notify_sell">我的鉴定估价售卖</string>-->
@@ -162,7 +165,7 @@
     <string name="jewelry_material_925">925银</string>
     <string name="news_cancel">删除</string>
     <string name="wallet_title">我的钱包</string>
-    <string name="wallet_details">收支明细</string>
+    <string name="wallet_details">明细</string>
     <string name="get_details">提现记录</string>
     <string name="get_pw">我的余额</string>
     <string name="get_no_pw">未设置</string>

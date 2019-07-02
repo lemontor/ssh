@@ -5,10 +5,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
 import android.util.SparseArray
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import com.miiikr.taixian.BaseMvp.IView.DetailsView
 import com.miiikr.taixian.BaseMvp.View.BaseMvpActivity
 import com.miiikr.taixian.BaseMvp.presenter.DetailsPresenter
@@ -16,6 +13,7 @@ import com.miiikr.taixian.R
 import com.miiikr.taixian.adapter.GoodsDetailsAdapter
 import com.miiikr.taixian.entity.CheckDetailsEntity
 import com.miiikr.taixian.ui.fragment.GoodsDetailsFragment
+import com.miiikr.taixian.utils.AndroidWorkaround
 import com.miiikr.taixian.utils.RequestInterface
 import com.miiikr.taixian.utils.SharedPreferenceUtils
 import com.miiikr.taixian.utils.ToastUtils
@@ -25,6 +23,7 @@ import com.miiikr.taixian.widget.card.CardPageTransformer
 import com.miiikr.taixian.widget.card.PageTransformerConfig
 import com.ssh.net.ssh.utils.GlideHelper
 import com.ssh.net.ssh.utils.IntentUtils
+import com.ssh.net.ssh.utils.ScreenUtils
 
 class SellDetailsActivity : BaseMvpActivity<DetailsPresenter>(), DetailsView {
 
@@ -94,6 +93,8 @@ class SellDetailsActivity : BaseMvpActivity<DetailsPresenter>(), DetailsView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_goods_details)
+        val layout = findViewById<RelativeLayout>(R.id.root_layout)
+        layout.setPadding(0, 0, 0, AndroidWorkaround.getNavigationBarHeight(this))
         mPresenter = DetailsPresenter()
         mPresenter.attachView(this)
         initUI()
